@@ -1,0 +1,39 @@
+*.pyc
+*~
+__pycache__
+.vscode             # Daten der Entwiclungsumgebung
+
+
+## bei Änderungen an dieser DAtei
+## remove all files from git cache
+# git rm -rf --cached .
+# git add .
+# git commit -m ".gitignore geändert"
+
+# nur der einfachheit halber nicht ignored
+# static/lokal/*      
+db.sqlite3          
+# media/CACHE/images/filme/*
+
+# das macht collectstatic
+static/django_extensions/*
+static/admin/*
+
+
+
+#
+# Alles ab hier gehört unbedingt ins Backup
+#
+
+#
+# Die Konfigurationsdaten
+#
+mysite/newsletter_keys.py  
+mysite/privat_settings.py  
+filme/migrations    
+
+
+#
+# die eigentlichen Daten
+#
+media/filme/plakate/ 
