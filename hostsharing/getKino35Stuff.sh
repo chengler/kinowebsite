@@ -9,7 +9,7 @@ echo scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/my
 scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/mysite/privat_settings.py ../mysite/
 echo ##################################
 echo scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/mysite/newsletter_keys.py../mysite/
-scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/mysite/newsletter_keys.py../mysite/
+scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/mysite/newsletter_keys.py ../mysite/
 echo ##################################
 echo scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/db.sqlite3 ../.
 scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/db.sqlite3 ../.
