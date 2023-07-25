@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <title>Kino35 Newsletter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <style type="text/css">
+        /* CLIENT-SPECIFIC STYLES */
+        body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; }
+
+        /* RESET STYLES */
+        img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+        table { border-collapse: collapse !important; }
+        body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+    </style>
+  </head>
+  <body style="background-color: aliceblue; margin: 0 !important; padding: 60px 0 60px 0 !important;">
+    <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%">
+        <tr>
+            <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+            <td bgcolor="white" width="600px" style="border-radius: 4px; font-size:25px; font-family: lobster; padding: 5px 40px;">
+                Im <a href="http://{{ request.get_host }}">Kino35</a> am {{events.0.termin|date:"d M"}}:
+                <hr>
+            </td>
+            <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+        </tr>
+        <tr>
+            <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+            <td bgcolor="white" width="600px" style="border-radius: 4px;  font-family: sans-serif; padding: 0px 40px;">
+                <p>{{hinweis.text|safe}}</p>
+                <hr>
+            </td>
+            <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+        </tr>        
+    </table>
+    {% for event in events%}
+    {% with film=event.film %}
+        <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%">      
+            <tr>
+                <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+                <td bgcolor="white" width="600px" style="border-radius: 4px; font-family: sans-serif; padding: 10px 40px;">   
+                    <strong>
+                        um {{event.termin|date:"H:i"}} Uhr
+                        <p><a href="http://{{ request.get_host }}{% url 'film_detail' pk=film.pk %}"><filmtitel>{{ film.name }}</filmtitel></a></p>
+                    </strong>
+                    {% if event.text_extern != ''%}
+                        {{ event.text_extern }}
+                    {% endif %} 
+                    
+                </td>
+                <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+            </tr>       
+        </table>    
+        <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%">
+                <tr>
+                <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+                <td bgcolor="white" height="150px" width="80px" style="border-radius: 4px; font-family: sans-serif; padding: 5px 40px;">
+                    <img src="http://{{ request.get_host }}{{film.plakat_thumbnail.url }}" alt="(Filmplakat)">
+                </td>
+                <td bgcolor="white" width="420px" style="border-radius: 4px; font-family: sans-serif; padding: 20px 40px;">
+                    {% if film.director is not None %}
+                        <div>von {{ film.director|truncatechars:30 }}</div>
+                    {% endif %}
+                    {% if film.countryOfOrigin is not None %}
+                        <div>Land: {{ film.countryOfOrigin }}</div>
+                    {% endif %}
+                    {% if film.datePublished is not None %}
+                        <div>Jahr: {{ film.datePublished }}</div>
+                    {% endif %}
+                    {% if film.duration is not None %}
+                        <div> Spielzeit {{ film.duration }} min.</div>   
+                    {% endif %}
+                    {% if film.genre is not None %} 
+                        <div>Genre: {{ film.genre }}</div>
+                    {% endif %} 
+                    {% if film.fsk is not None %}
+                        <div>FSK:  {{ film.fsk_verbose }}</div> 
+                    {% endif %}
+                </td>
+                <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+            </tr>        
+        </table>
+        <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%">      
+            <tr>
+                <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+                <td bgcolor="white" width="600px" style="border-radius: 4px; font-family: sans-serif; padding: 0px 40px;">   
+                    {% if film.hinweis != ''%}
+                        <div>{{ film.hinweis  }}</div>
+                    {% endif %}                    
+                    {{ film.display_description}}
+                    <hr>
+                </td>
+                <td bgcolor="aliceblue" style="font-size: 0;"> </td>  
+        </table>
+    {% endwith %}                    
+    {% endfor %}
+    <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%">      
+        <tr>
+            <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+            <td bgcolor="white" width="600px" style="border-radius: 4px; font-family: sans-serif; padding: 20px 40px;">   
+                <p>Um sich vom Newsletter abzumelden, klicken Sie <a href="http://{{ request.get_host }}/newsletter/abmelden/#changeme#">folgenden Link</a> oder kopieren diesen in Ihren Browser.</p>
+            </td>
+            <td bgcolor="aliceblue" style="font-size: 0;"> </td>  
+    </table>    
+
+  </body>
+</html>
+

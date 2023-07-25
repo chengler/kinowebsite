@@ -1,0 +1,49 @@
+{% extends 'filme/base.html' %}
+{% block extra_head %}
+{% endblock %}
+{% block content %} 
+    {% load crispy_forms_tags %} 
+    <div class="container">
+        <a class="btn btn-primary " href="{% url 'sondernewsletter_neu' %}"><i class="fa fa-plus" aria-hidden="true"></i> Neuen Newsletter anlegen</a>
+        <table class="table table-hover  table-sm">
+            <thead>
+                <tr>
+                    <th scope="col-1">gesendet</th>
+                    <th scope="col-3">Titel</th>
+                    <th scope="col-1"></th>
+                    <th scope="col-1">Sender</th>
+                </tr>
+            </thead>
+            {% for newsletter in newsletters %}
+                    <tbody>
+                        <tr>
+                           <td>
+                                {% if newsletter.gesendet is not None %}
+                                    {{ newsletter.gesendet|date:"d. M. H:i"}}
+                                {% else %}
+                                   <a class="btn btn-secondary " href="{% url 'sondernewsletter_delete' newsletter.pk %}"><i class="fa fa-remove" aria-hidden="true"></i> löschen</a>
+                                {% endif %}
+                            </td>                            
+                            <td>
+                             <a  href="{% url 'sondernewsletter_edit' pk=newsletter.pk %}">
+                                {{newsletter.titel}} 
+                            </a>
+                               
+                            </td>                            
+                            <td>
+                                {% if newsletter.sende is not None %}
+                                    {{ newsletter.sende|date:"d. M. H:i (D)"}}
+                                {% endif %}                            
+                            </td>
+                            <td>
+                                {% if newsletter.gesendet is not None %}
+                                    {{ newsletter.sender }}
+                                {% endif %}                            
+                            </td>                            
+                        </tr>   
+                    </tbody>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+

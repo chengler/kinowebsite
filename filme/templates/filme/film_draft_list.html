@@ -1,0 +1,112 @@
+{% extends 'filme/base.html' %}
+{% load zehntel %}
+{% block content %}
+<div class="content col-12  col-lg-12 border-1">
+    {% if filme %}
+        <div class="row ">       
+            <div class="col-1">
+                Plakat
+            </div>
+            <div class="col-3">                        
+                Name
+            </div>
+            <div class="col-1"> 
+                Webseite
+            </div>
+            <div class="col-1"> 
+                Trailer
+            </div>
+            <div class="col-5">
+                Bewertung
+            </div>
+            <div class="col-1"> 
+                   Aktion
+            </div>
+        </div>
+        <hr>
+        {% for film in filme %}
+            <div class="row ">       
+                <div class="col-1">
+                    {% if request.resolver_match.url_name == 'film_archiv' %}
+                        <a href="{% url 'film_detail' pk=film.pk %}?next={{request.path}}">
+                    {% else %}
+                        <a href="{% url 'film_draft_bewertung' pk=film.pk %}?next={{request.path}}">
+                    {% endif %}
+                    <img src="{{film.plakat_minithumb.url }}" alt="Plakat"></a>
+                    </a>
+                </div>
+                <div class="col-3">                        
+                    <a href="{% url 'film_draft_bewertung' pk=film.pk %}?next={{request.path}}">
+                        {{ film.name }}
+                    </a>
+                    <br\>
+                    {% if film.genre is not None %}
+                        {{ film.genre }}
+                    {% endif %}
+                </div>
+                <div class="col-1"> 
+                    {% if film.website is not None %}
+                        <a target="_blank" rel="noopener noreferrer" href="{{ film.website }}">Weblink</a>
+                    {% else %}
+                        kein Weblink
+                    {% endif %}
+                </div>
+                <div class="col-1"> 
+                    {% if film.trailer is not None %}
+                        <a target="_blank" rel="noopener noreferrer" href="{{ film.trailer }}">Trailer</a>
+                    {% else %}
+                        kein Trailer                        
+                    {% endif %}
+                </div>
+                <div class="col-5"> 
+                    {% if film.interne_bewertung_ratio is not None %}    
+                            {{  film.interne_bewertung_ratio | zehntel }}
+                    {% endif %}
+                    (
+                    {% if film.interne_bewertung_zahl is not None %}
+                        {{film.interne_bewertung_zahl}} 
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                    /
+                    {% if film.interne_bewerter_zahl is not None %}
+                        {{film.interne_bewerter_zahl}} 
+                    {% else %}
+                        &nbsp;
+                    {% endif %}
+                    )
+                    {% if film.interner_kommentar is not None %}
+                        {{film.interner_kommentar |truncatechars:100 }}
+                    {% else %}
+                        Keine Bewertung
+                    {% endif %}
+                </div>
+                <div class="col-1"> 
+                    {% if request.resolver_match.url_name == 'film_draft_sichten_list' %}
+                        {% if film.film_no_delete == False %}
+                            <a href="{% url 'film_remove' pk=film.pk  %}?next={{request.path}}">
+                                <i class="fa fa-trash" aria-hidden="true"></i> löschen
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                    {% if request.resolver_match.url_name == 'film_draft_programmplanung_list' %}
+                        <a  href="{% url 'film_status' key='3' pk=film.pk %}?next={{request.path}}">
+                            <i class="fa fa-list" aria-hidden="true"></i> <div>in die Planung</div></a> 
+                    {% endif %}
+                    {% if request.resolver_match.url_name == 'film_archiv' %}
+                        <a  href="{% url 'film_status' key='3' pk=film.pk %}?next={{request.path}}">
+                            <i class="fa fa-list" aria-hidden="true"></i> <div>in die Planung</div></a> 
+                    {% endif %}
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+    {% else %}
+    <div class="row">
+        <div class="col-12"> 
+            <h2> Es liegen hier aktuell keine Filme vor. </h2>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'filme/base.html' %}
+{% block content %}
+    {% load crispy_forms_tags %} 
+    <h2>Neue Termine</h2>
+    <form method="POST" class="film-form" enctype="multipart/form-data" >
+        {% csrf_token %}
+        {{ form.termin|as_crispy_field }}
+        {{ form.zeit|as_crispy_field }}
+        {{ form.kategorie|as_crispy_field }}
+        {{ form.wdh|as_crispy_field }}
+        <button type="submit" class="save btn btn-success">Save</button>
+    </form>
+{% endblock %}  

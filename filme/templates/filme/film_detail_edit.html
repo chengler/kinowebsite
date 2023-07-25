@@ -1,0 +1,94 @@
+{% extends 'filme/base.html' %}
+
+{% block content %}
+    {% load crispy_forms_tags %} 
+  
+
+    <form method="POST" class="film-form" enctype="multipart/form-data" >
+        {% csrf_token %}
+
+        <div class="row">
+            <div class="col-9">
+                {{ form.status}}
+                 {{ form.interner_kommentar|as_crispy_field }}
+            </div>
+            <div class="col-3">
+                <button type="submit" class="save btn btn-success">Save</button>
+                <div>
+                {{form.film_komplett}} komplett
+                </div>
+            </div>
+        </div>   
+
+        <div class="row">
+            <div class="col-3">
+                {% if film.plakat %}
+                    <img src="{{film.plakat_thumbnail.url }}" alt="thumb"> 
+                {% else %}
+                    Hier sollte mein Plakat stehen O_O
+                {% endif %}
+            </div>
+            <div class="col-9">
+             <h2>{{film.name}}</h2>
+            </div>
+        </div>
+            
+
+        <div class="row">
+            <div class="col-6">
+                {{ form.name|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.trailer|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.plakat|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.website|as_crispy_field }}
+                {{ form.countryOfOrigin|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.director|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.datePublished|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.duration|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.genre|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.actors|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.fsk|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                {{ form.description|as_crispy_field }}
+            </div>
+            <div class="col-4">
+                {{ form.hinweis|as_crispy_field }}
+            </div>
+        </div>
+
+        <button type="submit" class="rechts save btn btn-success">Save</button>
+    </form>
+    {% if film.film_no_delete == False %}
+        <a href="{% url 'film_remove' pk=film.pk  %}">
+            <i class="fa fa-trash" aria-hidden="true"></i> löschen
+        </a>
+    {% endif %}
+{% endblock %}

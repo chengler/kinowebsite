@@ -1,0 +1,93 @@
+{% extends 'filme/base.html' %}
+{% block content %}
+{% load space2plus %}
+{% load crispy_forms_tags %} 
+<div class="content col-12  col-lg-12 border-1">
+    <form method="POST" class="film-form" enctype="multipart/form-data" >
+    {% csrf_token %}
+        <div class="row">
+            <div class="col-10">
+                <h2>{{ film.name }}</h2>
+            </div>
+            <div class="col-2">
+                {% if film.film_no_delete == False %}
+                    <a href="{% url 'film_remove' pk=film.pk  %}">
+                        <i class="fa fa-trash" aria-hidden="true"></i> löschen
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                {% if film.plakat %}
+                    <img src="{{film.plakat_klein.url }}" alt="klein">
+                {% else %}
+                    hier sollte ihr Plakat stehen
+                {% endif %}
+                {{ form.plakat|as_crispy_field }}
+                <a target="_blank" rel="noopener noreferrer" 
+                    href="https://duckduckgo.com/?q=filmplakate+{{film.name|space2plus }}">
+                    zur Plakatsuche
+                </a>  
+                <hr>
+                <div>
+                    {{ form.interne_bewertung_zahl|as_crispy_field }}
+                </div> 
+                <div>
+                    {{ form.interne_bewerter_zahl|as_crispy_field }}
+                </div>       
+                <hr>       
+   
+                  
+            </div>
+            
+            <div class="col-6">
+                <div>
+                    {{ form.status|as_crispy_field }}
+                </div>
+                <div>
+                    {{ form.name|as_crispy_field }}
+                </div>
+                <div>
+                    {{ form.genre|as_crispy_field }}
+                </div>
+
+                <div>
+                    {% if film.trailer is not None %}
+                        <a target="_blank" rel="noopener noreferrer" 
+                            href="{{ film.trailer }}">zum Trailer</a>
+                    {% else %}
+                        <a target="_blank" rel="noopener noreferrer" href="https://duckduckgo.com/?q=kino.de+{{film.name|space2plus }}">
+                        Trailer (http://)
+                        </a>
+                    {% endif %}
+                    {{ form.trailer|as_crispy_field }}
+                </div>
+                <div>
+                    {% if film.website is not None %}
+                        <a target="_blank" rel="noopener noreferrer" 
+                        href="{{ film.website }}">zur Website</a>
+                    {% else %}
+                        <a target="_blank" rel="noopener noreferrer" href="https://duckduckgo.com/?q=programmkino.de+{{film.name|space2plus }}">
+                        Webseite (http://)
+                        </a>
+                    {% endif %}
+                    {{ form.website|as_crispy_field }} 
+                </div>
+                <div>
+                    <a target="_blank" rel="noopener noreferrer" href="https://www.vdfkino.de/cgi-bin/termine.cgi?SEARCH={{film.name|space2plus }}&SEARCH2=&month=Monat&year=Jahr&ACTION=Go&.cgifields=month&.cgifields=year">
+                    zu vdfkino
+                    </a>
+                    {{ form.interner_kommentar|as_crispy_field }}
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12"> 
+                <button type="submit" class="rechts save btn btn-success">Speichern</button>     
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}        

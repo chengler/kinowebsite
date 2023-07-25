@@ -1,0 +1,28 @@
+{% extends 'filme/base.html' %}
+{% block content %}
+    <div class="content col-12  col-lg-9 border-1">
+        
+            {% include 'filme/film_detail_snippet.html' %}  
+        <hr>
+    </div>    
+    
+{% endblock %}
+
+{% block sidebar %}
+    <div class="sidebar col-12  col-lg-3 border-1 ">
+        {% include 'filme/newsletter_abo_snippet.html' %}
+        <hr>
+        <div class=" text-center miniheader">
+                Vorschau nach Kategorie                
+        </div>
+        <div class="row border-2 rahmen">                 
+            {% for event in sidebar_events %}
+                <div class="col-12 col-sm-6 col-lg-12 border-3  "> 
+                    {% with film=event.film %}
+                        {% include 'filme/filmevent_sidbar_big_snippet.html' %}
+                    {% endwith %}  
+                </div >          
+            {% endfor %}                
+        </div>  
+    </div>
+{% endblock %}

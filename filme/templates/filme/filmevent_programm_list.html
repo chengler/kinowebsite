@@ -1,0 +1,70 @@
+{% extends 'filme/base.html' %}
+{% block extra_head %}
+    <meta name="description" content="Das komplette Programm des Kino35 auf einer Seite.">
+    <title>Kino 35 - Programm</title>
+    <meta name="robots" content="index, NoFollow"> 
+{% endblock %}
+{% block content %}
+<div class="content col-12  col-lg-9 order-2 order-lg-1 border-1">
+    {% if events.count == 0 %}
+        <h3>Keine weiteren Filme im Programm O_O</h3>
+    {% else %}
+        <div class="col-12 border-2  vorschau">
+                <h3>Vorschau</h3>                
+        </div>         
+        {% for event in events%}
+        <hr>
+            <span itemscope itemtype="http://schema.org/Event">
+                <span hidden itemprop="name" itemtype="text">{{ event.get_kategorie_display}}</span>
+                <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+                    <span itemprop="name" hidden >{{event.location_name}}</span>
+                    <span hidden itemprop="address" itemtype="text">{{event.location_address}}</span>
+                </span>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'filmevent_detail_edit' pk=event.pk %}?next={{request.path}}">
+                      <h4>{{ event.termin|date:"D. d. M. H:i"}} &nbsp; <span class="kategorie>"> "{{ event.get_kategorie_display}}"</h4></span>
+                    </a>
+                {% else %}
+                    <h4><time itemprop="startDate" datetime="{{ event.termin|date:"Y-m-dTH:i"}}">{{ event.termin|date:"D. d. M. H:i"}}</time> &nbsp;   
+                       <span class="kategorie>"> "{{ event.get_kategorie_display}}"</span></h4>
+                {% endif %}   
+                {% with film=event.film %}
+                    {% include 'filme/filmevent_list_snippet.html' %}
+                {% endwith %}
+            </span>        
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block sidebar %} 
+<div class="sidebar col-12  col-lg-3 order-1 order-lg-2 border-1">
+    <div class=" row   border-4 ">
+        <div class="col-12 border-2 rahmen ">
+                <h3>Auswahl</h3>
+        </div> 
+        {% for event in sidebar_events %}
+            <div class="col-12 col-sm-6 col-lg-12 border-3 auswahl2 rahmen "> 
+            <hr>
+                {% with film=event.film %}
+                    {% include 'filme/filmevent_sidbar_big_snippet.html' %}
+                {% endwith %}  
+                
+            </div >          
+        {% endfor %}    
+
+        {% if sidebar_count != 0 %}
+            <div class="col-12 col-sm-6 col-lg-12 border-3 ">
+                <hr>
+                {% include 'filme/newsletter_abo_snippet.html' %}
+            </div >        
+        {% else %}
+            <div class="col-12 ">
+                <hr> 
+                {% include 'filme/newsletter_abo_snippet.html' %}
+            </div>
+        {% endif %}   
+        <hr>
+    </div>                
+</div>           
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'filme/base.html' %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+  <H2>{{ event.film.name|linebreaksbr }}</H2>
+  <p><img src="{{event.film.plakat_thumbnail.url }}" alt="thumb"></p>
+  <p>{{ event.termin|linebreaksbr }}</p>
+
+    {% comment %}
+    {{ form|crispy }}
+    {% endcomment %}
+
+  <form method="post" autocomplete="on" novalidate>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="rechts save btn btn-success">Speichern</button>     
+
+  </form>
+
+{% endblock %}

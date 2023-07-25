@@ -1,0 +1,11 @@
+{% extends 'filme/base.html' %}
+{% block content %}
+{% load crispy_forms_tags %} 
+    <h2>Neuer Film</h2>
+    <form method="POST" class="film-form" enctype="multipart/form-data" >
+        {% csrf_token %}       
+        {{ form.name|as_crispy_field }}
+        {{ form.interner_kommentar|as_crispy_field }}
+        <button type="submit" class="save btn btn-success">Speichern</button>
+    </form>
+{% endblock %}        

@@ -1,0 +1,14 @@
+{% load crispy_forms_tags %} 
+<div class="row rahmen">
+    <div class="col-12 border-2  ">
+        <div class=" newsletter ">
+            <h3>Newsletter </h3>
+        </div>
+        <form method='POST'>
+            {% csrf_token %}
+            {{ form.email|as_crispy_field }}
+            <button class='btn btn btn-outline-dark ' type='submit'>abonnieren</button>                        
+        </form>
+    </div>
+</div> 
+<hr>

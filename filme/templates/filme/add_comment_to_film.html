@@ -1,0 +1,14 @@
+{% extends 'filme/base.html' %}
+
+{% block content %}
+    {% load crispy_forms_tags %} 
+
+    <h2>Kommentar von {{ user.username }} zu</h2>
+    <H2>{{film.name }}</H2>
+
+    <form method="POST" class="film-form">
+        {% csrf_token %}
+        {{ form.kommentar|as_crispy_field }}
+        <button type="submit" class="save btn btn-default">Send</button>
+    </form>
+{% endblock %}

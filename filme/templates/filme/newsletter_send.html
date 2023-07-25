@@ -1,0 +1,30 @@
+{% extends 'filme/base.html' %}
+{% load django_bootstrap5 %}
+{% block extra_head %}
+{% endblock %}
+{% block content %}
+<h2>sende newsletter</h2>
+<div class="content col-12  col-lg-9 border-1">
+    <div>
+        Typ: {{typ}}
+    </div>
+    <div>
+        start {{start}}
+    </div>
+    <div>
+        ende {{ende}}
+    </div>
+    <div>
+        benötigte Zeit {{timediff}}
+    </div>
+    <div>
+        Anzahl {{count}}
+    </div>
+    <div>
+        Key: {{key}}
+    </div>
+</div>
+
+{% endblock %}
+
+

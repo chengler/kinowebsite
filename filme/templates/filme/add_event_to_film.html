@@ -1,0 +1,31 @@
+{% extends 'filme/base.html' %}
+
+{% block extra_head %}
+  <!-- jquery for DateTimePicker -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- XDSoft DateTimePicker -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.min.css" integrity="sha256-DOS9W6NR+NFe1fUhEE0PGKY/fubbUCnOfTje2JMDw3Y=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.20/jquery.datetimepicker.full.min.js" integrity="sha256-FEqEelWI3WouFOo2VWP/uJfs1y8KJ++FLh2Lbqc8SJk=" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+{% load crispy_forms_tags %} 
+
+  <H2>Neue Veranstaltung</H2>
+  <h4> {{ film.name }}</H4>
+  <p><img src="{{film.plakat_thumbnail.url }}" alt="thumb"></p>
+  
+  <form method="post" autocomplete="off" novalidate>
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-6">
+          {{ form.termin|as_crispy_field }}
+        </div>
+    </div>
+    <div>
+      {{ form.text|as_crispy_field }}
+    </div>
+    <button type="submit" class="save btn btn-success">Speicher Veranstaltung</button>
+  </form>
+
+{% endblock %}

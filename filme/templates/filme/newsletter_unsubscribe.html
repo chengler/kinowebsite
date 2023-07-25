@@ -1,0 +1,15 @@
+{% extends 'filme/base.html' %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<h2>Newsletter Abmeldung </h2>
+<div class="content col-12  col-lg-9 border-1">
+    <div>
+        {{ email}}
+    </div>
+    <div>
+        {{status}}
+    </div>
+</div>
+
+{% endblock %}

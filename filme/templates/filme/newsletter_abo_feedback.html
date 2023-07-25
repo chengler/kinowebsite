@@ -1,0 +1,24 @@
+{% extends 'filme/base.html' %}
+{% block content %}
+<div class="content col-12  col-lg-9 border-1">
+    <div> 
+        <h2>Ihre Anfrage wurde bearbeitet </h2> 
+    </div>
+    <div>
+        {% if flag == 'error' %}
+        Es gab einen unbekannten Fehler. Bitte wenden Sie sich direkt an uns. z.B. über mailto:newsletter@35kino.de
+        {% endif %}
+        {% if flag == 'neu' %}
+        Eben wurde eine Email an die eigegebene Adresse versendet.</br>
+        Bitte bestätigen Sie mit dem link in der Email, dass Sie den Newsletter wirklich erhalten wollen.
+        {% endif %}
+        {% if flag == 'wartend' %}
+        Soeben wurde eine weitere Mail versand. Das System wartet auf Ihre Bestätigung. 
+        Finden Sie die Mail nicht, ist sie vermutlich im Spam-Filter.
+        {% endif %}
+        {% if flag == 'OK' %}
+        Diese Mailadresse ist bereits angemeldet und bestätigt. Falls Sie keine Newsletter erhalten, landen diese vermutlich im Spamfilter.
+        {% endif %}    
+    </div>
+</div>
+{% endblock %}

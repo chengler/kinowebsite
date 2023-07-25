@@ -1,0 +1,40 @@
+{% extends 'filme/base.html' %}
+{% block content %} 
+    {% include 'filme/newsletter_render_sondernewsletter.html' %} 
+
+    <div class="col-12  ">
+        <hr>
+        {% if newsletter.gesendet == None %}
+        <a href="{% url 'sondernews_send' newsletter.pk  user.email   %}" class="btn btn-primary "><i class="fa fa-send" aria-hidden="true"></i> Sende Testmail an {{ user.email }} </a>
+        <a href="{% url 'sondernews_send' newsletter.pk '@all'   %}" class="rechts btn btn-danger "><i class="fa fa-send" aria-hidden="true"></i> Sende Rundmail @all </a> 
+        {% else %}
+            <a href="{% url 'sondernews_send' newsletter.pk  user.email   %}" class="btn btn-primary "><i class="fa fa-send" aria-hidden="true"></i> Sende Testmail an {{ user.email }} </a>
+            <span class="rechts ">Vor dem versenden muss eine Arbeitskopie erstellt werden.</button>
+        {% endif %}
+
+        <hr>
+    </div>
+
+    {% load crispy_forms_tags %} 
+    <form method="POST"  enctype="multipart/form-data" >
+        {% csrf_token %}        
+        <div class="col-12  ">
+            <h4>Newsletter ändern</h4>
+        </div>
+        <div>
+            {{ form.titel|as_crispy_field }}
+            {% if newsletter.bild_thumb %}
+                <img src="{{newsletter.bild_thumb.url }}" alt="kleines Bild">
+            {% endif %}
+            {{ form.bild_orig|as_crispy_field }}
+            {{ form.text|as_crispy_field }}
+            
+            {% if newsletter.gesendet == None %}
+                <button type="submit" class="save btn btn-success">Newsletter ändern</button>
+            {% else %}
+                <button type="submit" class="save btn btn-success">Kopie erstellen und ändern</button>
+            {% endif %}
+
+        </div>
+     </form>
+{% endblock %}

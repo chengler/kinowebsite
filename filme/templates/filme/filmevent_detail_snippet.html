@@ -1,0 +1,92 @@
+        <div class="row">
+            <div class="col-12">
+                <div>{{ event.display_text_extern}}&nbsp;</div>
+            </div>
+        </div>
+         <hr>
+        <div class="row" itemscope itemtype="http://schema.org/Movie">                        
+            <div class="col-4 border-2">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'film_detail_edit' pk=film.pk %}?next={{request.path}}">
+                        <img class="plakat" src="{{film.plakat_klein.url}}" srcset="{{film.plakat_gross.url}} x2" alt="Filmplakat">
+                    </a>
+                {% else %}
+                        <img itemprop="image" class="plakat" src="{{film.plakat_klein.url}}" srcset="{{film.plakat_gross.url}} x2" alt="Filmplakat">
+                {% endif %}
+            </div>
+            <div class="col-7 border-4">   
+                    {% if caler != 'filmevent_detail' %}
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'film_detail_edit' pk=film.pk %}?next={{request.path}}">
+                        <h2>{{ event.film.name}}</h2>   
+                            </a>
+                        {% else %}
+                        <h2 itemprop="name">{{ event.film.name}}</h2>   
+                        {% endif %}
+                    {% endif %}
+                    {% if film.director is not None %}
+                        <div>Regie: <span itemprop="director">{{ film.director }}</span></div>
+                    {% endif %}
+                    {% if film.countryOfOrigin is not None %}
+                        <div>Land: <span itemprop="countryOfOrigin">{{ film.countryOfOrigin }}</span></div>
+                    {% endif %}
+                    <div>
+                        {% if film.datePublished is not None %}
+                            Jahr: <time itemprop="dateCreated" datetime="{{film.datePublished}}">{{ film.datePublished }}</time>
+                        {% endif %}
+                        {% if film.duration is not None %}
+                            Spielzeit: <time itemprop="duration" datetime="PT{{film.duration}}M">{{ film.duration }}</time> min.
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if film.genre is not None %} 
+                            Genre: <span itemprop="genre">{{ film.genre }}</span>
+                        {% endif %} 
+                        {% if film.fsk is not None %}
+                            &nbsp;- {{ film.fsk_verbose }} 
+                        {% endif %}
+                    </div>                   
+                    {% if film.actors is not None %}
+                        <div>Darstellende: <span itemprop="actor">{{ film.actors }}</span></div>
+                    {% endif %}
+            </div>
+            {% if user.is_authenticated %}
+                    {% include 'filme/filmevent_dienste_snippet.html' %}    
+            {% endif %}            
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="film_hinweis">{{ film.display_hinweis|linebreaksbr }}</div>
+                <div class="film_display_description">{{ film.display_description|linebreaksbr }}</div>
+                {% if film.website is not None %}
+                    <a target="_blank" rel="noopener noreferrer" 
+                        href="{{ film.website }}">|zur Website des Films|</a>
+                {% endif %}
+                {% if film.trailer is not None %}
+                    <a target="_blank" rel="noopener noreferrer" 
+                        href="{{ film.trailer }}">|zum Trailer|</a>
+                {% endif %}
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="row">
+                <div class="col-12 film_interner_kommentar">                    
+                    {% if film.interner_kommentar is not None %}
+                        Unsere Bewertung: {{film.interner_kommentar  }}
+                    {% endif %}
+                    {% if film.film_no_delete == False%}
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn btn-default" href="{% url 'film_remove' pk=film.pk %}">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> l&ouml;schen</a>   
+                            </div>
+                        </div> 
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %}
+
+        
+
+
+

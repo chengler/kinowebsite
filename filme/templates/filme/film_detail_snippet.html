@@ -1,0 +1,73 @@
+        <div class="row deeper">
+        </div>
+         <hr>
+        <div class="row">
+            <div class="col-4">
+                {% if user.is_authenticated %}
+                    <a href="{% url 'film_detail_edit' pk=film.pk %}?next={{request.path}}">
+                        <img class="plakat" src="{{film.plakat_klein.url }}" alt="klein">
+                    </a>
+                {% else %}
+                    <img class="plakat" src="{{film.plakat_klein.url }}" alt="klein">
+                {% endif %}
+            </div>
+            <div class="col-8">      
+                    <h2 class="">{{ film.name }} </h2>
+                    {% if film.director is not None %}
+                        <div>Regie: {{ film.director }}</div>
+                    {% endif %}
+                    {% if film.countryOfOrigin is not None %}
+                        <div>Land: {{ film.countryOfOrigin }}</div>
+                    {% endif %}
+                    <div>
+                        {% if film.datePublished is not None %}
+                            Jahr: {{ film.datePublished }} 
+                        {% endif %}
+                        {% if film.duration is not None %}
+                            Spielzeit: {{ film.duration }} min.   
+                        {% endif %}
+                    </div>
+                    <div>
+                        {% if film.genre is not None %} 
+                            Genre: {{ film.genre }}
+                        {% endif %} 
+                        {% if film.fsk is not None %}
+                            &nbsp;- {{ film.fsk_verbose }} 
+                        {% endif %}
+                    </div>                   
+                    {% if film.actors is not None %}
+                        <div>Darstellende: {{ film.actors }}</div>
+                    {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="film_hinweis">{{ film.display_hinweis|linebreaksbr }}</div>
+                <div class="film_display_description">{{ film.display_description|linebreaksbr }}</div>
+                {% if film.website is not None %}
+                    <a target="_blank" rel="noopener noreferrer" 
+                        href="{{ film.website }}"">|zur Website des Films|</a>
+                {% endif %}
+                {% if film.trailer is not None %}
+                    <a target="_blank" rel="noopener noreferrer" 
+                        href="{{ film.trailer }}"">|zum Trailer|</a>
+                {% endif %}
+            </div>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="row">
+                <div class="col-12 film_interner_kommentar">                    
+                    {% if film.interner_kommentar is not None %}
+                        Unsere Bewertung: {{film.interner_kommentar  }}
+                    {% endif %}
+                    {% if film.film_no_delete == False%}
+                        <div class="row">
+                            <div class="col-12">
+                                <a class="btn btn-default" href="{% url 'film_remove' pk=film.pk %}">
+                                    <i class="fa fa-trash" aria-hidden="true"></i> l&ouml;schen</a>   
+                            </div>
+                        </div> 
+                    {% endif %}
+                </div>
+            </div>
+        {% endif %} 

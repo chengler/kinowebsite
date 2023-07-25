@@ -1,0 +1,43 @@
+{% extends 'filme/base.html' %}
+{% block extra_head %}
+{% endblock %}
+{% block content %} 
+<div class="content col-12  col-lg-12 border-1">
+        <table class="table table-hover  table-sm">
+            <thead>
+                <tr>
+                    <th scope="col-2">Datum</th>
+                    <th scope="col-4">Filmname</th>
+                    <th scope="col-3">Genre</th>
+                    <th scope="col-3">Regie</th>
+                    
+                </tr>
+            </thead>
+            {% for event in events %}
+                {% with film=event.film %}
+                    <tbody>
+                        <tr>
+                            <td class="col-2">
+                                <a href="{% url 'filmevent_detail' pk=event.pk %}?next={{request.path}}"> 
+                                    {{ event.termin|date:"d.m.Y H:i"}}
+                                </a>                                                              
+                            </td>
+                           <td class="col-4">
+                                <a href="{% url 'film_detail' pk=event.film.pk %}?next={{request.path}}"> 
+                                    {{event.film.name}}
+                                </a>
+                            </td>                            
+                            <td class="col-3">
+                                {{event.film.genre}}
+                            </td>                            
+                            <td class="col-3">
+                                {{event.film.director}}
+                            </td>                                                                                
+                        </tr>   
+                    </tbody>
+                {% endwith%}
+            {% endfor %}
+        </table>
+</div>
+{% endblock %}
+

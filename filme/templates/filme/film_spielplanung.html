@@ -1,0 +1,100 @@
+{% extends 'filme/base.html' %}
+{% load zehntel %}
+
+{% block extra_head %}
+{% endblock %}
+{% block content %} 
+    {% load crispy_forms_tags %} 
+    <div class="container">
+
+        <table class="table table-hover  table-sm">
+            <thead>
+                <tr>
+                    <th scope="col-2">Kategorie</th>
+                    <th scope="col-2">Datum</th>
+                    <th scope="col-2">Zeit</th>
+                    <th scope="col-3">Wunschfilm</th>
+                    <th scope="col-3">Ersatzfilm</th>
+                </tr>
+            </thead>
+            <tbody>
+                <form method="post">
+                {% csrf_token %}    
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    {% if forloop.counter0 < formset.initial_form_count%}
+                        <tr>
+                            {{ form.id }}
+                            <td>{{form.kategorie|as_crispy_field}}</td>
+                            <td>{{form.termin|as_crispy_field}}</td>      
+                            <td>{{form.zeit|as_crispy_field}}</td>
+                            <td>{{form.film|as_crispy_field}}</td>
+                            <td>{{form.ersatzfilm|as_crispy_field}}</td>
+                        </tr>   
+                    {% endif%}
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-12">
+                <a href="{% url 'event_new' %}" class="btn btn-primary "><i class="fa fa-calendar-o" aria-hidden="true"></i> Neue Termine</a>
+                {% if request.get_full_path == '/film/spielplanung/1' %}
+                    <a href="{% url 'film_spielplanung_list' %}" class="btn btn-secondary "><i class="fa fa-filter" aria-hidden="true"></i> Alle Kategorien</a>
+                {% else %}
+                    <a href="{% url 'film_spielplanung_list' %}/1" class="btn btn-secondary "><i class="fa fa-filter" aria-hidden="true"></i> Nur Freitagsfilme</a>
+                {% endif %}
+                <button type="submit" class="rechts btn btn-success"><i class="fa fa-floppy-o" aria-hidden="true"></i> speichern</button>
+            </div>
+        </div>
+                </form>
+        <table class="table table-hover  table-sm">
+            <thead>
+                <tr>
+                    <th scope="col-3">Filmname</th>
+                    <th scope="col-1">Genre</th>
+                    <th scope="col-2">Website| Trailer</th>
+                    <th scope="col-5">interner Kommentar</th>
+                    <th scope="col-1">archivieren</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for film in filme %}
+                    <tr>
+                        {{ form.id }}
+                        <td><a href="{% url 'film_detail_edit' pk=film.pk %}?next={{request.path}}">{{ film.name|truncatechars:20 }}</a></td>
+                        <td>
+                            {% if film.genre is not None %}
+                                {{ film.genre |truncatechars:12 }}
+                            {% else%} <span> <span>
+                            {% endif %}
+                        </td>      
+                        <td>
+                            {% if film.website is not None %}
+                                <a target="_blank" rel="noopener noreferrer" href="{{ film.website }}">Web.. </a>
+                                {% endif %}
+                                {% if film.trailer is not None %}
+                                <a target="_blank" rel="noopener noreferrer" href="{{ film.trailer }}">Trailer</a> 
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if film.interne_bewertung_ratio is not None %}    
+                                {{  film.interne_bewertung_ratio | zehntel }}&nbsp;
+                            {% endif %}
+                            {% if film.interner_kommentar is not None %}
+                                {{film.interner_kommentar |truncatechars:50 }}
+                            {% else%}
+                                <span> </span>
+                            {% endif %}                        
+                        </td>
+                        <td>
+                            <a class="rechts " href="{% url 'film_status' key='4' pk=film.pk %}?next={{request.path}}">
+                            <i class="fa fa-undo" aria-hidden="true"></i> ins Archiv</a> 
+                        </td>    
+                    </tr>   
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+

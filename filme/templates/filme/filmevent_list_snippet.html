@@ -1,0 +1,53 @@
+    <div class="film-list"  itemscope itemtype="http://schema.org/Movie">
+        <div class="row" >
+            <div class="col-12" > 
+                <a href="{% url 'film_detail' pk=film.pk %}"> 
+                    <h4 itemprop="name"> {{film.name}}</h4> 
+                </a>
+                {% if event.text_extern != ''%}
+                    <div>{{ event.display_text_extern |truncatechars:60 }}</div>
+                {% endif %}                                                           
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5 col-lg-3">
+                <a href="{% url 'filmevent_detail' pk=event.pk %}">
+                    <img itemprop="image" class="plakat" src="{{film.plakat_thumbnail.url}}" srcset="{{film.plakat_klein.url}} x2" alt="Filmplakat">
+                </a> 
+            </div>
+            <div class="col-7 col-lg-3">
+                {% if film.director is not None %}
+                        <div>von <span itemprop="director">{{ film.director}}</span></div>
+                    {% endif %}
+                    {% if film.countryOfOrigin is not None %}
+                        <div>Land: <span itemprop="countryOfOrigin">{{film.countryOfOrigin}}</span></div>
+                    {% endif %}
+                    {% if film.datePublished is not None %}
+                        <div>Jahr: <time itemprop="dateCreated" datetime="{{film.datePublished}}">{{ film.datePublished }}</time></div>
+                    {% endif %}
+                    {% if film.duration is not None %}
+                        <div> Spielzeit <time itemprop="duration" datetime="PT{{film.duration}}M">{{film.duration }}</time> min.</div>   
+                    {% endif %}
+                    {% if film.genre is not None %} 
+                        <div>Genre: <span itemprop="genre">{{ film.genre }}</span></div>
+                    {% endif %} 
+                    {% if film.fsk is not None %}
+                        <div>FSK:  {{ film.fsk_verbose }}</div> 
+                    {% endif %}
+            </div>
+            <div class="col-12 col-lg-6">
+                {% if user.is_authenticated %}  
+                    <div>
+                       {% include 'filme/filmevent_dienste_snippet.html' %}
+                    </div> 
+                {% else %}
+                    <div class="text">
+                        {% if event.text_extern != ''%}
+                            <div>{{ film.display_hinweis |truncatechars:60 }}</div>
+                        {% endif %}                    
+                        {{ film.display_description|truncatechars:200|linebreaksbr }}
+                    </div>
+                {% endif %}
+            </div> 
+        </div>
+    </div>

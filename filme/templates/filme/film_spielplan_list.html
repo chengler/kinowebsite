@@ -1,0 +1,77 @@
+{% extends 'filme/base.html' %}
+{% block extra_head %}
+{% endblock %}
+{% block content %} 
+    {% load crispy_forms_tags %} 
+    <div class="container">
+        <table class="table table-hover  table-sm">
+            <thead>
+                <tr>
+                    <th scope="col-1">Filmevent</th>
+                    <th scope="col-1">Kategorie</th>
+                    <th scope="col-1">bestätigt</th>
+                    <th scope="col-2">Filmname</th>
+                    <th scope="col-1">bearbeitet</th>
+                    <th scope="col-1">online</th>
+
+                    
+                </tr>
+            </thead>
+            {% for event in events %}
+                {% with film=event.film %}
+                    <tbody>
+                        <tr>
+                            <td>
+                                {% if event.event_film_confirmed == False and film %}
+                                    <a href="{% url 'filmevent_detail_edit' pk=event.pk %}?next={{request.path}}"> 
+                                        {{ event.termin|date:"d. M. H:i (D)"}} <i class="fa fa-edit" aria-hidden="true"></i>
+                                    </a>                            
+                                {% else%}
+                                    {{ event.termin|date:"d. M. H:i (D)"}} 
+                                {% endif %}                                
+                            </td>
+                           <td>
+                                {{event.get_kategorie_display}}
+                            </td>                            
+                            <td>
+                                {% if event.event_film_confirmed == False and film %}
+                                    <a class="" href="{% url 'confirm_eventfilm' pk=event.pk %}?next={{request.path}}">
+                                    bestätige <i class="fa fa-hand-spock-o" aria-hidden="true"></i></a>
+                                {% else%}
+                                    ja
+                                {% endif %}
+                            </td>                            
+                            <td>
+                                {% if film %}
+                                    <a  href="{% url 'film_detail' pk=film.pk %}">
+                                        {{film.name}} 
+                                    </a>
+                                {% else %}
+                                    <a class="danger" href="{% url 'film_spielplanung_list' %}">
+                                    <i class="fa fa-search" aria-hidden="true"> Filme gibts in der Spielplanung!</i></a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if film %}
+                                    {% if  film.film_komplett %}
+                                        ja
+                                    {% else %}
+                                        <a  href="{% url 'film_detail_edit' pk=film.pk %}">
+                                            <i class="fa fa-edit" aria-hidden="true"></i> zu bearbeiten
+                                        </a>
+                                    {% endif %}
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if event.event_online %}
+                                    <i class="fa fa-check" aria-hidden="true"></i>
+                                {% endif %}
+                            </td>                            
+                        </tr>   
+                    </tbody>
+                {% endwith%}
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
+

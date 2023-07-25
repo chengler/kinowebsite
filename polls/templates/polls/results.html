@@ -1,0 +1,14 @@
+<h1>{{ question.question_text }}</h1>
+
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} {{ choice.votes|pluralize:"Stimme,Stimmen" }}</li>
+
+{% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+
+<!-- Avoid race conditiones
+https://docs.djangoproject.com/en/3.0/ref/models/expressions/#avoiding-race-conditions-using-f
+-->

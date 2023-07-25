@@ -1,0 +1,115 @@
+{% load static %}
+{% spaceless %}
+{% endspaceless %}
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% block extra_head %}
+        {% endblock %}
+        <link rel="shortcut icon" type="image/jpg" href="{% static '/lokal/favicon.ico' %}" async/>  
+         <!--    
+        <link rel="stylesheet" href="{% static 'filme/fonts/fa47/css/font-awesome.min.css' %}?v=1" async/>
+         <!- fsa -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" async/>    
+        {% load django_bootstrap5 %}
+        {% bootstrap_css %}
+         {% comment %} {% bootstrap_javascript jquery='full' %}  {% endcomment %}
+        <!-- lokales CSS-->
+        <link rel="stylesheet"  type="text/css" href="{% static 'css/filme.css' %}?v=7" async/>  
+    </head>   
+
+
+    <body>                      
+        <div class="wrapper">
+            <div class="container header-container">
+                <div class="page-header">
+                    <a href="/"> <img alt="Kino 35" src="/static/lokal/logo-web-min2.png" > </a>
+                    {% if user.is_authenticated %}
+                        <span class="rechts second-headline ">{{ user.username }} <a href="{% url 'logout' %}"><i class="second-headline fa fa-sign-out"></i></a> </span>
+                    {% else %} 
+                        <span class="rechts second-headline"><a href="{% url 'login' %}" ><i class="second-headline fa fa-sign-in"></i></a></span>
+                    {% endif %}   
+                </div> 
+                <ul class="nav nav-tabs sticky-top ">
+                    <li class="nav-item">
+                        <a class="{% if request.resolver_match.url_name == 'film_index' %}active{% endif %} nav-link" href="/"><i class="fa fa-home" aria-hidden="true"></i> Start</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="{% if request.resolver_match.url_name == 'filmevent_programm_list' %}active{% endif %} nav-link" href="{% url 'filmevent_programm_list'%}"><i class="fa fa-film" aria-hidden="true"></i> Programm</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="{% if request.resolver_match.url_name == 'film_anfahrt' %}active{% endif %} nav-link" href="{% url 'film_anfahrt'%}"><i class="fa fa-map-o" aria-hidden="true"></i> Anfahrt</a>
+                    </li>
+                    {% comment %} <li class=" nav-item">
+                        <a class="{% if request.resolver_match.url_name == 'film_ueber_uns' %}active{% endif %} nav-link" href="{% url 'film_ueber_uns'%}"><i class="fa fa-users" aria-hidden="true"></i> Über uns</a>
+                    </li> {% endcomment %}
+                </ul>
+                {% if user.is_authenticated %}
+                    <ul class="nav nav-tabs sticky-top ">
+                        <li class="nav-item">
+                            <a class="{% if request.resolver_match.url_name == 'film_neu' %}active{% endif %} nav-link" href="{% url 'film_neu' %}"><i class="fa fa-plus" aria-hidden="true"></i> Film neu</a>
+                        </li>  
+                        <li class="nav-item">
+                            <a class="{% if request.resolver_match.url_name == 'film_draft_sichten_list' %}active{% endif %} nav-link" href="{% url 'film_draft_sichten_list' %}"><i class="fa fa-eye" aria-hidden="true"></i> Filme sichten</a>
+                        </li>    
+                        <li class="nav-item">
+                            <a class="{% if request.resolver_match.url_name == 'film_draft_programmplanung_list' %}active{% endif %} nav-link" href="{% url 'film_draft_programmplanung_list' %}"><i class="fa fa-list" aria-hidden="true"></i> Vorauswahl</a>
+                        </li> 
+                        <li class="nav-item">
+                            <a class="{% if request.resolver_match.url_name == 'film_spielplanung_list' %}active{% endif %} nav-link" href="{% url 'film_spielplanung_list' %}"><i class="fa fa-th-list" aria-hidden="true"></i> Programmplanung</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{% if request.resolver_match.url_name == 'film_spielplan_list' %}active{% endif %} nav-link" href="{% url 'film_spielplan_list' %}"><i class="fa fa-list-ol" aria-hidden="true"></i> Spielplan</a>
+                        </li>   
+                        <li class="nav-item">
+                            <a class="{% if request.resolver_match.url_name == 'film_archiv' %}active{% endif %} nav-link" href="{% url 'film_archiv' %}"><i class="fa fa-undo" aria-hidden="true"></i> Archiv</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="{% if request.resolver_match.url_name == 'filmevent_archiv' %}active{% endif %} nav-link" href="{% url 'filmevent_archiv' %}"><i class="fa fa-database" aria-hidden="true"></i> Chronik</a>
+                        </li>                                                                                                                                
+                    </ul>
+                {% endif %}    
+            </div>
+        </div>
+
+        <div class="container inhalt border-3"> 
+                <div class="row main">
+                {# Display django.contrib.messages as Bootstrap alerts #}
+                    <div class="content col-12">
+                        {% bootstrap_messages %}
+                    </div>
+                    {% block content %}
+                    {% endblock %}
+                    {% block sidebar %}
+                    {% endblock %}
+                </div>
+        </div>
+        {% comment %} <div class="wrapper"> {% endcomment %}
+        <footer class="footer">
+            <div class="container "> 
+                <ul class="nav  nav-tabs small-text  ">
+                    <li class="nav-item ">
+                        <a class="{% if request.resolver_match.url_name == 'film_impressum' %}active{% endif %} nav-link" href="{% url 'film_impressum' %}"><i class="fa fa-book" aria-hidden="true"></i> Impressum</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="{% if request.resolver_match.url_name == 'film/datenschutzhinweis/' %}active{% endif %} nav-link" href="{% url 'film_datenschutzhinweis' %}"><i class="fa fa-database" aria-hidden="true"></i> Datenschutzhinweis</a>
+                    </li>
+                        <li class="nav-item">
+                        <a class=" nav-link" title="link führt zu Facebook" target="_blank" rel="noopener noreferrer" href="https://de-de.facebook.com/Kino35">
+                        <i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                        </li>
+                            <li class="nav-item">
+                            <a class=" nav-link" title="Sondernewsletter erstellen"  href="{% url 'sondernewsletter_list' %}">
+                            <i class="fa fa-envelope-o" aria-hidden="true"></i> Sondernewsletter</a>
+                        </li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        </footer>
+        {% comment %} </div> {% endcomment %}
+    </body>
+</html>

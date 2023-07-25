@@ -1,0 +1,31 @@
+<div class="col-12">
+<a href="{% url 'filmevent_dienste' pk=event.pk %}?next={{request.path}}">
+    {% if event.theke1 == '' or event.theke2 == ''%}
+        <div class="warning">
+    {% else %}
+        <div>
+    {% endif%}
+        Theke: {{event.theke1}} und {{event.theke2}}
+        </div>
+    <div>
+        {% if event.kasse == '' %}
+            <span class="warning">Kasse: {{event.kasse}}</span> -
+        {% else %}
+            <span class="abgedeckt">Kasse: {{event.kasse}}</span> -
+        {% endif%}
+        {% if event.vorfuehrer == '' %}
+            <span class="warning">Vorführer: {{event.vorfuehrer}}</span>
+        {% else %}
+            <span class="abgedeckt">Vorführer: {{event.vorfuehrer}}</span>
+        {% endif%}
+    </div>
+</a>
+</div>
+<div class="col-12">
+    <div>
+        Info: {{event.text_intern|truncatechars:180}}
+    </div>
+</div>
+
+
+

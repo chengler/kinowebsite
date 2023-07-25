@@ -1,0 +1,84 @@
+{% extends 'filme/base.html' %}
+{% block extra_head %}
+    <meta name="description" content="Kino35 - Arthausfilme in Fulda. Hier finden Sie den Film des nächsten Spieltags. Manchmal gibt es auch mehr als einen Film. ">
+    <title>Kino 35 - Startseite</title>
+    <meta name="robots" content="index NoFollow"> 
+{% endblock %}
+{% block content %}
+<div class="content col-12  col-lg-9 border-1">
+    {% if  hinweis.anzeigen %} 
+        <div class="indexinfo ">
+            <h3>Hinweis</h3>
+            <hr>
+            {{hinweis.text|safe}}
+            <hr>
+        </div>
+    {% endif %}
+    {% if events.count == 0 %}
+        <h3>Keine weiteren Filme im Programm O_O</h3>
+    {% else %}
+        <div class="col-12 border-2  vorschau">
+                <h3>Der nächste Spieltag</h3>                
+                <hr>
+        </div>       
+        {% for event in events%}
+            <div class="row ">
+                <div class="col-12" itemscope itemtype="http://schema.org/Event">
+                    <span hidden itemprop="name" itemtype="text">{{ event.get_kategorie_display}}</span>
+                    <span itemprop="location" itemscope itemtype="http://schema.org/Place">
+                        <span itemprop="name" hidden >{{event.location_name}}</span>
+                        <span hidden itemprop="address" itemtype="text">{{event.location_address}}</span>
+                    </span>
+                    {% with film=event.film %}
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'filmevent_detail_edit' pk=event.pk %}?next={{request.path}}">
+                                <h4>{{ event.termin|date:"D. d. M. H:i"}} &nbsp; <span class="kategorie>"> "{{ event.get_kategorie_display}}"</span></h4>
+                            </a>
+                        {% else %}
+                            <h4><time itemprop="startDate" datetime="{{ event.termin|date:"Y-m-dTH:i"}}">{{ event.termin|date:"D. d. M. H:i"}}</time> &nbsp; 
+                               <span class="kategorie>"> "{{ event.get_kategorie_display}}"</span></h4>
+                        {% endif %}   
+                            {% if events.count == 1 %}                
+                                {% include 'filme/filmevent_detail_snippet.html' %}
+                            {% else%}          
+                                {% include 'filme/filmevent_list_snippet.html' %}
+                            {% endif %}
+                    {% endwith %}                    
+                </div>                   
+            </div>                    
+            <hr>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}
+
+{% block sidebar %} 
+<div class="sidebar col-12  col-lg-3  border-1">
+    <div class=" row   border-4 ">
+        <div class="col-12 border-2 rahmen order-2 order-lg-2">
+                <h3>Auswahl</h3>
+        </div> 
+        {% for event in sidebar_events %}
+            <div class="col-12 col-sm-6 col-lg-12 border-3 auswahl2 rahmen order-2 order-lg-2"> 
+            <hr>
+                {% with film=event.film %}
+                    {% include 'filme/filmevent_sidbar_big_snippet.html' %}
+                {% endwith %}  
+                
+            </div >          
+        {% endfor %}    
+
+        {% if sidebar_count != 0 %}
+                <div class="col-12 col-sm-6 col-lg-12  border-3 order-2 order-lg-1">
+                    {% include 'filme/newsletter_abo_snippet.html' %} 
+                </div >        
+        {% else %}
+            <div class="col-12 order-1 order-lg-1">      
+                {% include 'filme/newsletter_abo_snippet.html' %}
+            </div>
+        {% endif %}   
+    </div>                
+</div>           
+{% endblock %}
+
+

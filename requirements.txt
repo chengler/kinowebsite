@@ -1,0 +1,27 @@
+wheel~=0.40
+Django~=4.2
+Pillow==9.5.0  # 10 braucht anpassung
+django-imagekit
+django-crispy-forms
+django_extensions
+django-bootstrap5 # https://pypi.org/project/django-bootstrap5/ # :nicht  bootstrap-v5!
+crispy-bootstrap5 #neu
+pydotplus
+requests
+html2text
+python-dateutil
+django-maintenance-mode # https://pypi.org/project/django-maintenance-mode/
+beautifulsoup4
+
+# html Editor
+    # Imperavi (or tinymce) rich text editor is optional
+    # 'imperavi',
+
+
+# pip wheel --wheel-dir=/local/wheels -r requirements.txt
+#python -m pip install --upgrade pip
+# pip install -r requirements.txt
+
+
+# delete cache
+#https://stackoverflow.com/questions/2268417/expire-a-view-cache-in-django/2268583#2268583

@@ -1,0 +1,132 @@
+github hilfreich für den Einstieg
+https://rogerdudler.github.io/git-guide/
+#
+### installation ###
+#
+Beispiel für lauffähigen Apache-Server auf Ubuntu 16.04
+- installier und aktivere wsgi
+apt-get install libapache2-mod-wsgi-py3 
+a2enmod wsgi
+
+config:
+<VirtualHost *:80>
+    Alias /favicon.ico /var/www/html/kino-35/filme/static/favicon.jpg
+
+    Alias /static /var/www/html/kino-35/static
+    <Directory /var/www/html/kino-35/static>
+        Require all granted
+    </Directory>
+
+    Alias /media /var/www/html/kino-35/media
+    <Directory /var/www/html/kino-35/media>
+        Require all granted
+    </Directory>
+
+    <Directory /var/www/html/kino-35>
+      <Files wsgi.py>
+        Require all granted
+      </Files>
+    </Directory>
+    WSGIDaemonProcess kino-35 python-path=/var/www/html/kino-35 python-home=/var/www/html/kino-35/myvenv
+    WSGIProcessGroup kino-35
+    WSGIScriptAlias / /var/www/html/kino-35/mysite/wsgi.py
+
+</VirtualHost>
+
+
+https://wiki.ubuntuusers.de/Apache_2.4/
+### Rechte unter /var/www/html
+
+chown -R www-data:www-data kino-35
+chmod 666 db.sqlite3
+
+# django
+
+git clone https://github.com/chengler/kino-35
+
+
+erstelle/passe an .gitignore mit:
+
+auf dem productiven server kann db und migrations erhalten bleiben.
+
+*.pyc
+*~
+.vscode
+__pycache__
+myvenv
+mysite/privat_settings.py
+mysite/newsletter_keys.py
+newsletter
+users
+.gitignore
+db.sqlite3
+filme/migrations
+media/CACHE
+  
+
+
+erstelle/passe an:
+    mysite/privat_settings.py
+    mysite/newsletter_keys.py
+
+    DEBUG = False # nicht vergessen!
+
+apt-get install python3-venv
+python3 -m venv myvenv
+source myvenv/bin/activate
+pip install --upgrade pip
+pip install -r requirements.txt
+# zur überprüfung
+python manage.py makemigrations
+python manage.py migrate
+python manage.py collectstatic
+
+
+
+# für Änderungen an der DB Struktur
+python manage.py makemigrations
+python manage.py migrate
+
+### änderungen an  .gitignore
+git rm -r --cached .
+git add .
+git commit -m "fixed untracked files"
+
+#
+### UPDATE 
+# 
+1. auf entwicklungsserver
+git pull # falls Konflikt, wer hat den Code geändert
+ #datenbank übernehmen
+cp db.sqlite3.back db.sqlite3
+
+
+python manage.py collectstatic # nur bei bedarf
+git add --all
+git commit -m "text"
+git push 
+
+2. 35kino.de
+git pull
+
+uU source myvenv/bin/activate
+uU pip3.6  -r requirements.txt
+uU python manage.py makemigrations
+uU python manage.py migrate
+
+/etc/init.d/apache2 reload 
+
+
+python manage.py makemigrations --empty filme
+python manage.py makemigrations  filme
+
+python manage.py migrate --fake filme
+
+python manage.py migrate filme
+
+
+
+
+
+
+

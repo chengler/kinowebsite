@@ -1,0 +1,4 @@
+PassengerFriendlyErrorPages on
+PassengerPython /home/pacs/kkf00/users/kino35.de/pythonenv/bin/python3
+SetEnv PYTHONPATH /home/pacs/kkf00/users/kino35.de/kinowebsite
+

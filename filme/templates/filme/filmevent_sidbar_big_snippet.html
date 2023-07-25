@@ -1,0 +1,45 @@
+    <div class="row ">
+        <div class="col-12">
+            <div class="kategorie ">
+            <h4>"{{ event.get_kategorie_display}}"</h4>
+            </div>
+            <div class="datum">
+                {{ event.termin|date:"D. d. M. H:i" }}
+            </div>            
+            <div class="filmtitel">
+                <a href="{% url 'filmevent_detail' pk=event.pk %}">
+                    <h5>{{ film.name }}</h5>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-4 col-sm-8">
+            <a href="{% url 'filmevent_detail' pk=event.pk %}">
+                <img class="plakat" src="{{film.plakat_thumbnail.url}}" srcset="{{film.plakat_klein.url}} x2" alt="Miniplakat">
+            </a>
+        </div>
+        <div class="col-8 col-sm-10">
+            {% if film.director is not None %}
+                    <div>Regie: {{ film.director }}</div>
+            {% endif %}
+            {% if film.countryOfOrigin is not None %}
+                    <div>{{ film.countryOfOrigin }} {{ film.datePublished }}</div>
+            {% endif %}                {% if film.duration is not None %}
+                    <div>Dauer: {{ film.duration }} min.</div>
+            {% endif %}
+            {% if film.genre is not None %} 
+                    <div>{{ film.genre }}</div>
+            {% endif %} 
+            {% if film.fsk is not None %}
+                    <div>  {{ film.fsk_verbose }}</div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row ">
+        <hr>
+    </div>
+
+
+
