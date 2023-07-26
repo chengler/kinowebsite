@@ -12,6 +12,7 @@ html2text
 python-dateutil
 django-maintenance-mode # https://pypi.org/project/django-maintenance-mode/
 beautifulsoup4
+django-maintenance-mode
 
 # html Editor
     # Imperavi (or tinymce) rich text editor is optional

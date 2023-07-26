@@ -82,6 +82,7 @@ MIDDLEWARE = [
     # 'django.middleware.cache.UpdateCacheMiddleware',
     # 'django.middleware.common.CommonMiddleware',
     # 'django.middleware.cache.FetchFromCacheMiddleware',
+    'maintenance_mode.middleware.MaintenanceModeMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -185,3 +186,9 @@ SECURE_HSTS_PRELOAD = True
 # }
 # CACHE_MIDDLEWARE_ALIAS = "cache"
 # CACHE_MIDDLEWARE_SECONDS = 600
+
+# https://pypi.org/project/django-maintenance-mode/
+MAINTENANCE_MODE = True # None True
+# if True admin site will not be affected by the maintenance-mode page
+MAINTENANCE_MODE_IGNORE_ADMIN_SITE = False
+
