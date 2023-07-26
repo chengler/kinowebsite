@@ -189,6 +189,8 @@ SECURE_HSTS_PRELOAD = True
 # CACHE_MIDDLEWARE_SECONDS = 600
 
 # https://pypi.org/project/django-maintenance-mode/
+
+# passenger-config restart-app
 MAINTENANCE_MODE = None # None True
 # if True admin site will not be affected by the maintenance-mode page
 MAINTENANCE_MODE_IGNORE_ADMIN_SITE = False

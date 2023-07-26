@@ -2,6 +2,7 @@
 # bei der domain www.kino35.de sind folgende Schritte notwendig
 
 DOMAIN=kino35.de
+DOMAIN=$1
 clear
 echo Konfiguriere für DOMAIN $DOMAIN
 
