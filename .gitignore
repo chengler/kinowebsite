@@ -19,7 +19,8 @@ media/CACHE/images/filme/*
 static/django_extensions/*
 static/admin/*
 
-
+# maintaince oder nicht? 
+mysite/maintenance_mode_state.txt
 
 #
 # Alles ab hier gehört unbedingt ins Backup
