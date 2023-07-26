@@ -1,87 +1,96 @@
 {% extends 'filme/base.html' %}
 {% load zehntel %}
 {% block content %}
+<!-- film_draft_list.html -->
 <div class="content col-12  col-lg-12 border-1">
     {% if filme %}
         <div class="row ">       
-            <div class="col-1">
-                Plakat
+            <div class="col-3">
+                Plakat <br> Name <br> Score
             </div>
-            <div class="col-3">                        
-                Name
-            </div>
-            <div class="col-1"> 
-                Webseite
-            </div>
-            <div class="col-1"> 
-                Trailer
+            <div class="col-2"> 
+                Webseite <br> Trailer 
             </div>
             <div class="col-5">
                 Bewertung
             </div>
-            <div class="col-1"> 
+            <div class="col-2"> 
                    Aktion
             </div>
         </div>
         <hr>
         {% for film in filme %}
+            <div>
+                <a href="{% url 'film_draft_bewertung' pk=film.pk %}?next={{request.path}}">
+                    {{ film.name }}
+                </a>
+            </div>
             <div class="row ">       
-                <div class="col-1">
-                    {% if request.resolver_match.url_name == 'film_archiv' %}
+                <div class="col-3">
+                    <div>
+                        {% if request.resolver_match.url_name == 'film_archiv' %}
                         <a href="{% url 'film_detail' pk=film.pk %}?next={{request.path}}">
-                    {% else %}
+                        {% else %}
                         <a href="{% url 'film_draft_bewertung' pk=film.pk %}?next={{request.path}}">
-                    {% endif %}
-                    <img src="{{film.plakat_minithumb.url }}" alt="Plakat"></a>
-                    </a>
+                        {% endif %}
+                        <img src="{{film.plakat_minithumb.url }}" alt="Plakat"></a>
+                        </a>
+                    </div> 
+
+                    <div>
+                        {% if film.genre is not None %}
+                            {{ film.genre }}
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        {% if film.interne_bewertung_ratio is not None %}    
+                        {{  film.interne_bewertung_ratio | zehntel }}
+                        {% endif %}
+                        -
+                        {% if film.interne_bewertung_zahl is not None %}
+                            {{film.interne_bewertung_zahl}} 
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                        /
+                        {% if film.interne_bewerter_zahl is not None %}
+                            {{film.interne_bewerter_zahl}} 
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                        
+                    </div>
+
                 </div>
-                <div class="col-3">                        
-                    <a href="{% url 'film_draft_bewertung' pk=film.pk %}?next={{request.path}}">
-                        {{ film.name }}
-                    </a>
-                    <br\>
-                    {% if film.genre is not None %}
-                        {{ film.genre }}
-                    {% endif %}
-                </div>
-                <div class="col-1"> 
-                    {% if film.website is not None %}
-                        <a target="_blank" rel="noopener noreferrer" href="{{ film.website }}">Weblink</a>
-                    {% else %}
-                        kein Weblink
-                    {% endif %}
-                </div>
-                <div class="col-1"> 
-                    {% if film.trailer is not None %}
-                        <a target="_blank" rel="noopener noreferrer" href="{{ film.trailer }}">Trailer</a>
-                    {% else %}
-                        kein Trailer                        
-                    {% endif %}
+                <div class="col-2"> 
+                    <div>
+                        <br>
+                        {% if film.website is not None %}
+                            <a target="_blank" rel="noopener noreferrer" href="{{ film.website }}">Weblink</a>
+                        {% else %}
+                            kein Weblink
+                        {% endif %}
+                    </div>
+                    <div> 
+                        <br>  
+                        {% if film.trailer is not None %}
+                            <a target="_blank" rel="noopener noreferrer" href="{{ film.trailer }}">Trailer</a>
+                        {% else %}
+                            kein Trailer                        
+                        {% endif %}
+                    </div>
+
                 </div>
                 <div class="col-5"> 
-                    {% if film.interne_bewertung_ratio is not None %}    
-                            {{  film.interne_bewertung_ratio | zehntel }}
-                    {% endif %}
-                    (
-                    {% if film.interne_bewertung_zahl is not None %}
-                        {{film.interne_bewertung_zahl}} 
-                    {% else %}
-                        &nbsp;
-                    {% endif %}
-                    /
-                    {% if film.interne_bewerter_zahl is not None %}
-                        {{film.interne_bewerter_zahl}} 
-                    {% else %}
-                        &nbsp;
-                    {% endif %}
-                    )
+
                     {% if film.interner_kommentar is not None %}
                         {{film.interner_kommentar |truncatechars:100 }}
                     {% else %}
                         Keine Bewertung
                     {% endif %}
                 </div>
-                <div class="col-1"> 
+                <div class="col-2"> 
                     {% if request.resolver_match.url_name == 'film_draft_sichten_list' %}
                         {% if film.film_no_delete == False %}
                             <a href="{% url 'film_remove' pk=film.pk  %}?next={{request.path}}">
