@@ -11,9 +11,9 @@ __pycache__
 # git commit -m ".gitignore geändert"
 
 # nur der einfachheit halber nicht ignored
-# static/lokal/*      
-# db.sqlite3          
-# media/CACHE/images/filme/*
+static/lokal/*      
+db.sqlite3          
+media/CACHE/images/filme/*
 
 # das macht collectstatic
 static/django_extensions/*
