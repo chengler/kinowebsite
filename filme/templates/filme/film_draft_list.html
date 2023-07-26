@@ -20,10 +20,10 @@
         </div>
         <hr>
         {% for film in filme %}
-            <div>
+            <div><strong>
                 <a href="{% url 'film_draft_bewertung' pk=film.pk %}?next={{request.path}}">
                     {{ film.name }}
-                </a>
+                </a></strong>
             </div>
             <div class="row ">       
                 <div class="col-3">
