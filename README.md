@@ -57,6 +57,7 @@ HINWEIS: Der Code ist nicht vollständig. Mehr Infos unter dem [Issue #16](https
 1. Ins `Hauptverzeichnis` wechseln
 2. `git clone git@github.com:/chengler/kinowebsite` ausführen
 3. die Daten befinden sich nun im Verzeichnis `kinowebseite`
+   
 
 ### anpassen der setting.py
 Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese können wie folgt angelegt werden:
@@ -64,6 +65,8 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese 
 - `cp configure_newsletter_keys newsletter_keys` # Dort sind die Keys zu Mails versenden
 - `cp configure_privat_settings.py privat_settings.py` # Debug Mode, Log Level, Maintenance Mode, Credentials zum Mailserver usw.
 Anschließend werden die Daten im Editor der Wahl an die lokale Installation angepasst.
+
+### reqirements collectstatic runserver media
 
 
 - 
