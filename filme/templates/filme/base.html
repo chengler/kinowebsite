@@ -11,7 +11,7 @@
          <!--    
         <link rel="stylesheet" href="{% static 'filme/fonts/fa47/css/font-awesome.min.css' %}?v=1" async/>
          <!- fsa -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" async/>    
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" media="none" onload="if(media!='all')media='all'" async />    
         {% load django_bootstrap5 %}
         {% bootstrap_css %}
          {% comment %} {% bootstrap_javascript jquery='full' %}  {% endcomment %}
