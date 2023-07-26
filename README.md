@@ -1,6 +1,7 @@
 ## Kinowebsite ist 
 eine Website für ein kleines Arthouse Kino mit folgenden Kernfunktionen:
 - verwaltet Newsletter Abonenten DSVGO konform
+- versendet automatisierte newsletter
 - Kennt unterschiedliche Kategorien wie z.B Kinderfilme
 - Hat einen integrierten Workflow zur Programmfindung. Filme werden
   - vorgeschlagen
@@ -14,7 +15,7 @@ Der Flow basiert auf eine ehrenamtlich Struktur und kennt wenig Hirachie:
 - Es gibt nur zwei Rollen: Mitarbeitende und Admin.
 - Der Admin verwaltet Mitarbeitende
 - Die Mitarbeitenden machen alles andere
-- Zum versenden eines Newsletters benötigen Mitarbeitende 'Keys'. Diese sind in `newsletter_keys` hinterlegt
+- Zum versenden manueller Newsletters benötigen Mitarbeitende 'Keys'. Diese sind in `newsletter_keys` hinterlegt
 
 ## und basiert auf
 - Django Framework <= aktuell Django 4.2 auf Python 3.11
@@ -62,7 +63,7 @@ HINWEIS: Der Code ist nicht vollständig. Mehr Infos unter dem [Issue #16](https
 ### anpassen der setting.py
 Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese können wie folgt angelegt werden:
 - in den Ordner `kinowebseite/mysite`wechseln
-- `cp configure_newsletter_keys newsletter_keys` # Dort sind die Keys zu Mails versenden
+- `cp configure_newsletter_keys newsletter_keys` # Dort sind die Keys um Newsletters zu versenden
 - `cp configure_privat_settings.py privat_settings.py` # Debug Mode, Log Level, Maintenance Mode, Credentials zum Mailserver usw.
 Anschließend werden die Daten im Editor der Wahl an die lokale Installation angepasst.
 
