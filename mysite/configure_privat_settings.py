@@ -2,9 +2,8 @@
 
 #DEBUG = False
 DEBUG = True
-ALLOWED_HOSTS = [ 'dev.kino35.de']
-DEFAULT_DOMAIN = 'https://dev.kino35.de'
-# SECRET_KEY = 'b8(_#4g7&hr&5!*90#oo%p!-1(!r%i42&*w&@-0@(&bykwgbba'
+ALLOWED_HOSTS = [ '127.0.0.1']
+DEFAULT_DOMAIN = 'https://Meine.Domain'
 SECRET_KEY = 'YOUR_KEY_HERE(_#4g7&iljthr&5!*90#oo%fp!-1(!r%i42&*e<F2>w&@-0@(&bykwgbba'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
