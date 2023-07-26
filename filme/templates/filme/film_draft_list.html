@@ -8,10 +8,10 @@
             <div class="col-3">
                 Plakat <br> Name <br> Score
             </div>
-            <div class="col-2"> 
+            <div class="col-3"> 
                 Webseite <br> Trailer 
             </div>
-            <div class="col-5">
+            <div class="col-4">
                 Bewertung
             </div>
             <div class="col-2"> 
@@ -63,7 +63,7 @@
                     </div>
 
                 </div>
-                <div class="col-2"> 
+                <div class="col-3"> 
                     <div>
                         <br>
                         {% if film.website is not None %}
@@ -82,7 +82,7 @@
                     </div>
 
                 </div>
-                <div class="col-5"> 
+                <div class="col-4"> 
 
                     {% if film.interner_kommentar is not None %}
                         {{film.interner_kommentar |truncatechars:100 }}
