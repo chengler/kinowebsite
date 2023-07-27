@@ -10,16 +10,17 @@ __pycache__
 # git add .
 # git commit -m ".gitignore geändert"
 
-# nur der einfachheit halber nicht ignored
-static/lokal/*      
-db.sqlite3          
-media/CACHE/images/filme/*
+# die Kinospezifischen Sachen
+static/lokal/*  
+!static/lokal/favicon-default.ico
+!static/lokal/logo-default.png
+
 
 # das macht collectstatic
 static/django_extensions/*
 static/admin/*
 
-# maintaince oder nicht? 
+# maintaince oder nicht? datei wird beim installieren Eingerichtet
 mysite/maintenance_mode_state.txt
 
 #
@@ -37,4 +38,6 @@ filme/migrations
 #
 # die eigentlichen Daten
 #
-media/filme/plakate/ 
+db.sqlite3          
+media/filme/plakate/
+media/CACHE/images/filme/*
