@@ -62,13 +62,14 @@ HINWEIS: Der Code ist nicht vollständig. Mehr Infos unter dem [Issue #16](https
 
 ### anpassen der setting.py
 Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese können wie folgt angelegt werden:
-- in den Ordner `kinowebseite/mysite`wechseln
-- `cp configure_newsletter_keys newsletter_keys` # Dort sind die Keys um Newsletters zu versenden
-- `cp configure_privat_settings.py privat_settings.py` # Debug Mode, Log Level, Maintenance Mode, Credentials zum Mailserver usw.
-Anschließend werden die Daten im Editor der Wahl an die lokale Installation angepasst.
-- DEBUG = True
-- ALLOWED_HOSTS = enthält ['127.0.0.1']
-- SECRET_KEY = !
+- in den Ordner `kinowebseite/hostsharing`wechseln
+    - `firstCopy.bat` # Für Windows sind die Keys um Newsletters zu versenden
+    - `firstCopy.sh` # Für die bash
+-  die `mysite/newsletter_keys` enthält die Schlüßel zum versenden von Newslettern - Bitte anpassen
+-  `mysite/privat_settings.py` benötigt Anpassung
+    - DEBUG = True
+    - ALLOWED_HOSTS = enthält ['127.0.0.1']
+    - SECRET_KEY = HIER einen GUTEN KEY einfügen!
 
 
 ### letzte Schritte der Installation
