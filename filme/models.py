@@ -307,11 +307,12 @@ class NewsletterSent(models.Model):
     gestartet = models.DateTimeField(auto_now_add = True)
     beendet = models.DateTimeField(null = True)
     anzahl = models.PositiveSmallIntegerField(default=0)
-    delete_testmail = False
 
     def sent_newsletter(self, view_name, subject='[Kino35]', pk=None, email='@all'):
         '''versendet Newsletter'''
         print('NewsletterSent in action')
+        delete_testmail = False
+
         #hier wird der renderer bestimmt
         # zukünftig gibt es vielleicht mahr als einen
         # der view braucht eine Url, hier wird der url name verwendet
