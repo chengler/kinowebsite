@@ -9,8 +9,8 @@ echo "Keine Garantie!"
 cd .
 echo ##################################################
 echo kopiere default Logo und Favicon <= durch eigene ersetzen
-cp -v  ..\static\lokal\favicon-default.ico  ..\static\lokal\favicon.ico
-cp -v  ..\static\lokal\logo-default.png  ..\static\lokal\KinoLogo.png
+cp -v  ../static/lokal/favicon-default.ico  ../static/lokal/favicon.ico
+cp -v   ../static/lokal/logo-default.png  ../static/lokal/KinoLogo.png
 echo ###################################################
 echo kopiere newsletter_keys und privat_settings.py
 cp -v ../mysite/configure_newsletter_keys ../mysite/newsletter_keys # Dort sind die Keys um Newsletters zu versenden
