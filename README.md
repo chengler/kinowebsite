@@ -91,10 +91,31 @@ Wechseln Sie in den Ordner `kinoserver/hostsharing`. Dort finden sich Skripte, w
     -  die alten Einträge werden nicht gelöscht <= auf Richtigkeit überprüfen
 - ~/doms/$DOMAIN/htdocs-ssl/ <= erhält die symbolischen links, damit der Webserver statische Datein ausliefern kann
     - in `privat_settings.py` muss dafür DEBUG=False stehen
-    - Da statischen Dateine werden wie folgt erstellt:
+    - Da statischen Dateien werden wie folgt erstellt:
         - `Kinowebsite$` `python manage.py collectstatic` 
  - die `passenger_wsgi.py` wird an die richtige Stelle kopiert um vom Webserver ausgeführt zu werden.
 -  ~/doms/$DOMAIN/htdocs-ssl/.htaccess <= Diese Datei sollte existieren und auf die verwendete Subdomain wie  'www'oder  'dev'verweisen
+
+## eigenes Repository starten
+Es benötigt einen Account auf Github. Ein Beitrag zum Code ist über Passwort nicht mehr möglich, sondern nur noch über Keys. Hier erfolgt nun eine sehr einfache Anleitung, welche viele Möglichkeiten nicht berücksichtigt.
+Es lohnt sich den Schlüssel mit einem Passort zu sichern. So gibt es einmal ein 'sehr schweres' Passwort an der 'GitHub Pforte' und ein 'leichtes' am lokalen Rechner. So ist, wenn der Schlüßel verschwindet noch nicht alles verloren.
+### ssh Zugang
+Dafür benötigt es eine shell. z.B. die bash unter Linux oder die Power-Shell unter Windows
+- `ls ~/.ssh` <= gibt es bereits einen Schlüßel, also die `id_rsa.pub`
+    - falls nein: `ssh-keygen.exe -t rsa -b 4096 -C EMAIL-ADRESSE`
+- den `id_rsa.pub` bei Settings >> SSH and PGP  hochladen
+- den SSH-Agent starten
+      - `ssh-agent.exe ` (Win)
+      - `eval "$(ssh-agent -s)" `(linux)
+- `ssh-add ~/.ssh/id_rsa` <= Schlüssel hinzufügen
+
+### git konfiguieren 
+- `git config --global user.name "GIT-USER-NAME"`
+- `git config --global user.email phu@examole.de`
+
+### git verwenden
+- `git branch -M main`
+- `git push git@github.com:/chengler/kinowebsite`
 
 
 
