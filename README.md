@@ -81,12 +81,12 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Wurden
 in der Shell im `Hauptverzeichnis` werden nun folgende Befehle abgesetzt
 - python -m pip install --upgrade pip # instaliert die aktuele Version des Installationswerkzeuges pip
 - pip install -r requirements.txt     # installiert die benötigten Dajngo Module
-- nur für die eigenen Website (Beim kompletten Clonen sind diese Datein beim 'individualisieren' bereits kopiert)
-    - python manage.py makemigrations filme
-    - python manage.py migrate
-    - python manage.py createsuperuser
-- python manage.py collectstatic
-- python manage.py runserver 
+- Datenbank `db.sqlite3` anlegen wenn nicht bereits kopiert
+    - `python manage.py makemigrations filme`
+    - `python manage.py migrate`
+    - `python manage.py createsuperuser`
+- `python manage.py collectstatic` # erstellt die statischen Datein, fürs Backend immer nötig
+- `python manage.py runserver` 
     - In einer lokalen Installation sollte nun der Testserver unter [127.0.0.1:8000](http://127.0.0.1:8000/) ereichbar sein
     - Das Backend unter: [127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
 
