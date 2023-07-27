@@ -14,10 +14,6 @@ echo Vorgabe für user $USER @ Domain $DOMAIN im Paket $PACKETUSER
 # exit 0
 
 cd .
-echo ##################################################
-echo kopiere default Logo und Favicon <= durch eigene ersetzen
-cp -v  ..\static\lokal\favicon-default.ico  ..\static\lokal\favicon.ico
-cp -v  ..\static\lokal\logo-default.png  ..\static\lokal\KinoLogo.png
 echo ###################################################
 ### Pfade für passenger via .htaccess ergänzen
 ### der alte Inhalt wird nicht überschieben
