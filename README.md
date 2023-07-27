@@ -58,10 +58,15 @@ HINWEIS: Der Code ist nicht vollständig. Mehr Infos unter dem [Issue #16](https
 1. Ins `Hauptverzeichnis` wechseln
 2. `git clone https://github.com/chengler/kinowebsite.git` ausführen
 3. die Daten befinden sich nun im Verzeichnis `kinowebseite`
-   
+
+### komplettes clonen
+Für einen kompletten Clone der Originalseite werden folgende Dateine von der Originalseite kopiert:
+   -  für Windows aus `hostsharing/getKino35Stuff.bat`
+   -  für Linux aus `hostsharing/getKino35Stuff.sh`
+In diesem Fall muss die `settings.py` nicht mehr angepast werden.
 
 ### anpassen der setting.py
-Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese können wie folgt angelegt werden:
+Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Wurden diese nicht beim individualisieren bereits kopiert, können diese wie folgt angelegt werden:
 - in den Ordner `kinowebseite/hostsharing`wechseln
     - `firstCopy.bat` # Gibt die kopierenden Dateine für Windows aus (C&P).
     - `firstCopy.sh` # Für die bash `chomd a+x` macht sie ausführbar
@@ -71,20 +76,12 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese 
     - ALLOWED_HOSTS = enthält ['127.0.0.1']
     - SECRET_KEY = HIER einen GUTEN KEY einfügen!
 
-### individualisieren
-In `static/lokal` werden 
-- für die eigenen Website
-    - `favicon-default.ico`  nach `favicon.ico` kopiert.
-    - `logo-default.png` nach `KinoLogo.png` kopiert.
-- für einen Clone folgende Dateine von der Originalseite kopiert:
-   -  für Windows aus `hostsharing/getKino35Stuff.bat`
-   -  für Linux aus `hostsharing/getKino35Stuff.sh`
 
 ### letzte Schritte der Installation
 in der Shell im `Hauptverzeichnis` werden nun folgende Befehle abgesetzt
 - python -m pip install --upgrade pip # instaliert die aktuele Version des Installationswerkzeuges pip
 - pip install -r requirements.txt     # installiert die benötigten Dajngo Module
-- nur für die eigenen Website (Der Clone hat diese Datein beim 'individualisieren' bereits kopiert)
+- nur für die eigenen Website (Beim kompletten Clonen sind diese Datein beim 'individualisieren' bereits kopiert)
     - python manage.py makemigrations filme
     - python manage.py migrate
     - python manage.py createsuperuser
