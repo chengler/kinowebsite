@@ -76,7 +76,6 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese 
 in der Shell im `Hauptverzeichnis` werden nun folgende Befehle abgesetzt
 - python -m pip install --upgrade pip # instaliert die aktuele Version des Installationswerkzeuges pip
 - pip install -r requirements.txt     # installiert die benötigten Dajngo Module 
-- reqirements collectstatic runserver media
 - python manage.py runserver # startet den testserver
 
 In einer lokalen Installation sollte nun der Testserver unter [127.0.0.1:8000](http://127.0.0.1:8000/) ereichbar sein
