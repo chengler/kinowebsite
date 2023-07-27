@@ -14,15 +14,19 @@ echo Vorgabe für user $USER @ Domain $DOMAIN im Paket $PACKETUSER
 # exit 0
 
 cd .
+echo ##################################################
+echo kopiere default Logo und Favicon <= durch eigene ersetzen
+cp -v  ..\static\lokal\favicon-default.ico  ..\static\lokal\favicon.ico
+cp -v  ..\static\lokal\logo-default.png  ..\static\lokal\KinoLogo.png
 echo ###################################################
 ### Pfade für passenger via .htaccess ergänzen
 ### der alte Inhalt wird nicht überschieben
-echo ergänze die .htaccess in ~/$DOMAIN/.htaccess
+echo ergänze die .htaccess in ~/doms/$DOMAIN/.htaccess
 echo löschen Sie überflüssiges von Hand!
 
-echo PassengerFriendlyErrorPages on >> ~/$DOMAIN/
-echo PassengerPython /home/pacs/$PACKETUSER/users/$USER/pythonenv/bin/python >> ~/$DOMAIN/
-echo SetEnv PYTHONPATH /home/pacs/$PACKETUSER/users/$USER/kinowebsite >> ~/$DOMAIN/
+echo PassengerFriendlyErrorPages on >> ~/doms/$DOMAIN/
+echo PassengerPython /home/pacs/$PACKETUSER/users/$USER/pythonenv/bin/python >> ~/doms/$DOMAIN/
+echo SetEnv PYTHONPATH /home/pacs/$PACKETUSER/users/$USER/kinowebsite >> ~/doms/$DOMAIN/
 echo Die .htaccess findet sich unter ~/$DOMAIN/.htaccess
 echo ###################################################
 echo die Ordner static und media werden im 'DEBUG = False' Modus direkt vom Webserver ausgeliefert
