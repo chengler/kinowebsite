@@ -56,7 +56,7 @@ HINWEIS: Der Code ist nicht vollständig. Mehr Infos unter dem [Issue #16](https
 
 ### Clonen unter win 11 oder debian linux
 1. Ins `Hauptverzeichnis` wechseln
-2. `git clone git@github.com:/chengler/kinowebsite` ausführen
+2. `git clone https://github.com/chengler/kinowebsite.git` ausführen
 3. die Daten befinden sich nun im Verzeichnis `kinowebseite`
    
 
@@ -119,6 +119,8 @@ Dafür benötigt es eine shell. z.B. die bash unter Linux oder die Power-Shell u
 - `git add .`
 - `git commit`
 - `git push git@github.com:/chengler/kinowebsite`
+- `git pull git@github.com:/chengler/kinowebsite` ausführen
+
 
 
 
