@@ -79,9 +79,10 @@ in der Shell im `Hauptverzeichnis` werden nun folgende Befehle abgesetzt
 - python manage.py makemigrations filme
 - python manage.py migrate
 - python manage.py runserver # startet den testserv
-  
 In einer lokalen Installation sollte nun der Testserver unter [127.0.0.1:8000](http://127.0.0.1:8000/) ereichbar sein
+
 - python manage.py createsuperuser
+  
 Das Backend für den eben erstellten user: [127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
 
 ### Deployment am Beispiel hostsharing.net
