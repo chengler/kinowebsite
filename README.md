@@ -25,26 +25,26 @@ Im folgenden findet sich die Anleitung zur Installation einer Entwicklungsumgebu
 # Voraussetzungen zur Installation
 Die empfohlene Dateistruktur besteht aus einem Hauptverzeichnis mit zwei Unterverzeichnissen
 - `Hauptverzeichnis`
-    - `pyvenv` # die virtuelle Python Umgebung
+    - `pythonenv` # die virtuelle Python Umgebung
     - `kinowebseite` # das Django/Python Projekt
       
-## `pyvenv` enthält Python 3.11 als virtuelle Umgebung
-### pyvenv unter win 11
+## `pythonenv` enthält Python 3.11 als virtuelle Umgebung
+### pythonenv unter win 11
 1. Installation
     -  Python 3.11 über den Windows Store installieren
     - `python3.11.exe --version` bestätigt die erfolgreiche Installation
-    - Im `Hauptverzeichniss` installiert `python3.11.exe -m venv pyvenv`die virtuelle Umgebung
+    - Im `Hauptverzeichniss` installiert `python3.11.exe -m venv pythonenv`die virtuelle Umgebung
 2. Aktivierung
-    - Aus dem `Hauptverzeichnis`aktiviert `.\pyvenv\Scripts\Activate.ps1` die virtuelle Umgebung
+    - Aus dem `Hauptverzeichnis`aktiviert `.\pythonenv\Scripts\Activate.ps1` die virtuelle Umgebung
     - Sollte die PowerShell dies verhindern, ermöglich `Set-ExecutionPolicy Unrestricted -Scope Process` die Aktivierung.
 
-### pyvenv unter debian linux
+### pythonenv unter debian linux
 1. Installation
     - Folgende [Anleitung](https://wiki.hostsharing.net/index.php?title=Eigenes_Python_installieren) zeigt die Installation auf einem server von hostsharing.net. Wähle die Version 3.11.
     - `python –version` bestätigt die erfolgreiche Installation
-    - Im `Hauptverzeichnis` installiert `virtualenv -p python ./pyvenv`die virtuelle Umgebung
+    - Im `Hauptverzeichnis` installiert `virtualenv -p python ./pythonenv`die virtuelle Umgebung
 2. Aktivierung
-    - Aus dem `Hauptverzeichnis`aktiviert `source ./pyvenv/bin/activate` die virtuelle Umgebung
+    - Aus dem `Hauptverzeichnis`aktiviert `source ./pythonenv/bin/activate` die virtuelle Umgebung
   
 ## Die `kinowebseite` mit dem Code aus Github erstellen
 HINWEIS: Der Code ist nicht vollständig. Mehr Infos unter dem [Issue #16](https://github.com/chengler/kinowebsite/issues/16)
@@ -75,10 +75,13 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese 
 ### letzte Schritte der Installation
 in der Shell im `Hauptverzeichnis` werden nun folgende Befehle abgesetzt
 - python -m pip install --upgrade pip # instaliert die aktuele Version des Installationswerkzeuges pip
-- pip install -r requirements.txt     # installiert die benötigten Dajngo Module 
-- python manage.py runserver # startet den testserver
-
-In einer lokalen Installation sollte nun der Testserver unter [127.0.0.1:8000](http://127.0.0.1:8000/) ereichbar sein
+- pip install -r requirements.txt     # installiert die benötigten Dajngo Module
+- python manage.py makemigrations filme
+- python manage.py migrate
+- python manage.py runserver # startet den testserv
+    - In einer lokalen Installation sollte nun der Testserver unter [127.0.0.1:8000](http://127.0.0.1:8000/) ereichbar sein
+- python manage.py createsuperuser
+    - Das Backend für den eben erstellten user: [127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
 
 ### Deployment am Beispiel hostsharing.net
 Wechseln Sie in den Ordner `kinoserver/hostsharing`. Dort finden sich Skripte, welche das deployen vereinfachen. 
