@@ -4,6 +4,10 @@ MESSAGE_LEVEL = 10  # DEBUG default 20= Info; 40 Error
 #DEBUG = False
 DEBUG = True
 
+DJANGO_LOG_LEVEL = 'WARNING'  #  DEBUG, INFO, WARNING, ERROR, CRITICAL. DEBUG Ausgabe in Datei nach settings.py
+DJANGO_FORMATTER = 'simple' # logger outpu in simple oder verbose
+
+
 ALLOWED_HOSTS = [ '127.0.0.1']
 DEFAULT_DOMAIN = 'https://Meine.Domain'
 SECRET_KEY = 'YOUR_KEY_HERE(_#4g7&iljthr&5!*90#oo%fp!-1(!r%i42&*e<F2>w&@-0@(&bykwgbba'

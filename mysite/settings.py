@@ -17,6 +17,38 @@ import os
 from .privat_settings import *
 
 
+# logging 
+# https://docs.djangoproject.com/en/4.2/howto/logging/
+# Use logger namespacing könnte Sinn machen
+LOGGING = {
+    "version": 1,  # the dictConfig format version
+    "disable_existing_loggers": False,  # retain the default loggers
+    "handlers": {
+        "file": {
+            "class": "logging.FileHandler",
+            "filename": "general.log",
+            "level": DJANGO_LOG_LEVEL, # mindestens warning, Variable in privat_settings L
+            "formatter":DJANGO_FORMATTER,  # verbose oder simple; os.getenv("DJANGO_FORMATTER")
+        },
+    },
+    "loggers": {
+        "": {
+            "level": "DEBUG",
+            "handlers": ["file"], # der logger hat keine Einschränkungen
+        },
+    },
+    "formatters": {  #verbose oder simple
+        "verbose": {
+            "format": "{name} {levelname} {asctime} {module} {process:d} {thread:d} {message}",
+            "style": "{",
+        },
+        "simple": {
+            "format": "{levelname} {message}",
+            "style": "{",
+        },
+    },
+}
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 

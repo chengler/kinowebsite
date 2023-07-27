@@ -20,6 +20,8 @@ from django.db.models import Q
 #from django.shortcuts import render1
 from django.urls import reverse
 from django.core import mail
+import logging
+logger = logging.getLogger(__name__) # wird noch nicht verwendet. Ausgabe woher der Fehler kommt
 # custom user für das nächste Projekt
 # https://learndjango.com/tutorials/django-best-practices-referencing-user-model
 
@@ -311,6 +313,9 @@ class NewsletterSent(models.Model):
     def sent_newsletter(self, view_name, subject='[Kino35]', pk=None, email='@all'):
         '''versendet Newsletter'''
         print('NewsletterSent in action')
+        logger.info("INFO: NewsletterSent in action")
+        logger.warning("warning: NewsletterSent in action")
+
         delete_testmail = False
 
         #hier wird der renderer bestimmt
@@ -327,6 +332,7 @@ class NewsletterSent(models.Model):
             # print("ausversehen an allen ;-)", email)
         else:
             print("Testmail an", email)
+            logger.info("Testmail an", email)
             # Falls Testmail keine ABonentenadresse.. zum testen anlegen, zum Schluss löschen
             if not NewsletterAbonnent.objects.filter(email = email).exists():
                 NewsletterAbonnent.objects.create(email = email, opt_in = True)
