@@ -71,18 +71,27 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese 
     - ALLOWED_HOSTS = enthält ['127.0.0.1']
     - SECRET_KEY = HIER einen GUTEN KEY einfügen!
 
+### individualisieren
+In `static/lokal` werden 
+- für die eigenen Website
+    - `favicon-default.ico`  nach `favicon.ico` kopiert.
+    - `logo-default.png` nach `KinoLogo.png` kopiert.
+- für einen Clone folgende Dateine von der Originalseite kopiert:
+   -  für Windows aus `hostsharing/getKino35Stuff.bat`
+   -  für Linux aus `hostsharing/getKino35Stuff.sh`
 
 ### letzte Schritte der Installation
 in der Shell im `Hauptverzeichnis` werden nun folgende Befehle abgesetzt
 - python -m pip install --upgrade pip # instaliert die aktuele Version des Installationswerkzeuges pip
 - pip install -r requirements.txt     # installiert die benötigten Dajngo Module
-- python manage.py makemigrations filme
-- python manage.py migrate
-- python manage.py runserver # startet den testserv
-    - In einer lokalen Installation sollte nun der Testserver unter [127.0.0.1:8000](http://127.0.0.1:8000/) ereichbar sein
-- python manage.py createsuperuser
+- nur für die eigenen Website (Der Clone hat diese Datein beim 'individualisieren' bereits kopiert)
+    - python manage.py makemigrations filme
+    - python manage.py migrate
+    - python manage.py createsuperuser
 - python manage.py collectstatic
-    - Das Backend für den eben erstellten user: [127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+- python manage.py runserver 
+    - In einer lokalen Installation sollte nun der Testserver unter [127.0.0.1:8000](http://127.0.0.1:8000/) ereichbar sein
+    - Das Backend unter: [127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
 
 ### Deployment am Beispiel hostsharing.net
 Wechseln Sie in den Ordner `kinoserver/hostsharing`. Dort finden sich Skripte, welche das deployen vereinfachen. 
