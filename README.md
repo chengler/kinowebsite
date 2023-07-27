@@ -58,10 +58,15 @@ HINWEIS: Der Code ist nicht vollständig. Mehr Infos unter dem [Issue #16](https
 1. Ins `Hauptverzeichnis` wechseln
 2. `git clone https://github.com/chengler/kinowebsite.git` ausführen
 3. die Daten befinden sich nun im Verzeichnis `kinowebseite`
-   
+
+### komplettes clonen
+Für einen kompletten Clone der Originalseite werden folgende Dateine von der Originalseite kopiert:
+   -  für Windows aus `hostsharing/getKino35Stuff.bat`
+   -  für Linux aus `hostsharing/getKino35Stuff.sh`
+In diesem Fall muss die `settings.py` nicht mehr angepast werden.
 
 ### anpassen der setting.py
-Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese können wie folgt angelegt werden:
+Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Wurden diese nicht beim individualisieren bereits kopiert, können diese wie folgt angelegt werden:
 - in den Ordner `kinowebseite/hostsharing`wechseln
     - `firstCopy.bat` # Gibt die kopierenden Dateine für Windows aus (C&P).
     - `firstCopy.sh` # Für die bash `chomd a+x` macht sie ausführbar
@@ -76,13 +81,15 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese 
 in der Shell im `Hauptverzeichnis` werden nun folgende Befehle abgesetzt
 - python -m pip install --upgrade pip # instaliert die aktuele Version des Installationswerkzeuges pip
 - pip install -r requirements.txt     # installiert die benötigten Dajngo Module
-- python manage.py makemigrations filme
-- python manage.py migrate
-- python manage.py runserver # startet den testserv
-    - In einer lokalen Installation sollte nun der Testserver unter [127.0.0.1:8000](http://127.0.0.1:8000/) ereichbar sein
-- python manage.py createsuperuser
-- python manage.py collectstatic
-    - Das Backend für den eben erstellten user: [127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
+- Datenbank `db.sqlite3` anlegen wenn nicht bereits kopiert
+    - `python manage.py makemigrations filme`
+    - `python manage.py migrate`
+    - `python manage.py createsuperuser`
+- `python manage.py collectstatic` # erstellt die statischen Datein, fürs Backend immer nötig
+- `python manage.py runserver` 
+    - In einer lokalen Installation muss in `privat_settings.py` `DEBUG=True` gesetzt sein
+    - der Testserver ist unter [127.0.0.1:8000](http://127.0.0.1:8000/) ereichbar 
+    - sein Backend unter: [127.0.0.1:8000/admin](http://127.0.0.1:8000/admin)
 
 ### Deployment am Beispiel hostsharing.net
 Wechseln Sie in den Ordner `kinoserver/hostsharing`. Dort finden sich Skripte, welche das deployen vereinfachen. 
