@@ -80,7 +80,10 @@ def film_index(request):
         events = nextevents # empty
         print('kein Film mehr im aktuellen Programm')
     hinweis = Inhaltsseite.objects.filter(typen = 1)
-    hinweis = hinweis[0]  
+    if hinweis:
+        hinweis = hinweis[0]  
+    else:
+        print("Keine Hinweise enthalten")
     if request.method == "POST":
         return newsletter_form_snippet(request)
     else:
