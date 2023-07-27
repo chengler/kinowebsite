@@ -84,16 +84,17 @@ In einer lokalen Installation sollte nun der Testserver unter [127.0.0.1:8000](h
 Wechseln Sie in den Ordner `kinoserver/hostsharing`. Dort finden sich Skripte, welche das deployen vereinfachen. 
 `cat configure.sh ` gibt die Datei aus. Der Aufruf für die Website unter 'dev.beispieldomain.de' wäre 
 `./configure.sh dev.beispieldomain.de xyz00
-` 
-Folgende Schritte werden ausgeführt, bzw. müssen händisch erledigt werden.
-- ~/doms/$DOMAIN/.htaccess <= wird um die Einstellungen für die Passenger APP erweitert.
+`. Folgende Schritte werden ausgeführt, bzw. müssen händisch erledigt werden:
+- ~/doms/$DOMAIN/.htaccess <= wird um die Einstellungen für die Passenger App erweitert.
+    -  `PassengerFriendlyErrorPages` `on` für die Produkitvsite und `off` für die Testsite
     -  Diese Datei wäre auch der Ort, um einen [Verzeichnissschutz](https://wiki.hostsharing.net/index.php?title=.htaccess#Passwortschutz_f.C3.BCr_Dateien) anzulegen.
-    -  die alten Einträge werden nicht gelöscht <= auf richtigkeit überprüfen
-  - ~/doms/$DOMAIN/htdocs-ssl/ <= erhält die Pfade, damit der Webserver statische Datein ausliefern kann
-      - im Ordner `Kinowebsite` muss `python manage.py collectstatic` ausgeführt werden
-      - in `privat_settings.py` muss dafür DEBUG=False stehen
-      - die `passenger_wsgi.py` wird an die Stelle kopiert, damit sie vom Webserver ausgeführt wird.
-  -  ~/doms/$DOMAIN/htdocs-ssl/.htaccess <= Diese Datei sollte existieren und auf die verwendete Subdomain wie  'www'oder  'dev'verweisen
+    -  die alten Einträge werden nicht gelöscht <= auf Richtigkeit überprüfen
+- ~/doms/$DOMAIN/htdocs-ssl/ <= erhält die symbolischen links, damit der Webserver statische Datein ausliefern kann
+    - in `privat_settings.py` muss dafür DEBUG=False stehen
+    - Da statischen Dateine werden wie folgt erstellt:
+        - `Kinowebsite$` `python manage.py collectstatic` 
+ - die `passenger_wsgi.py` wird an die richtige Stelle kopiert um vom Webserver ausgeführt zu werden.
+-  ~/doms/$DOMAIN/htdocs-ssl/.htaccess <= Diese Datei sollte existieren und auf die verwendete Subdomain wie  'www'oder  'dev'verweisen
 
 
 
