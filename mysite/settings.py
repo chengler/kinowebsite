@@ -16,6 +16,8 @@ import os
 # MESSAGE_LEVEL = 10  # DEBUG default 20= Info; 40 Error
 from .privat_settings import *
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # logging 
 # https://docs.djangoproject.com/en/4.2/howto/logging/
@@ -26,7 +28,7 @@ LOGGING = {
     "handlers": {
         "file": {
             "class": "logging.FileHandler",
-            "filename": "general.log",
+            "filename": os.path.join(BASE_DIR,"general.log"),
             "level": DJANGO_LOG_LEVEL, # mindestens warning, Variable in privat_settings L
             "formatter":DJANGO_FORMATTER,  # verbose oder simple; os.getenv("DJANGO_FORMATTER")
         },
@@ -49,8 +51,7 @@ LOGGING = {
     },
 }
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 
 # Quick-start development settings - unsuitable for production
