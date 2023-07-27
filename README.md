@@ -63,7 +63,7 @@ HINWEIS: Der Code ist nicht vollständig. Mehr Infos unter dem [Issue #16](https
 ### anpassen der setting.py
 Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese können wie folgt angelegt werden:
 - in den Ordner `kinowebseite/hostsharing`wechseln
-    - `firstCopy.bat` # Für Windows sind die Keys um Newsletters zu versenden
+    - `firstCopy.bat` # Gibt die kopierenden Dateine für Windows aus (C&P).
     - `firstCopy.sh` # Für die bash
 -  die `mysite/newsletter_keys` enthält die Schlüßel zum versenden von Newslettern - Bitte anpassen
 -  `mysite/privat_settings.py` benötigt Anpassung
