@@ -1,11 +1,3 @@
-#!/bin/bash
-# firstCopy
-clear
-echo "VORSICHT! bitte prüfen Sie erst das Skript"
-echo "Keine Garantie!"
-
-# exit 0
-
 cd .
 echo kopiere default Logo und Favicon <= durch eigene ersetzen
 copy -v ..\static\lokal\favicon-default.ico ..\static\lokal\favicon.ico
