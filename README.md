@@ -41,7 +41,7 @@ Die empfohlene Dateistruktur besteht aus einem Hauptverzeichnis mit zwei Unterve
 ### pythonenv unter debian linux
 1. Installation
     - Folgende [Anleitung](https://wiki.hostsharing.net/index.php?title=Eigenes_Python_installieren) zeigt die Installation auf einem server von hostsharing.net. Wähle die Version 3.11.
-    - `python –version` bestätigt die erfolgreiche Installation
+    - `python –-version` bestätigt die erfolgreiche Installation
     - Im `Hauptverzeichnis` installiert `virtualenv -p python ./pythonenv`die virtuelle Umgebung
 2. Aktivierung
     - Aus dem `Hauptverzeichnis`aktiviert `source ./pythonenv/bin/activate` die virtuelle Umgebung
