@@ -66,12 +66,34 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Diese 
 - `cp configure_newsletter_keys newsletter_keys` # Dort sind die Keys um Newsletters zu versenden
 - `cp configure_privat_settings.py privat_settings.py` # Debug Mode, Log Level, Maintenance Mode, Credentials zum Mailserver usw.
 Anschließend werden die Daten im Editor der Wahl an die lokale Installation angepasst.
+- DEBUG = True
+- ALLOWED_HOSTS = enthält ['127.0.0.1']
+- SECRET_KEY = !
 
-### reqirements collectstatic runserver media
 
+### letzte Schritte der Installation
+in der Shell im `Hauptverzeichnis` werden nun folgende Befehle abgesetzt
+- python -m pip install --upgrade pip # instaliert die aktuele Version des Installationswerkzeuges pip
+- pip install -r requirements.txt     # installiert die benötigten Dajngo Module 
+- reqirements collectstatic runserver media
+- python manage.py runserver # startet den testserver
 
-- 
+In einer lokalen Installation sollte nun der Testserver unter [127.0.0.1:8000](http://127.0.0.1:8000/) ereichbar sein
 
+### Deployment am Beispiel hostsharing.net
+Wechseln Sie in den Ordner `kinoserver/hostsharing`. Dort finden sich Skripte, welche das deployen vereinfachen. 
+`cat configure.sh ` gibt die Datei aus. Der Aufruf für die Website unter 'dev.beispieldomain.de' wäre 
+`./configure.sh dev.beispieldomain.de xyz00
+` 
+Folgende Schritte werden ausgeführt, bzw. müssen händisch erledigt werden.
+- ~/doms/$DOMAIN/.htaccess <= wird um die Einstellungen für die Passenger APP erweitert.
+    -  Diese Datei wäre auch der Ort, um einen [Verzeichnissschutz](https://wiki.hostsharing.net/index.php?title=.htaccess#Passwortschutz_f.C3.BCr_Dateien) anzulegen.
+    -  die alten Einträge werden nicht gelöscht <= auf richtigkeit überprüfen
+  - ~/doms/$DOMAIN/htdocs-ssl/ <= erhält die Pfade, damit der Webserver statische Datein ausliefern kann
+      - im Ordner `Kinowebsite` muss `python manage.py collectstatic` ausgeführt werden
+      - in `privat_settings.py` muss dafür DEBUG=False stehen
+      - die `passenger_wsgi.py` wird an die Stelle kopiert, damit sie vom Webserver ausgeführt wird.
+  -  ~/doms/$DOMAIN/htdocs-ssl/.htaccess <= Diese Datei sollte existieren und auf die verwendete Subdomain wie  'www'oder  'dev'verweisen
 
 
 
