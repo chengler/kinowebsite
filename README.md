@@ -65,7 +65,8 @@ Für einen kompletten Clone der Originalseite werden folgende Dateine von der Or
    -  für Linux aus `hostsharing/getKino35Stuff.sh`
 In diesem Fall muss die `settings.py` nicht mehr angepast werden.
 
-### anpassen der setting.py
+### Konfiguration
+#### settings.py
 Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Wurden diese nicht beim individualisieren bereits kopiert, können diese wie folgt angelegt werden:
 - in den Ordner `kinowebseite/hostsharing`wechseln
     - `firstCopy.bat` # Gibt die kopierenden Dateine für Windows aus (C&P).
@@ -75,6 +76,9 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Wurden
     - DEBUG = True
     - ALLOWED_HOSTS = enthält ['127.0.0.1']
     - SECRET_KEY = HIER einen GUTEN KEY einfügen!
+#### crontab
+Versenden der newsletter zu einer bestimmten Zeit geht einfach über `crontab -e`
+5  6 * * * wget --quiet  "https://www.35kino.de/newsletter/sende/heute/<heute Key aus newsletter.keys" > /dev/null
 
 
 ### letzte Schritte der Installation
