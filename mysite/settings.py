@@ -31,12 +31,17 @@ LOGGING = {
             "filename": os.path.join(BASE_DIR,"general.log"),
             "level": DJANGO_LOG_LEVEL, # mindestens warning, Variable in privat_settings L
             "formatter":DJANGO_FORMATTER,  # verbose oder simple; os.getenv("DJANGO_FORMATTER")
+        },     
+        "console": {
+            "class": "logging.StreamHandler",
+            "level": DJANGO_LOG_LEVEL, # mindestens warning, Variable in privat_settings L
+            "formatter":DJANGO_FORMATTER,  # verbose oder simple; os.getenv("DJANGO_FORMATTER")
         },
     },
     "loggers": {
         "": {
             "level": "DEBUG",
-            "handlers": ["file"], # der logger hat keine Einschränkungen
+            "handlers": ["file", "console"], # der logger hat keine Einschränkungen
         },
     },
     "formatters": {  #verbose oder simple

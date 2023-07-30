@@ -28,12 +28,10 @@ from urllib.request import urlopen
 from django.core.files import File
 from django.contrib import messages
 import threading
-
-
 # from datetime import datetime
-
 from django.forms import modelformset_factory
-
+import logging
+logger = logging.getLogger(__name__) 
 
 def error404(request, exception):
     return render(request, 'filme/404.html', exception = exception)
@@ -160,14 +158,15 @@ def sondernews_send(request, pk, email='@all'):
     <pk> des newsletters
     <email> für testmail oder @all
    '''
-    print('### Sondernewsletter:', request.user)
+    logger.info("sondernews_send:  request.user  %s", request.user)
     typ = "Sondernewsletter"
     if email == '@all':
         sonder_newsletter = get_object_or_404(Sondernewsletter, pk=pk)
         sonder_newsletter.gesendet = datetime.datetime.now()
         sonder_newsletter.sender = request.user
         sonder_newsletter.save()
-        print(sonder_newsletter.gesendet)
+        logger.info("sondernews_send:  sonder_newsletter.gesendetr  %s", sonder_newsletter.gesendet)
+
     newsletter = NewsletterSent.objects.create()              
     t = threading.Thread(
     target=newsletter.sent_newsletter,
@@ -386,9 +385,6 @@ def film_archiv(request):
     in der Chronik filmevent_archiv'''
     filme = Film.objects.filter(status = '4',event_film__isnull = True ).order_by('name')
     return render(request, 'filme/film_draft_list.html', {'filme': filme }) 
-
-
-
 
 
 

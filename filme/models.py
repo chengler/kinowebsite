@@ -35,6 +35,7 @@ def limit_film_choices():
         # related_name='event_film'
         # related_name='event_ersatz
     # print("###result",result)
+    logger.debug("def limit_film_choices(): %s", result)
     return result
 
 class Film(models.Model):
@@ -107,11 +108,16 @@ class Film(models.Model):
             self.interne_bewertung_ratio = round((((self.interne_bewertung_zahl * 100 ) / self.interne_bewerter_zahl)  ))
             if self.interne_bewertung_ratio > 100:
                 self.interne_bewertung_ratio = 0
+            
             print('** interne_bewertung_ratio',self.interne_bewertung_ratio)
             print((((self.interne_bewertung_zahl * 10 ) / self.interne_bewerter_zahl)  ))
+            logger.debug("def set_ratio(self):", self.interne_bewerter_zahl)
+
         except (ValueError, TypeError, ZeroDivisionError):
             self.interne_bewertung_ratio = 0
             print("Runden fehlgeschlagen")
+            logger.warning("Runden fehlgeschlagen")
+
         return self.interne_bewertung_ratio
 
     def display_description(self):
@@ -312,10 +318,7 @@ class NewsletterSent(models.Model):
 
     def sent_newsletter(self, view_name, subject='[Kino35]', pk=None, email='@all'):
         '''versendet Newsletter'''
-        print('NewsletterSent in action')
-        logger.info("INFO: NewsletterSent in action")
-        logger.warning("warning: NewsletterSent in action")
-
+        logger.info("sent_newsletter in action")
         delete_testmail = False
 
         #hier wird der renderer bestimmt
@@ -328,11 +331,11 @@ class NewsletterSent(models.Model):
             url = settings.DEFAULT_DOMAIN + reverse(view_name, args=(pk,))
         if email == '@all':
             abonenten = NewsletterAbonnent.objects.filter(opt_in = True)
+            logger.info("sent_newsletter: Email @all")
             # versende nicht ausversehen an alle
             # print("ausversehen an allen ;-)", email)
         else:
-            print("Testmail an", email)
-            logger.info("Testmail an", email)
+            logger.info("Testmail an %s", email)
             # Falls Testmail keine ABonentenadresse.. zum testen anlegen, zum Schluss löschen
             if not NewsletterAbonnent.objects.filter(email = email).exists():
                 NewsletterAbonnent.objects.create(email = email, opt_in = True)
@@ -369,9 +372,11 @@ class NewsletterSent(models.Model):
             # message.send() # ohne bulk
             try:            
                 connection.send_messages([message,]) # bulke eine nach der anderen, 
-                print(idx,"gesendet an:", abonent.pk)               
+                print(idx,"gesendet an:", abonent.pk)       
+                logger.debug("NewsletterSent: %s gesendet an %s", idx, abonent.pk)        
             except:
                 print("### Fehler beim emailversand. Lösche ", abonent.pk,'mit mail', abonent.email) 
+                logger.warning("NewsletterSent: Fehler beim emailversand. Lösche")  
                 abonent.delete()      
         connection.close()
 
@@ -380,7 +385,7 @@ class NewsletterSent(models.Model):
         timediff = self.beendet - self.gestartet
         text_body = 'start: '+ str(self.gestartet) + ' ende: ' + str(self.beendet) + ' benötigte Zeit: ' + str(timediff) + ' Anzahl: ' + str(self.anzahl) + "\n" +  text_body
         message = EmailMultiAlternatives(subject=subject, body=text_body, 
-                from_email=from_email, to = ['newsletter@35kino.de'] )
+                from_email=from_email, to = ['newsletter@kino35.de'] )
         message.send()
         self.save()
         #lösche TEstmail, fals zuvor nicht in DB
