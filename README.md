@@ -76,6 +76,7 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Wurden
     - DEBUG = True
     - ALLOWED_HOSTS = enthält ['127.0.0.1']
     - SECRET_KEY = HIER einen GUTEN KEY einfügen!
+    - DEFAULT_DOMAIN = 'http://127.0.0.1:8000/'
 #### Newsletter
 - Versenden des Newsletters mit dem Programm von je heute zu einer bestimmten Zeit geht einfach über `crontab -e`
     -   `5  6 * * * wget --quiet  "https://<myDomain>/newsletter/sende/heute/<HEUTE_KEY aus newsletter.keys>" > /dev/null`
