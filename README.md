@@ -74,7 +74,7 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Wurden
 -  die `mysite/newsletter_keys` enthält die Schlüßel zum versenden von Newslettern - Bitte anpassen
 -  `mysite/privat_settings.py` benötigt Anpassung
     - DEBUG = True
-    - ALLOWED_HOSTS = enthält ['127.0.0.1']
+    - ALLOWED_HOSTS = enthält ['127.0.0.1'] # Die je eigene Domain immer an erster stelle im Array
     - SECRET_KEY = HIER einen GUTEN KEY einfügen!
     - DEFAULT_DOMAIN = 'http://127.0.0.1:8000/'
 #### Newsletter
