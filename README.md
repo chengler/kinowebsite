@@ -76,15 +76,16 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Wurden
     - DEBUG = True
     - ALLOWED_HOSTS = enthält ['127.0.0.1']
     - SECRET_KEY = HIER einen GUTEN KEY einfügen!
-#### crontab
-Versenden der newsletter zu einer bestimmten Zeit geht einfach über `crontab -e`
-
-`5  6 * * * wget --quiet  "https://<myDomain>/newsletter/sende/heute/<HEUTE_KEY aus newsletter.keys>" > /dev/null
-`
-- btw. Der auf der Startseite angezeigte Hinweis lässt sich auch als newsletter versenden:
+#### Newsletter
+- Versenden des Newsletters mit dem Programm von je heute zu einer bestimmten Zeit geht einfach über `crontab -e`
+    -   `5  6 * * * wget --quiet  "https://<myDomain>/newsletter/sende/heute/<HEUTE_KEY aus newsletter.keys>" > /dev/null`
+- Der auf der Startseite angezeigte Hinweis lässt sich auch als newsletter versenden:
     - `https://<myDomain>/newsletter/sende/hinweis/<HINWEIS_KEY aus newsletter.keys>` versendet den auf
     - `https://<myDomain>/newsletter/newsletter_hinweis/`  in der Voransicht zu sehenden Hinweis,
-    - `https://<myDomain>/admin/filme/inhaltsseite/` welcher  im admin Backend erstellt wird,
+    - `https://<myDomain>/admin/filme/inhaltsseite/` welcher  im admin Backend erstellt wird
+- Der individuell anpassbare Sondernewsletter ist erreichbar über
+    - https://<myDomain>/newsletter/sondernewsletter/liste
+    - Die Testmail geht an die E-Mail Adresse des je angemeldeten users
 
 
 ### letzte Schritte der Installation
