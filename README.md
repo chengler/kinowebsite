@@ -79,8 +79,13 @@ Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Wurden
 #### crontab
 Versenden der newsletter zu einer bestimmten Zeit geht einfach über `crontab -e`
 
-`5  6 * * * wget --quiet  "https://www.35kino.de/newsletter/sende/heute/<heute Key aus newsletter.keys>" > /dev/null
+`5  6 * * * wget --quiet  "https://<myDomain>/newsletter/sende/heute/<HEUTE_KEY aus newsletter.keys>" > /dev/null
 `
+- btw. Der auf der Startseite angezeigte Hinweis lässt sich auch als newsletter versenden:
+    - `https://<myDomain>/newsletter/sende/hinweis/<HINWEIS_KEY aus newsletter.keys>` versendet den auf
+    - `https://<myDomain>/newsletter/newsletter_hinweis/`  in der Voransicht zu sehenden Hinweis,
+    - `https://<myDomain>/admin/filme/inhaltsseite/` welcher  im admin Backend erstellt wird,
+
 
 ### letzte Schritte der Installation
 in der Shell im `Hauptverzeichnis` werden nun folgende Befehle abgesetzt
