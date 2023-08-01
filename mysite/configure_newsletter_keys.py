@@ -5,3 +5,9 @@
 HEUTE_KEY = 'HEUTE'
 HINWEIS_KEY = 'GESTERN'
 SONDERNEWSLETTER_PIN = 'MORGEN'
+
+# wenn von einer live-Instanz die variablen Dateien wie Datenbank, Filmplakaten in die Entwicklungsumgebungen kopiert werden soll
+# hier kommt die Variable rein
+# # ziel=<user>@<server_url>:<basedir>
+# der # Tag ist gewollt. Die Variable beginnt mit #! und wird mit grep ausgelesen 
+#!ZIEL=lege Ziel in ~/kinowebsite/mysite/newsletter_keys.py fest

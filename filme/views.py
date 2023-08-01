@@ -165,7 +165,7 @@ def sondernews_send(request, pk, email='@all'):
         sonder_newsletter.gesendet = datetime.datetime.now()
         sonder_newsletter.sender = request.user
         sonder_newsletter.save()
-        logger.info("sondernews_send:  sonder_newsletter.gesendetr  %s", sonder_newsletter.gesendet)
+        logger.info("sondernews_send:  sonder_newsletter.gesendet  %s", sonder_newsletter.gesendet)
 
     newsletter = NewsletterSent.objects.create()              
     t = threading.Thread(

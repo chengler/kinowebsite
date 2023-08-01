@@ -1,25 +1,32 @@
 #!/bin/bash
 
 # hole die localen Datein der Website, die nicht im git sind, weil sie direkt zum Projekt gehören
+# Dies macht erst Sinn, wenn es eine Webseite gibt, welche zur weiterentwicklung geclont werden soll
+# Dies macht nur einmal Sinn. zukünftig die Datei etVarData.sh verwenden
 
-cd .
-# weil sie für jede Website angepasst werden sollten
-echo ##################################
-echo scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/mysite/privat_settings.py ../mysite/
-scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/mysite/privat_settings.py ../mysite/
-echo ##################################
-echo scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/mysite/newsletter_keys.py../mysite/
-scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/mysite/newsletter_keys.py ../mysite/
-echo ##################################
-echo scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/db.sqlite3 ../.
-scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/db.sqlite3 ../.
-echo ##################################
-# scp -i ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/static/lokal/* ../static/lokal/
-echo rsync -rv --delete -e "ssh -i  ~/.ssh/id_rsa" kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/static/lokal/ ../static/lokal/
-rsync -rv --delete -e "ssh -i  ~/.ssh/id_rsa" kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/static/lokal/ ../static/lokal/
-echo ##################################
-# scp -ri ~/.ssh/id_rsa kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/media/CACHE/images/filme/* ../media/CACHE/images/filme/
-echo rsync -rv --delete -e "ssh -i  ~/.ssh/id_rsa" kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/media/CACHE/images/filme/ ../media/CACHE/images/filme/
-rsync -rv --delete -e "ssh -i  ~/.ssh/id_rsa" kkf00-kino35.de@kkf00.hostsharing.net:~/kinowebsite/media/CACHE/images/filme/ ../media/CACHE/images/filme/
-echo ##################################
+echo "erst Skript lesen, anpassen und dann exit 0 auskommentieren"
+echo "keine Garantie, sie sollten das Skript verstehen"
+# exit 0
+
+# wechsel in das Verzeichniss in dem dieses Skript steht -> hostsharing
+dir="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
+cd $dir
+
+#!ZIEL=lege Ziel in ~/kinowebsite/mysite/newsletter_keys.py fest
+
+ziel=$(cat ../mysite/newsletter_keys.py | grep "#!ZIEL" | awk 'BEGIN {FS="="} {print $2}')
+echo $ziel
+
+
+
+# mysite/privat_settings.py
+scp -i ~/.ssh/id_rsa $ziel/mysite/privat_settings.py ../mysite/
+# mysite/newsletter_keys.py
+scp -i ~/.ssh/id_rsa $ziel/mysite/newsletter_keys.py ../mysite/
+# db.sqlite3
+scp -i ~/.ssh/id_rsa $ziel/db.sqlite3 ../.
+# static/lokal/* <- favicon etc.
+rsync -rv  -e "ssh -i  ~/.ssh/id_rsa" $ziel/static/lokal/ ../static/lokal/
+# Filmplakate etc
+rsync -rv -e "ssh -i  ~/.ssh/id_rsa" $ziel/media/CACHE/images/filme/ ../media/CACHE/images/filme/
 
