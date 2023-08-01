@@ -14,7 +14,7 @@ ziel=$(cat ../mysite/newsletter_keys.py | grep "#!ZIEL" | awk 'BEGIN {FS="="} {p
 echo $ziel
 
 printf "\n"
-echo  aktualisiere Grafikdaten ...
+#echo  aktualisiere Grafikdaten ...
 rsync -r -e "ssh -i  ~/.ssh/id_rsa" $ziel/media/CACHE/images/filme/ ../media/CACHE/images/filme/
 echo Grafikdatein aktualisiert.
 echo "Aktualisiere Datenbank ..."
