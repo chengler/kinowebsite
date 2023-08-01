@@ -69,6 +69,7 @@ In diesem Fall muss die `settings.py` nicht mehr angepast werden.
 #### settings.py
 Die sensiblen Daten aus `settings.py` sind in zwei Dateien ausgegliedert. Wurden diese nicht beim individualisieren bereits kopiert, können diese wie folgt angelegt werden:
 - in den Ordner `kinowebseite/hostsharing`wechseln
+- firstcopy: ein Platzhalter Logo und Favicon werden an die richtige Stelle kopiert <= später durch eigene ersetzen>
     - `firstCopy.bat` # Gibt die kopierenden Dateine für Windows aus (C&P).
     - `firstCopy.sh` # Für die bash `chomd a+x` macht sie ausführbar
 -  die `mysite/newsletter_keys` enthält die Schlüßel zum versenden von Newslettern - Bitte anpassen
@@ -108,7 +109,6 @@ Wechseln Sie in den Ordner `kinoserver/hostsharing`. Dort finden sich Skripte, w
 `cat configure.sh ` gibt die Datei aus. Der Aufruf für die Website unter 'dev.beispieldomain.de' wäre 
 `./configure.sh dev.beispieldomain.de xyz00
 `. Folgende Schritte werden ausgeführt, bzw. müssen händisch erledigt werden:
-- ein Platzhalter Logo und Favicon werden an die richtige Stelle kopiert <= später durch eigene ersetzen>
 - ~/doms/$DOMAIN/.htaccess <= wird um die Einstellungen für die Passenger App erweitert.
     -  `PassengerFriendlyErrorPages` `on` für die Produkitvsite und `off` für die Testsite
     -  Diese Datei wäre auch der Ort, um einen [Verzeichnissschutz](https://wiki.hostsharing.net/index.php?title=.htaccess#Passwortschutz_f.C3.BCr_Dateien) anzulegen.
