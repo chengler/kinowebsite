@@ -20,4 +20,3 @@ echo Grafikdatein aktualisiert.
 echo "Aktualisiere Datenbank ..."
 scp -i ~/.ssh/id_rsa $ziel/db.sqlite3 ../.
 echo "Datenbank aktualisiert."
-exit 0
