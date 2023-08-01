@@ -12,11 +12,9 @@ echo "keine Garantie, sie sollten das Skript verstehen"
 dir="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 cd $dir
 
-#!ZIEL=lege Ziel in ~/kinowebsite/mysite/newsletter_keys.py fest
-
-ziel=$(cat ../mysite/newsletter_keys.py | grep "#!ZIEL" | awk 'BEGIN {FS="="} {print $2}')
+# von welchem server wird kopiert
+ziel=$(cat ../mysite/produktiver_server.txt)
 echo $ziel
-
 
 
 # mysite/privat_settings.py
@@ -26,7 +24,7 @@ scp -i ~/.ssh/id_rsa $ziel/mysite/newsletter_keys.py ../mysite/
 # db.sqlite3
 scp -i ~/.ssh/id_rsa $ziel/db.sqlite3 ../.
 # static/lokal/* <- favicon etc.
-rsync -rv  -e "ssh -i  ~/.ssh/id_rsa" $ziel/static/lokal/ ../static/lokal/
+rsync -r  -e "ssh -i  ~/.ssh/id_rsa" $ziel/static/lokal/ ../static/lokal/
 # Filmplakate etc
-rsync -rv -e "ssh -i  ~/.ssh/id_rsa" $ziel/media/CACHE/images/filme/ ../media/CACHE/images/filme/
+rsync -r -e "ssh -i  ~/.ssh/id_rsa" $ziel/media/CACHE/images/filme/ ../media/CACHE/images/filme/
 

@@ -1,0 +1,1 @@
+lege <user>@<server_url>:<Pfad zur kinowebsite> in mysite/produktiver_server.text fest

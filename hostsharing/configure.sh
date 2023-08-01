@@ -1,4 +1,5 @@
 #!/bin/bash
+# dieses skript hilft bei der einrichtung der Application bei hostsharing.net, sofern dort nach der best-practice vorgegangen wurde
 # bei der domain dev.kino35.de sind folgende Schritte notwendig
 clear
 echo "VORSICHT! bitte prüfen Sie erst das Skript"
