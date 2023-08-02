@@ -32,7 +32,8 @@ general.log
 # Die Konfigurationsdaten
 #
 mysite/newsletter_keys.py  
-mysite/privat_settings.py  
+mysite/privat_settings.py 
+mysite/produktiver_server.txt
 filme/migrations    
 
 

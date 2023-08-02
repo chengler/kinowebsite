@@ -6,11 +6,8 @@
 dir="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 cd $dir
 
-#!ZIEL=lege Ziel in ~/kinowebsite/mysite/newsletter_keys.py fest
-
-# ziel=<user>@<server_url>:<basedir>
-# lese Variable #!ZIEL aus datei
-ziel=$(cat ../mysite/newsletter_keys.py | grep "#!ZIEL" | awk 'BEGIN {FS="="} {print $2}')
+# von welchem server wird kopiert
+ziel=$(cat ../mysite/produktiver_server.txt)
 echo $ziel
 
 printf "\n"
@@ -20,4 +17,3 @@ echo Grafikdatein aktualisiert.
 echo "Aktualisiere Datenbank ..."
 scp -i ~/.ssh/id_rsa $ziel/db.sqlite3 ../.
 echo "Datenbank aktualisiert."
-exit 0
