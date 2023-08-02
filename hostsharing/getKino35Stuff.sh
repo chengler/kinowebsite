@@ -27,4 +27,6 @@ scp -i ~/.ssh/id_rsa $ziel/db.sqlite3 ../.
 rsync -r  -e "ssh -i  ~/.ssh/id_rsa" $ziel/static/lokal/ ../static/lokal/
 # Filmplakate etc
 rsync -r -e "ssh -i  ~/.ssh/id_rsa" $ziel/media/CACHE/images/filme/ ../media/CACHE/images/filme/
+rsync -r -e "ssh -i  ~/.ssh/id_rsa" $ziel/media/filme/ ../media/filme/
+
 

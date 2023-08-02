@@ -3,6 +3,7 @@
 clear
 echo "VORSICHT! bitte prüfen Sie erst das Skript"
 echo "Keine Garantie!"
+echo kopiert die Dateien welche angepasst werden müssen.
 
 # exit 0
 
