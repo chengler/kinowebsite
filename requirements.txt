@@ -13,6 +13,8 @@ python-dateutil~=2.8
 django-maintenance-mode~=0.18 # https://pypi.org/project/django-maintenance-mode/
 beautifulsoup4~=4.12
 
+# Successfully installed django-sslserver-0.22
+
 # html Editor
     # Imperavi (or tinymce) rich text editor is optional
     # 'imperavi',

@@ -575,6 +575,7 @@ def sondernewsletter_delete(request, pk):
 @login_required
 def sondernewsletter_edit(request, pk):
     '''Sondernewsletter überarbeiten und versenden.'''
+    logger.debug("sondernewsletter_edit: start")
     newsletter = get_object_or_404(Sondernewsletter, pk=pk)
     if request.method == "POST":
         form = NewsletterForm(request.POST, request.FILES, instance=newsletter )
@@ -587,6 +588,7 @@ def sondernewsletter_edit(request, pk):
             return redirect( 'sondernewsletter_edit', pk = newsletter.pk )
     else:
         form = NewsletterForm(instance=newsletter)
+    logger.debug("sondernewsletter_edit:  request.user  %s newsletter.bild_thumb.url %s", request.user, newsletter.bild_thumb.url)
     return render(request, 'filme/newsletter_sondernewsletter_edit.html', {'user': request.user, 'newsletter': newsletter, 'form': form})  
 
 def sondernewsletter_render(request, pk):
