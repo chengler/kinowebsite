@@ -41,5 +41,7 @@ filme/migrations
 # die eigentlichen Daten
 #
 db.sqlite3          
-media/filme/plakate/
-media/CACHE/images/filme/*
+media/filme/newsletter
+media/filme/plakate
+media/CACHE
+
