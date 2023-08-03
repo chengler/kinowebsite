@@ -23,6 +23,10 @@ static/admin/*
 # maintaince oder nicht? datei wird beim installieren Eingerichtet
 mysite/maintenance_mode_state.txt
 general.log
+# für django ssl server
+cert/*  # Zirtifikate für https des Django webservers
+cert.crt
+cert.key
 
 #
 # Alles ab hier gehört unbedingt ins Backup
