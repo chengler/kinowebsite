@@ -34,8 +34,6 @@ Im folgenden findet sich die Anleitung zur Installation einer Entwicklungsumgebu
 - [Change‐Management](https://github.com/chengler/kinowebsite/wiki/Change‐Management)
 - [Forken](https://github.com/chengler/kinowebsite/wiki/Forken)
 
-test des Change-Managements
-
 
 
 
