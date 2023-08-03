@@ -32,6 +32,8 @@ import threading
 from django.forms import modelformset_factory
 import logging
 logger = logging.getLogger(__name__) 
+#     logger.info("Text:  request.user  %s", request.user)
+
 
 def error404(request, exception):
     return render(request, 'filme/404.html', exception = exception)
@@ -76,7 +78,10 @@ def film_index(request):
         events = Event.objects.filter(event_online=True, termin__date = datum).order_by('termin')
     else: 
         events = nextevents # empty
-        print('kein Film mehr im aktuellen Programm')
+        # print('kein Film mehr im aktuellen Programm')
+        logger.info("film_index: Keine Filme mehr im aktuellen Programm")
+
+        
     hinweis = Inhaltsseite.objects.filter(typen = 1)
     if hinweis:
         hinweis = hinweis[0]  
@@ -274,7 +279,9 @@ def get_sidebar_query(delta):
         # alle Filme des nächsten Tages ab mitternacht
         mydate = mydate.replace(hour=0, minute=0, second=0)
     except IndexError as e: # keine filme da
-        print('Keine Filme für den Sidebar vorhanden: ', e)
+        # print('Keine Filme für den Sidebar vorhanden: ', e)
+        logger.info("def get_sidebar_query: %s", e)
+
         return relevant   
     # suche aus jeder kategorie den näachten event nach mydate
     for kategorie in Event.KATEGORIE_CHOICES:
