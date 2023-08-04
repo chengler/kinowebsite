@@ -15,10 +15,6 @@ beautifulsoup4~=4.12
 
 # Successfully installed django-sslserver-0.22
 
-# html Editor
-    # Imperavi (or tinymce) rich text editor is optional
-    # 'imperavi',
-
 ## update
 # python -m pip install --upgrade pip
 # pip install -r requirements.txt
