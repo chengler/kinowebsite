@@ -24,7 +24,7 @@ Im folgenden findet sich die Anleitung zur Installation einer Entwicklungsumgebu
 
 ## Es gibt ein wiki
 ### Installation
-- [Python](https://github.com/chengler/kinowebsite/wiki/Python)
+- [Start](https://github.com/chengler/kinowebsite/wiki/Start)
 - [Konfiguration I](https://github.com/chengler/kinowebsite/wiki/Konfiguration-I)
 - [Konfiguration II](https://github.com/chengler/kinowebsite/wiki/Konfiguration-II)
 - [Konfiguration III](https://github.com/chengler/kinowebsite/wiki/Konfiguration-III)
