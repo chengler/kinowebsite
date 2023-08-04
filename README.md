@@ -23,8 +23,8 @@ Der Flow basiert auf eine ehrenamtlich Struktur und kennt wenig Hirachie:
 Im folgenden findet sich die Anleitung zur Installation einer Entwicklungsumgebung auf einem Lokalen Windows und einer Produktiven Installation auf einem debian/linux server von hostsharing.net (passenger / wsgi).
 
 ## Es gibt ein wiki
-- [Home](https://github.com/chengler/kinowebsite/wiki)
-- [Installation](https://github.com/chengler/kinowebsite/wiki/Installation)
+# Installation
+- [Python](https://github.com/chengler/kinowebsite/wiki/Python)
 - [Konfiguration I](https://github.com/chengler/kinowebsite/wiki/Konfiguration-I)
 - [Konfiguration II](https://github.com/chengler/kinowebsite/wiki/Konfiguration-II)
 - [Konfiguration III](https://github.com/chengler/kinowebsite/wiki/Konfiguration-III)
@@ -33,6 +33,13 @@ Im folgenden findet sich die Anleitung zur Installation einer Entwicklungsumgebu
 - [Entwicklungsumgebung](https://github.com/chengler/kinowebsite/wiki/Entwicklungsumgebung)
 - [Change‐Management](https://github.com/chengler/kinowebsite/wiki/Change‐Management)
 - [Forken](https://github.com/chengler/kinowebsite/wiki/Forken)
+
+
+# Anwendung
+- [Workflow](https://github.com/chengler/kinowebsite/wiki/Workflow)
+
+# Entwicklung
+- [Übersicht](https://github.com/chengler/kinowebsite/wiki/Übersicht)
 
 
 
