@@ -24,9 +24,12 @@ static/admin/*
 mysite/maintenance_mode_state.txt
 general.log
 # für django ssl server
-cert/  # Zirtifikate für https des Django webservers
+cert/crt.pem  # Zirtifikate für https des Django webservers
+cert/key.pem
+cert/*
 cert.crt
 cert.key
+
 
 #
 # Alles ab hier gehört unbedingt ins Backup
