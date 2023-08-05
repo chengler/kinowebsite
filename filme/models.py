@@ -180,12 +180,22 @@ class Event(models.Model):
     location_address = models.TextField(default='Ohmstr. 18-20 36037 Fulda',blank=True, max_length=128)# kann im Adminpannel geändert werden
     KATEGORIE_CHOICES = [
         ('1' , 'Freitagsfilm'),
-        ('2' , 'Kinderfilm'),
-        ('3' , 'Außer der Reihe'),
+        ('2' , 'KinderKino'),
+        ('3' , 'Sonderveranstaltung'),
         ('4' , 'Lesung'),
         ('5' , 'Für die Ohren'),
         ('6' , 'Autokino'),
         ('7' , 'OpenAir'),
+        ('8' , 'FIF'),
+        ('9' , 'DokuDonnerstag'),
+        ('10' , 'MuFi'),
+        ('11' , 'BIPoC'),
+        ('12' , 'Kuchen, Kaffee & Croissant'),
+        ('13' , 'BANZAI!'),
+        ('14' , 'Nachhaltigkeitsteam'),
+        ('15' , 'Kurzfilmtag'),
+        ('16' , 'Überraschungsfilm'),
+        ('17' , 'Theater'),
        ]
     kategorie =  models.CharField( max_length=16,choices=KATEGORIE_CHOICES,  null=True, blank=True)
 

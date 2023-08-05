@@ -24,7 +24,7 @@ static/admin/*
 mysite/maintenance_mode_state.txt
 general.log
 # für django ssl server
-cert/*  # Zirtifikate für https des Django webservers
+cert/  # Zirtifikate für https des Django webservers
 cert.crt
 cert.key
 
@@ -44,7 +44,8 @@ filme/migrations
 #
 # die eigentlichen Daten
 #
-db.sqlite3          
+db.sqlite3    
+db.sqlite3.back        
 media/filme/newsletter
 media/filme/plakate
 media/CACHE
