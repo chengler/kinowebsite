@@ -190,7 +190,7 @@ class Event(models.Model):
         ('9' , 'DokuDonnerstag'),
         ('10' , 'MuFi'),
         ('11' , 'BIPoC'),
-        ('12' , 'Kuchen, Kaffee & Croissant'),
+        ('12' , 'Kino, Kaffee & Croissant'),
         ('13' , 'BANZAI!'),
         ('14' , 'Nachhaltigkeitsteam'),
         ('15' , 'Kurzfilmtag'),
