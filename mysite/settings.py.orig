@@ -27,14 +27,17 @@ LOGGING = {
     "disable_existing_loggers": False,  # retain the default loggers
     "handlers": {
         "file": {
+<<<<<<< HEAD
             "class": "logging.FileHandler",
             #             'class': 'logging.handlers.RotatingFileHandler',
             #             'maxBytes': 15728640,  # 1024 * 1024 * 15B = 15MB  
             #             'backupCount': 10,    
+=======
             # "class": "logging.FileHandler",
             'class': 'logging.handlers.TimedRotatingFileHandler',
             'when': 'midnight',
             'backupCount': 3,
+>>>>>>> bug/#25
             "filename": os.path.join(BASE_DIR,"general.log"),
             "level": DJANGO_LOG_LEVEL, # mindestens warning, Variable in privat_settings L
             "formatter":DJANGO_FORMATTER,  # verbose oder simple; os.getenv("DJANGO_FORMATTER")
