@@ -28,6 +28,9 @@ LOGGING = {
     "handlers": {
         "file": {
             "class": "logging.FileHandler",
+            #             'class': 'logging.handlers.RotatingFileHandler',
+            #             'maxBytes': 15728640,  # 1024 * 1024 * 15B = 15MB  
+            #             'backupCount': 10,    
             "filename": os.path.join(BASE_DIR,"general.log"),
             "level": DJANGO_LOG_LEVEL, # mindestens warning, Variable in privat_settings L
             "formatter":DJANGO_FORMATTER,  # verbose oder simple; os.getenv("DJANGO_FORMATTER")
