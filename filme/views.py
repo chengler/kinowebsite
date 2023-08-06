@@ -427,7 +427,7 @@ def get_spielplanung_query(kategorieauswahl):
     '''Event filter für film_spielplanung_list, da er
     dort zweifach verwendet wird'''
     print("kategorieauswahl =", kategorieauswahl)
-    if kategorieauswahl is not 0:
+    if kategorieauswahl != 0:
         return Event.objects.filter(termin__gte=datetime.datetime.now() ).filter(kategorie=kategorieauswahl).order_by('termin')[:100]
     else: # alle kategorien
         return Event.objects.filter(termin__gte=datetime.datetime.now() ).order_by('termin')[:100]
