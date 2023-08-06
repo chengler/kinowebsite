@@ -21,6 +21,7 @@ from django.db.models import Q
 from django.urls import reverse
 from django.core import mail
 import logging
+from logging import FileHandler
 logger = logging.getLogger(__name__) 
 # custom user für das nächste Projekt
 # https://learndjango.com/tutorials/django-best-practices-referencing-user-model

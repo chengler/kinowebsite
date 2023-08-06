@@ -31,6 +31,8 @@ import threading
 # from datetime import datetime
 from django.forms import modelformset_factory
 import logging
+from logging import FileHandler
+# import logging.handlers
 logger = logging.getLogger(__name__) 
 #     logger.info("Text:  request.user  %s", request.user)
 
