@@ -3,7 +3,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
    <url>
-      <loc>https://www.35kino.de/</loc>
+      <loc>https://www.kino35.de/</loc>
 
       <lastmod>2020-05-17</lastmod>
 
@@ -13,7 +13,7 @@
    </url>
 
    <url>
-        <loc>https://www.35kino.de/film/programm/</loc>
+        <loc>https://www.kino35.de/film/programm/</loc>
 
         <changefreq>weekly</changefreq>
     
@@ -21,7 +21,7 @@
    </url>
 
    <url>
-      <loc>https://www.35kino.de/film/anfahrt/</loc>
+      <loc>https://www.kino35.de/film/anfahrt/</loc>
 
       <lastmod>2020-05-17</lastmod>
 
