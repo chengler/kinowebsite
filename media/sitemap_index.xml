@@ -4,8 +4,8 @@
       <loc>http://www.kino35.de/media/sitemap.xml</loc>
       <lastmod>2023-08-06</lastmod>
    </sitemap>
-   <sitemap>
-      <loc>http://www.kino35.de/media/sitemap-archiv.xml.gz</loc>
+   <!-- <sitemap>
+      <loc>http://www.kino35.de/media/sitemap-chronik.xml.gz</loc>
       <lastmod>2023-08-06</lastmod>
-   </sitemap>
+   </sitemap> -->
 </sitemapindex>

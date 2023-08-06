@@ -11,7 +11,7 @@ import os
 
 events = Event.objects.filter(termin__lte = datetime.datetime.now()).order_by('-termin')
 
-f = open("media/sitemap-archiv.xml", "w")
+f = open("media/sitemap-chronik.xml", "w")
 
 f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
 f.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
@@ -24,7 +24,7 @@ for event in events:
     f.write("    </url>\n")
 f.write('</urlset>\n')
 f.close()
-f = open("media/sitemap-archiv.xml", "r")
+f = open("media/sitemap-chronik.xml", "r")
 
 print(f.read()) 
 
