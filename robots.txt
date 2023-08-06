@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /media/filme
-Disallow: /media/CACHE
-
-Sitemap: https://www.kino35.de/media/sitemap_index.xml
