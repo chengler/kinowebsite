@@ -1,6 +1,7 @@
 from django.urls import path
 from . import views
 from django.conf.urls import handler404
+from django.views.generic.base import TemplateView
 
 handler404 = views.error404
 #app_name = 'filme'
@@ -61,6 +62,8 @@ urlpatterns = [
     path('film/datenschutzhinweis/', views.film_datenschutzhinweis, name='film_datenschutzhinweis'),
     path('film/ueber_uns/', views.film_ueber_uns, name='film_ueber_uns'),
     path('film/anfahrt/', views.film_anfahrt, name='film_anfahrt'),
+
+    path('robots.txt', TemplateView.as_view(template_name="filme/robots.txt", content_type="text/plain"),  ),
 
 
 
