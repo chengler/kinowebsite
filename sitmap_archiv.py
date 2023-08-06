@@ -17,7 +17,7 @@ f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
 f.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
 for event in events:
     f.write("    <url>\n")
-    f.write("        <loc>https://www.35kino.de/film/event/"+str(event.pk)+"/detail</loc>\n")
+    f.write("        <loc>https://www.kino35.de/film/event/"+str(event.pk)+"/detail</loc>\n")
     f.write("        <lastmod>"+event.termin.strftime('%Y-%m-%d')+"</lastmod>\n")
     f.write("        <changefreq>never</changefreq>\n")
     f.write("        <priority>0.1</priority>\n")
