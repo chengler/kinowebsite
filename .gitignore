@@ -22,7 +22,7 @@ static/admin/*
 
 # maintaince oder nicht? datei wird beim installieren Eingerichtet
 mysite/maintenance_mode_state.txt
-general.log
+general.log*
 # für django ssl server
 cert/crt.pem  # Zirtifikate für https des Django webservers
 cert/key.pem
