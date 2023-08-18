@@ -12,6 +12,9 @@ html2text~=2020.1
 python-dateutil~=2.8
 django-maintenance-mode~=0.18 # https://pypi.org/project/django-maintenance-mode/
 beautifulsoup4~=4.12
+django-summernote~=0.8.20
+
+# packet~=1.2.3 <= mind. Version 1.2.3 , aber nie 1.3
 
 # Successfully installed django-sslserver-0.22
 

@@ -32,6 +32,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('polls/', include('polls.urls')),
     path('', include('filme.urls')),
+    path('summernote/', include('django_summernote.urls')),
 
 ]
 

@@ -1,8 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
+from django_summernote.admin import SummernoteModelAdmin
 from .models import Film,  Inhaltsseite, Event, NewsletterAbonnent, NewsletterSent
-
 
 
 class FilmAdmin(admin.ModelAdmin):
@@ -30,12 +30,18 @@ class NewsletterAdmin(admin.ModelAdmin):
     list_display = ('email', 'beantragt', 'opt_in')
 
 
+class InhaltsseiteAdmin(SummernoteModelAdmin):
+     summernote_fields = ('text',)
 
-
+# # Apply summernote to all TextField in model.
+# class SomeModelAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
+#     summernote_fields = '__all__'
+# # Apply summernote only to specific TextField in model
+# https://github.com/summernote/django-summernote
 
 
 admin.site.register(Film, FilmAdmin)
-admin.site.register(Inhaltsseite)
+admin.site.register(Inhaltsseite, InhaltsseiteAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(NewsletterAbonnent, NewsletterAdmin)
 admin.site.register(NewsletterSent)

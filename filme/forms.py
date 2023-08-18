@@ -5,6 +5,15 @@ from crispy_forms.helper import FormHelper
 from django.forms import ClearableFileInput
 import datetime
 
+#from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
+#from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+# class FormFromSomeModel(forms.ModelForm):
+#     class Meta:
+#         model = SomeModel
+#         widgets = {
+#             'foo': SummernoteWidget(),
+#             'bar': SummernoteInplaceWidget(), # 
+#         }
 
 class FilmNeuForm(forms.ModelForm):
     class Meta:
@@ -25,7 +34,6 @@ class FilmBewertungForm(forms.ModelForm):
         widgets = {
             'interne_bewertung_zahl': InterneBewertung(),
             'interne_bewerter_zahl': InterneBewertung(),
-
             'plakat': MyClearableFileInput(),
         }
         labels = {

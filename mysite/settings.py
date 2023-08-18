@@ -110,6 +110,7 @@ INSTALLED_APPS = [
     'django_extensions', 
     'django.forms',
     'maintenance_mode',
+    'django_summernote',
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap5' # neu
 CRISPY_TEMPLATE_PACK = 'bootstrap5' # neu
