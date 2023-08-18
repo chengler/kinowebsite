@@ -1,6 +1,0 @@
-{
-  "ToxEnv": {
-    "name": "py36-dj202",
-    "type": "VirtualEnvRunner"
-  }
-}
