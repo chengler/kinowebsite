@@ -1,3 +1,4 @@
+from urllib import request
 from django.conf import settings
 from django.db import models
 
@@ -22,6 +23,8 @@ from django.urls import reverse
 from django.core import mail
 import logging
 from logging import FileHandler
+from mysite.privat_settings import DEFAULT_DOMAIN
+
 logger = logging.getLogger(__name__) 
 # custom user für das nächste Projekt
 # https://learndjango.com/tutorials/django-best-practices-referencing-user-model
@@ -38,6 +41,26 @@ def limit_film_choices():
     # print("###result",result)
     logger.debug("def limit_film_choices(): %s", result)
     return result
+
+
+
+class Flyer(models.Model):
+    def dateiname(instance, filename):
+        # media/filme/flyer/kino_yy-mm.pdf  %y %m
+        jahr = instance.bisZum.strftime('%y')
+        monat = instance.bisZum.strftime('%m')
+        pfad = 'filme/flyer/' + instance.prefix + "_" + jahr + monat + '.pdf'
+        logger.debug("*** def dateiname: filename %s ", pfad)
+        return (pfad)
+         
+    bisZum =  models.DateField(auto_now = False, blank = False) # Flyer wird angezeigt bis zum
+    bisZum.help_text = "Bis wann hat dieser Flyer gültigkeit? Bis zu diesem Tag wird der Flyer angezeigt werden. \n Jahr (yy) und Monat (mm) wird für den Pfad zum Flyer verwendet"
+    prefix = models.CharField(max_length = 8, default = 'kino', blank = False) # um mehrere Flyer wie Kino, Banzai anzuzeigen
+    prefix.help_text = "Um Flyer zu unterscheiden, welche im gleichen Mona:wt enden. default = kino \n Das Prefix wird für den Pfad zum Flyer verwendet"
+    anzeigename = models.CharField(max_length = 32, blank = False ) # Name wie Kino Oktober/November
+    anzeigename.help_text = "Dieser Name wird auf der Webseite angezigt. z.B. Kino Oktober/November"
+    flyer = models.FileField(upload_to = dateiname )
+    flyer.help_text = "Der Pfad zur Datei ist: " + DEFAULT_DOMAIN + "/media/flyer/prefix_yy-mm.pdf"
 
 class Film(models.Model):
     #author = models.ForeignKey(settings.AUTH_USER_MODEL, default='unbekannt', on_delete=models.SET_DEFAULT)

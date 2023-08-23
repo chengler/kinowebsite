@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Film,  Inhaltsseite, Event, NewsletterAbonnent, NewsletterSent
+from .models import Film,  Inhaltsseite, Event, NewsletterAbonnent, NewsletterSent, Flyer
 
 
 
@@ -29,16 +29,18 @@ class NewsletterAdmin(admin.ModelAdmin):
     search_fields = ['email',]
     list_display = ('email', 'beantragt', 'opt_in')
 
-
-
-
-
+class FlyerAdmin(admin.ModelAdmin):
+    list_display = ('anzeigename', 'prefix', 'bisZum')
 
 admin.site.register(Film, FilmAdmin)
 admin.site.register(Inhaltsseite)
 admin.site.register(Event, EventAdmin)
 admin.site.register(NewsletterAbonnent, NewsletterAdmin)
 admin.site.register(NewsletterSent)
+admin.site.register(Flyer, FlyerAdmin)
+
+
+
 
 
 
