@@ -42,21 +42,19 @@ def limit_film_choices():
     logger.debug("def limit_film_choices(): %s", result)
     return result
 
-
-
 class Flyer(models.Model):
+    # upload_to wird in models, die url wird in admin.py definiert
     def dateiname(instance, filename):
-        # media/filme/flyer/kino_yy-mm.pdf  %y %m
-        jahr = instance.bisZum.strftime('%y')
-        monat = instance.bisZum.strftime('%m')
-        pfad = 'filme/flyer/' + instance.prefix + "_" + jahr + monat + '.pdf'
-        logger.debug("*** def dateiname: filename %s ", pfad)
+        # media/flyer/kino_yy-mm.pdf  %y %m
+        datum = instance.bisZum.strftime('%y%m')
+        pfad = 'flyer/' + instance.prefix + "_" + datum + '.pdf'
+        logger.debug("*** class Flyer: def dateiname: PFAD: %s ", pfad)
         return (pfad)
-         
+    
     bisZum =  models.DateField(auto_now = False, blank = False) # Flyer wird angezeigt bis zum
     bisZum.help_text = "Bis wann hat dieser Flyer gültigkeit? Bis zu diesem Tag wird der Flyer angezeigt werden. \n Jahr (yy) und Monat (mm) wird für den Pfad zum Flyer verwendet"
     prefix = models.CharField(max_length = 8, default = 'kino', blank = False) # um mehrere Flyer wie Kino, Banzai anzuzeigen
-    prefix.help_text = "Um Flyer zu unterscheiden, welche im gleichen Mona:wt enden. default = kino \n Das Prefix wird für den Pfad zum Flyer verwendet"
+    prefix.help_text = "Handle with care! Das Prefix wird für den Pfad zum Flyer verwendet. default = kino</br> Damit können Flyer unterschieden werden, welche im gleichen Monat enden, oder anders beginnen sollen als kino z.B. mufi, banzai "
     anzeigename = models.CharField(max_length = 32, blank = False ) # Name wie Kino Oktober/November
     anzeigename.help_text = "Dieser Name wird auf der Webseite angezigt. z.B. Kino Oktober/November"
     flyer = models.FileField(upload_to = dateiname )

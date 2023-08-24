@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
-from .models import Film, Event, Comment, Inhaltsseite, NewsletterAbonnent, NewsletterSent  , ZeitStempel, Sondernewsletter
+from .models import Film, Event, Comment, Flyer, Inhaltsseite, NewsletterAbonnent, NewsletterSent  , ZeitStempel, Sondernewsletter
 from .forms import *
 # FilmForm, FilmNeuForm, FilmBewertungForm, EventForm, CommentForm, SpielplanForm, EventNeuForm, EventDiensteForm
 from django.contrib.auth.decorators import login_required
@@ -31,15 +31,25 @@ import threading
 # from datetime import datetime
 from django.forms import modelformset_factory
 import logging
-from logging import FileHandler
-# import logging.handlers
+# from logging import FileHandler
+from logging import handlers
 logger = logging.getLogger(__name__) 
 #     logger.info("Text:  request.user  %s", request.user)
 
 
+def get_flyer_query():
+    ''' zeigt die noch gültigen Flyer in einer Liste
+        Datenbankmodell: models.py class Flyer(models.Model):
+        admin/filme/flyer/: admin.py class FlyerAdmin(admin.ModelAdmin):
+        ViewsQuerry: views.ps def get_flyer_query():
+        Html: flyer_snippet.html
+        '''
+    aktuelle_flyers = Flyer.objects.filter(bisZum__gte=datetime.date.today()) # .order_by('bisZum')
+    logger.debug("*** views: def get_flyer_query: aktuelle_flyers: %s ", aktuelle_flyers)
+    return aktuelle_flyers
+
 def error404(request, exception):
     return render(request, 'filme/404.html', exception = exception)
-
 
 def newsletter_form_snippet(request):
     ''' handels die newsletter form und leitet
@@ -73,6 +83,7 @@ def film_index(request):
     # nextevents alle verantaltungen des nächsten Veranstaltungstages
     nextevents = get_programm_query()
     sidebar_events = get_sidebar_query(1)
+    aktuelle_flyers = get_flyer_query()
     # 0 wenn 0 oder gerade dann newsletterabo in eigene zeile
     sidebar_count = len(sidebar_events) % 2
     if nextevents:
@@ -80,21 +91,20 @@ def film_index(request):
         events = Event.objects.filter(event_online=True, termin__date = datum).order_by('termin')
     else: 
         events = nextevents # empty
-        # print('kein Film mehr im aktuellen Programm')
-        logger.info("film_index: Keine Filme mehr im aktuellen Programm")
+        logger.info("*** views: def film_index: Keine Filme mehr im aktuellen Programm")
 
         
     hinweis = Inhaltsseite.objects.filter(typen = 1)
     if hinweis:
         hinweis = hinweis[0]  
     else:
-        print("Keine Hinweise enthalten")
+        logger.info("*** views: def film_index: Keine Hinweise enthalten")
     if request.method == "POST":
         return newsletter_form_snippet(request)
     else:
         form = NewsletterAboForm()
     return render(request, 'filme/film_index.html', {'events': events, 'hinweis': hinweis, 
-      'form': form, 'sidebar_count': sidebar_count,'sidebar_events': sidebar_events})
+      'form': form, 'sidebar_count': sidebar_count,'sidebar_events': sidebar_events, 'flyers': aktuelle_flyers})
 
 def filmevent_programm_list(request):
     ''' Die Programmübersicht'''
@@ -704,6 +714,7 @@ def filmevent_dienste(request, pk):
 def film_impressum(request):
     inhalt = Inhaltsseite.objects.filter(typen = 2)
     inhalt = inhalt[0]  
+    logger.debug("film_impressum:  inhalt.text %s", inhalt.text)
     return render(request, 'filme/inhaltsseite.html', {'inhalt': inhalt })  
 
 def film_datenschutzhinweis(request):

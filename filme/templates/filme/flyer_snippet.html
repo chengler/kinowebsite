@@ -1,0 +1,8 @@
+{% for flyer in flyers%}
+    <div class="flyer-link">
+        <a href="{{ flyer.flyer.url}}">
+            <b>{{ flyer.anzeigename }}</b>
+        </a>
+    </div>
+{% endfor %}
+<hr>
