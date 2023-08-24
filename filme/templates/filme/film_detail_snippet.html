@@ -43,7 +43,7 @@
         <div class="row">
             <div class="col-12">
                 <div class="film_hinweis">{{ film.display_hinweis|linebreaksbr |safe }}</div>
-                <div class="film_display_description">{{ film.display_description|linebreaksbr| safe }}</div>
+                <div class="film_display_description">{{ film.display_description| safe }}</div>
                 {% if film.website is not None %}
                     <a target="_blank" rel="noopener noreferrer" 
                         href="{{ film.website }}"">|zur Website des Films|</a>
