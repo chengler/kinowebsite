@@ -16,8 +16,7 @@ urlpatterns = [
     path('film/archiv', views.film_archiv, name='film_archiv'),
     path('film/chronik', views.filmevent_archiv, name='filmevent_archiv'),
     path('a', views.filmevent_openarchiv, name='filmevent_openarchiv'),
-
-    
+ 
     path('film/vorschlag/<int:pk>/bewerten', views.film_draft_bewertung, name='film_draft_bewertung'),
     path('film/vorschlag/<int:pk>/delete/', views.film_remove, name='film_remove'),
     path('film/vorschlag/<int:pk>/status/<key>/', views.film_status, name='film_status'),
@@ -40,12 +39,8 @@ urlpatterns = [
     path('newsletter/sondernewsletter/edit/<int:pk>', views.sondernewsletter_edit, name='sondernewsletter_edit'),
     path('newsletter/sondernewsletter/render/<int:pk>', views.sondernewsletter_render, name='sondernewsletter_render'),
 
-
-
-
     path('newsletter/sende/<typ>/<key>', views.newsletter_send, name='newsletter_send'),
     path('newsletter/sende/sondernews/<int:pk>/<email>', views.sondernews_send, name='sondernews_send'),
-
 
     path('filmevent/newsletter/feedback/<flag>', views.newsletter_abo_feedback, name='newsletter_abo_feedback'),
     path('newsletter/opt_in/<email>/<salz>', views.newsletters_opt_in, name='newsletters_opt_in'),
@@ -63,7 +58,9 @@ urlpatterns = [
     path('film/ueber_uns/', views.film_ueber_uns, name='film_ueber_uns'),
     path('film/anfahrt/', views.film_anfahrt, name='film_anfahrt'),
 
+
     path('robots.txt', TemplateView.as_view(template_name="filme/robots.txt", content_type="text/plain"),  ),
+
 
 
 
