@@ -6,7 +6,7 @@ from django.forms import ClearableFileInput
 import datetime
 
 #from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
-# from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 # class FormFromSomeModel(forms.ModelForm):
 #     class Meta:
 #         model = SomeModel
@@ -73,6 +73,9 @@ class FilmForm(forms.ModelForm):
         }
         widgets = {
             'plakat': MyClearableFileInput(),
+            'description': SummernoteWidget(),
+
+
         }
 
 class DateInput(forms.DateInput):
