@@ -43,13 +43,26 @@ def limit_film_choices():
     return result
 
 class Flyer(models.Model):
-    # upload_to wird in models, die url wird in admin.py definiert
+    ''' zum speicher und anzeigen von Programmflyern.
+        admin.py class FlyerAdmin(admin.ModelAdmin):
+        bearbeite unter admin/filme/flyer/
+        Html: flyer_snippet.html'''
+   
     def dateiname(instance, filename):
-        # media/flyer/kino_yy-mm.pdf  %y %m
+        '''Legt den Dateipfad fest
+        media/flyer/<kino>_<yy-mm>.pdf'''
         datum = instance.bisZum.strftime('%y%m')
         pfad = 'flyer/' + instance.prefix + "_" + datum + '.pdf'
         logger.debug("*** class Flyer: def dateiname: PFAD: %s ", pfad)
-        return (pfad)
+        return (pfad)    
+    
+    @staticmethod 
+    def get_flyer_query():
+        ''' ladet alle noch nicht abgelaufenen Flyer in 'aktuelle_flyers'
+        Bezugspumkt ist heute und das date Feld bisZum'''
+        aktuelle_flyers = Flyer.objects.filter(bisZum__gte=datetime.date.today()) # .order_by('bisZum')
+        logger.debug("*** views: def get_flyer_query: aktuelle_flyers: %s ", aktuelle_flyers)
+        return aktuelle_flyers
     
     bisZum =  models.DateField(auto_now = False, blank = False) # Flyer wird angezeigt bis zum
     bisZum.help_text = "Bis wann hat dieser Flyer gültigkeit? Bis zu diesem Tag wfInhaltsird der Flyer angezeigt werden. \n Jahr (yy) und Monat (mm) wird für den Pfad zum Flyer verwendet"
@@ -195,7 +208,6 @@ class Event(models.Model):
         related_name='event_film',  blank = True, null=True, limit_choices_to = limit_film_choices)
     ersatzfilm = models.ForeignKey('filme.Film', on_delete=models.SET_NULL, related_query_name='event_ersatz',
         related_name='event_ersatz', blank=True, null=True, limit_choices_to = limit_film_choices)
-
     termin = models.DateTimeField(auto_now=False, null=True)# Termin der Vorführung
     zeit = models.TimeField(auto_now=False, null=True) # dummy
     text_intern = models.TextField(blank=True, default="") # intern zur Veranstalltung
@@ -277,10 +289,6 @@ class Inhaltsseite(models.Model):
     def __str__(self):
         return self.name
 
-
-
-
-
 class Comment(models.Model): 
     film = models.ForeignKey('filme.Film', on_delete=models.CASCADE, related_name='comments')
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -339,8 +347,6 @@ class NewsletterAbonnent(models.Model):
         else:
             status = 'Email und Sicherheitscode passen nicht zusammen. Löschung gescheitert! Bitte kontaktieren Sie uns'
         return status
-
-    
 
     def __str__(self):
         return self.email

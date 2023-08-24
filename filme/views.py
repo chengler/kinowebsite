@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
-from .models import Film, Event, Comment, Flyer, Inhaltsseite, NewsletterAbonnent, NewsletterSent  , ZeitStempel, Sondernewsletter
+from .models import Film, Event, Comment, Flyer, Inhaltsseite, NewsletterAbonnent, NewsletterSent, ZeitStempel, Sondernewsletter
 from .forms import *
 # FilmForm, FilmNeuForm, FilmBewertungForm, EventForm, CommentForm, SpielplanForm, EventNeuForm, EventDiensteForm
 from django.contrib.auth.decorators import login_required
@@ -83,7 +83,7 @@ def film_index(request):
     # nextevents alle verantaltungen des nächsten Veranstaltungstages
     nextevents = get_programm_query()
     sidebar_events = get_sidebar_query(1)
-    aktuelle_flyers = get_flyer_query()
+    aktuelle_flyers = Flyer.get_flyer_query()
     # 0 wenn 0 oder gerade dann newsletterabo in eigene zeile
     sidebar_count = len(sidebar_events) % 2
     if nextevents:
