@@ -52,7 +52,7 @@ class Flyer(models.Model):
         return (pfad)
     
     bisZum =  models.DateField(auto_now = False, blank = False) # Flyer wird angezeigt bis zum
-    bisZum.help_text = "Bis wann hat dieser Flyer gültigkeit? Bis zu diesem Tag wird der Flyer angezeigt werden. \n Jahr (yy) und Monat (mm) wird für den Pfad zum Flyer verwendet"
+    bisZum.help_text = "Bis wann hat dieser Flyer gültigkeit? Bis zu diesem Tag wfInhaltsird der Flyer angezeigt werden. \n Jahr (yy) und Monat (mm) wird für den Pfad zum Flyer verwendet"
     prefix = models.CharField(max_length = 8, default = 'kino', blank = False) # um mehrere Flyer wie Kino, Banzai anzuzeigen
     prefix.help_text = "Handle with care! Das Prefix wird für den Pfad zum Flyer verwendet. default = kino</br> Damit können Flyer unterschieden werden, welche im gleichen Monat enden, oder anders beginnen sollen als kino z.B. mufi, banzai "
     anzeigename = models.CharField(max_length = 32, blank = False ) # Name wie Kino Oktober/November

@@ -85,7 +85,7 @@
                 <div class="col-4"> 
 
                     {% if film.interner_kommentar is not None %}
-                        {{film.interner_kommentar |truncatechars:100 }}
+                        {{film.interner_kommentar  | truncatechars:100  }}
                     {% else %}
                         Keine Bewertung
                     {% endif %}

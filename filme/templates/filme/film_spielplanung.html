@@ -82,7 +82,7 @@
                                 {{  film.interne_bewertung_ratio | zehntel }}&nbsp;
                             {% endif %}
                             {% if film.interner_kommentar is not None %}
-                                {{film.interner_kommentar |truncatechars:50 }}
+                                {{film.interner_kommentar |truncatechars:50  }}
                             {% else%}
                                 <span> </span>
                             {% endif %}                        
