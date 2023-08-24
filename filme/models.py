@@ -104,9 +104,9 @@ class Film(models.Model):
        ]
     fsk = models.CharField(choices=FSK_CHOICES,  null=True, blank=True, max_length=16)
     hinweis = models.TextField(default='', blank=True) # spezeiller Hinweis zum Film OmU,Kooperationspartner ...
-    hinweis.help_text = "Ein spezieller Hinweis zu Film, aber nicht die Filmbeschreibung. Meist leer"
+    hinweis.help_text = "Ein spezieller Hinweis zu Film, aber nicht die Filmbeschreibung. Meist leer. html möglich"
     description = models.TextField(default='',blank=True) # Filmbeschreibung
-    description.help_text = "Die eigentliche Filmbeschreibung)"
+    description.help_text = "Die eigentliche Filmbeschreibung"
     vorschlags_datum = models.DateTimeField( default=timezone.now, blank=True )  #wann wurde der Film das erste mal vorgeschlagen/erstellt
     interner_kommentar = models.TextField(blank=True, null=True) # Feedback der Programmplanungsgruppe
     interne_bewertung_zahl = models.SmallIntegerField(null=True, default=0, blank=True) # Feedback Programmplanungsgruppe <= wieviele dafür
