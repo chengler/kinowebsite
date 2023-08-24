@@ -1,7 +1,10 @@
-from django.urls import path
+from django.urls import include, path
 from . import views
 from django.conf.urls import handler404
 from django.views.generic.base import TemplateView
+
+from django.conf import settings
+from django.conf.urls.static import static
 
 handler404 = views.error404
 #app_name = 'filme'
@@ -58,30 +61,20 @@ urlpatterns = [
     path('film/ueber_uns/', views.film_ueber_uns, name='film_ueber_uns'),
     path('film/anfahrt/', views.film_anfahrt, name='film_anfahrt'),
 
+    path('summernote/', include('django_summernote.urls')),
+
 
     path('robots.txt', TemplateView.as_view(template_name="filme/robots.txt", content_type="text/plain"),  ),
-
-
-
-
-    
     
 
-
- 
-
-   
-
- 
+    
 
 
     # path('film/<int:pk>/comment/', views.add_comment_to_film, name='add_comment_to_film'),
     # path('comment/<int:pk>/approve/', views.comment_approve, name='comment_approve'),
     # path('comment/<int:pk>/remove/', views.comment_remove, name='comment_remove'),
-
-
-
-
-
-
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

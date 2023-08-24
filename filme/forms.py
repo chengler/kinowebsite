@@ -6,7 +6,7 @@ from django.forms import ClearableFileInput
 import datetime
 
 #from django_summernote.fields import SummernoteTextFormField, SummernoteTextField
-#from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
+# from django_summernote.widgets import SummernoteWidget, SummernoteInplaceWidget
 # class FormFromSomeModel(forms.ModelForm):
 #     class Meta:
 #         model = SomeModel
@@ -19,6 +19,7 @@ class FilmNeuForm(forms.ModelForm):
     class Meta:
          model = Film
          fields = ('name', 'interner_kommentar')
+
 
 class InterneBewertung(forms.NumberInput):
     input_type = 'number'
