@@ -32,7 +32,7 @@ cert.key
 
 # summernote wird über requirements installiert
 # für update siehe https://github.com/chengler/kinowebsite/issues/19
-summernote/* 
+summernote/*
 static/summernote/*
 
 #
@@ -56,4 +56,4 @@ db.sqlite3.back
 media/filme/newsletter
 media/filme/plakate
 media/CACHE
-
+media/flyer
