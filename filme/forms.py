@@ -73,6 +73,7 @@ class FilmForm(forms.ModelForm):
         }
         widgets = {
             'plakat': MyClearableFileInput(),
+            'hinweis': SummernoteWidget(),
             'description': SummernoteWidget(),
 
 
