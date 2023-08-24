@@ -9,8 +9,6 @@ from .models import Film,  Inhaltsseite, Event, NewsletterAbonnent, NewsletterSe
 import logging
 from logging import FileHandler
 logger = logging.getLogger(__name__) 
->>>>>>> main
-
 
 class FilmAdmin(admin.ModelAdmin):
     search_fields = ['name', 'status']
@@ -68,8 +66,6 @@ class InhaltsseiteAdmin(SummernoteModelAdmin):
  
 
     
->>>>>>> main
-
 
 admin.site.register(Film, FilmAdmin)
 admin.site.register(Inhaltsseite, InhaltsseiteAdmin)
