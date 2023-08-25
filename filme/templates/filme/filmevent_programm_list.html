@@ -40,11 +40,17 @@
 {% block sidebar %} 
 <div class="sidebar col-12  col-lg-3 order-1 order-lg-2 border-1">
     <div class=" row   border-4 ">
-        <div class="col-12 border-2 rahmen ">
+        <div class="col-12 border-2 rahmen order-1 order-lg-1">
+            <h3>Flyer</h3>
+        </div> 
+        <div class="col-12 col-sm-6 col-lg-12 border-3 auswahl2 rahmen order-1 order-lg-1"> 
+                {% include 'filme/flyer_snippet.html' %}
+        </div > 
+        <div class="col-12 border-2 rahmen order-2 order-lg-2 ">
                 <h3>Auswahl</h3>
         </div> 
         {% for event in sidebar_events %}
-            <div class="col-12 col-sm-6 col-lg-12 border-3 auswahl2 rahmen "> 
+            <div class="col-12 col-sm-6 col-lg-12 border-3 auswahl2 rahmen order-2 order-lg-2"> 
             <hr>
                 {% with film=event.film %}
                     {% include 'filme/filmevent_sidbar_big_snippet.html' %}

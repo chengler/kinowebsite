@@ -36,18 +36,6 @@ from logging import handlers
 logger = logging.getLogger(__name__) 
 #     logger.info("Text:  request.user  %s", request.user)
 
-
-def get_flyer_query():
-    ''' zeigt die noch gültigen Flyer in einer Liste
-        Datenbankmodell: models.py class Flyer(models.Model):
-        admin/filme/flyer/: admin.py class FlyerAdmin(admin.ModelAdmin):
-        ViewsQuerry: views.ps def get_flyer_query():
-        Html: flyer_snippet.html
-        '''
-    aktuelle_flyers = Flyer.objects.filter(bisZum__gte=datetime.date.today()) # .order_by('bisZum')
-    logger.debug("*** views: def get_flyer_query: aktuelle_flyers: %s ", aktuelle_flyers)
-    return aktuelle_flyers
-
 def error404(request, exception):
     return render(request, 'filme/404.html', exception = exception)
 
@@ -111,13 +99,14 @@ def filmevent_programm_list(request):
     nextevents = get_programm_query()
     sidebar_events = get_sidebar_query(0)
     # 0 wenn 0 oder gerade dann newsletterabo in eigene zeile
+    aktuelle_flyers = Flyer.get_flyer_query()
     sidebar_count = len(sidebar_events) % 2
     if request.method == "POST":
         return newsletter_form_snippet(request)
     else:
         form = NewsletterAboForm()
     return render(request, 'filme/filmevent_programm_list.html',
-     {'events': nextevents, 'sidebar_events': sidebar_events, 'sidebar_count': sidebar_count, 'form': form })
+     {'events': nextevents, 'sidebar_events': sidebar_events, 'sidebar_count': sidebar_count, 'form': form, 'flyers': aktuelle_flyers })
 
 def newsletter_abo_feedback(request, flag):
     ''' Feedback nach Webanmeldung für den Newsletter'''
