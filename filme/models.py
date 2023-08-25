@@ -262,7 +262,36 @@ class Event(models.Model):
         """
         day_shift = (weekday - given_date.isoweekday()) % 7
         return given_date + datetime.timedelta(days=day_shift)
-    
+
+class Rollendoku(models.Model):
+    '''Dokumentationsseite für eine jeweilige Rolle wie z.B. admin'''
+    name = models.CharField( max_length=32, null=True)
+    name.help_text = 'Überschrift der Seite'
+    text = models.TextField(blank=True, null=True)
+    text.help_text = "Inhalt diser Seite"
+    anzeigen = models.BooleanField( default = True)
+    anzeigen.help_text = 'Soll die Seite angezeigt werden?'
+    ROLLEN_CHOICES = [
+         ('1', 'admin' ),
+         ('2', 'kinobetrieb' ),
+         ('3', 'mailuser' ),
+         ]
+    rolle =  models.CharField( max_length=150,choices=ROLLEN_CHOICES, unique=True)
+    bild = models.ImageField(upload_to='filme/plakate/', blank=True, null = True)
+    bild_klein = ImageSpecField(source='bild',
+                                           processors=[ResizeToFill(320, 240)],
+                                           format='JPEG',
+                                           options={'quality': 90},
+                                           )    
+    bild_gross = ImageSpecField(source='bild',
+                                           processors=[ResizeToFill(640, 480)],
+                                           format='JPEG',
+                                           options={'quality': 90},
+                                           )   
+    def __str__(self):
+        '''Ausgabe des Objektes ist der Rollenname wie admin'''
+        return self.get_rolle_display()
+
 class Inhaltsseite(models.Model):
     name = models.CharField( max_length=32, null=True, unique=True)
     text = models.TextField(blank=True, null=True)
@@ -433,6 +462,8 @@ class NewsletterSent(models.Model):
             delete_testmail.delete()
         #zeit auf Website
         return timediff
+
+
 
 
 class Sondernewsletter(models.Model):

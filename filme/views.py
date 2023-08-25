@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
-from .models import Film, Event, Comment, Flyer, Inhaltsseite, NewsletterAbonnent, NewsletterSent, ZeitStempel, Sondernewsletter
+from .models import Film, Event, Comment, Flyer, Inhaltsseite, NewsletterAbonnent, NewsletterSent, Rollendoku, ZeitStempel, Sondernewsletter
 from .forms import *
 # FilmForm, FilmNeuForm, FilmBewertungForm, EventForm, CommentForm, SpielplanForm, EventNeuForm, EventDiensteForm
 from django.contrib.auth.decorators import login_required
@@ -30,6 +30,9 @@ from django.contrib import messages
 import threading
 # from datetime import datetime
 from django.forms import modelformset_factory
+
+from django.contrib.auth.models import Group
+
 import logging
 # from logging import FileHandler
 from logging import handlers
@@ -697,9 +700,6 @@ def filmevent_dienste(request, pk):
         form = EventDetailForm(instance=event)
     return render(request, 'filme/filmevent_dienste.html', {'form': form, 'event': event})
 
-
-
-
 def film_impressum(request):
     inhalt = Inhaltsseite.objects.filter(typen = 2)
     inhalt = inhalt[0]  
@@ -720,6 +720,20 @@ def film_anfahrt(request):
     inhalt = Inhaltsseite.objects.filter(typen = 5)
     inhalt = inhalt[0]
     return render(request, 'filme/inhaltsseite.html', {'inhalt': inhalt }) 
+
+@login_required
+def rolle(request, int):
+    '''Dokumentationsseiten nach Rollen
+    Der Pfad rolle/1 rolle/2 zeigt die jeweilige Seite der Rolle (ROLLEN_CHOICES)
+    Voraussetzung ist, dass der user Mitglied dieser Rolle ist'''
+    obj = get_object_or_404(Rollendoku, rolle = int) # lade obj 
+    if not request.user.groups.filter(name = obj).exists(): 
+        # nicht Mitglied dieser Rolle -zurück zum start
+        return redirect("/")
+    logger.debug("*** views: def rolle: ROLLE = %s", obj )
+    return render(request, 'filme/inhaltsseite.html', {'inhalt': obj }) 
+
+
 
 def import_drupal(request):
     url = 'http://35kino.de/service/flyer'
