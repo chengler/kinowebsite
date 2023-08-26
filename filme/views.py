@@ -1,3 +1,5 @@
+from django.contrib.auth.models import Group
+
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
 from .models import Film, Event, Comment, Flyer, Inhaltsseite, NewsletterAbonnent, NewsletterSent, Rollendoku, ZeitStempel, Sondernewsletter
@@ -722,15 +724,25 @@ def film_anfahrt(request):
     return render(request, 'filme/inhaltsseite.html', {'inhalt': inhalt }) 
 
 @login_required
-def rolle(request, int):
+def rolle(request, name):
     '''Dokumentationsseiten nach Rollen
     Der Pfad rolle/1 rolle/2 zeigt die jeweilige Seite der Rolle (ROLLEN_CHOICES)
-    Voraussetzung ist, dass der user Mitglied dieser Rolle ist'''
-    obj = get_object_or_404(Rollendoku, rolle = int) # lade obj 
-    if not request.user.groups.filter(name = obj).exists(): 
-        # nicht Mitglied dieser Rolle -zurück zum start
+    Voraussetzung ist, dass der user Mitglied dieser Rolle ist
+    übergeben wird der Rollenname, daraus wird das passende Objekt aus Rollendoku ausgelesen'''
+    try: # Hole den pk zum Argument 'name' aus auth_group
+        group_pk = (Group.objects.filter(name__exact = name).get()).pk
+    except Group.DoesNotExist:
+        logger.warn("*** def rolle: Group zum Namen: %s nicht existent", name )
         return redirect("/")
-    logger.debug("*** views: def rolle: ROLLE = %s", obj )
+    logger.debug("*** def rolle: Group.pk zum Namen %s ist %s.", name, group_pk)
+    
+    try: # Hole das objekt Rollendoku.group_id mit group_pk aus auth_group
+         obj = Rollendoku.objects.filter(group_id__exact = group_pk).get()
+    except Rollendoku.DoesNotExist:
+         logger.warn("*** def rolle: Rollendoku zur Rolle: %s nicht existent", name )
+         return redirect("/")
+    logger.debug("*** def rolle: Rollendoku %s in obj geladen.", obj)
+
     return render(request, 'filme/inhaltsseite.html', {'inhalt': obj }) 
 
 
