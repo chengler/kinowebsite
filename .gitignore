@@ -16,7 +16,7 @@ static/lokal/*
 !static/lokal/logo-default.png
 
 # private Skripte beginnen mit my
-Skripte/my*
+meineSkripte/*
 
 # das macht collectstatic
 static/django_extensions/*
