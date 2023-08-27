@@ -1,5 +1,4 @@
 from django.contrib.auth.models import Group
-
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
 from .models import Film, Event, Comment, Flyer, Inhaltsseite, NewsletterAbonnent, NewsletterSent, Rollendoku, ZeitStempel, Sondernewsletter
@@ -723,27 +722,48 @@ def film_anfahrt(request):
     inhalt = inhalt[0]
     return render(request, 'filme/inhaltsseite.html', {'inhalt': inhalt }) 
 
+def get_context_data(self, **kwargs):
+    context = super(Rollendoku, self).get_context_data(**kwargs)
+    some_data = rollendoku.objects.all()
+    context.update({'some_data': some_data})
+    return context
+
 @login_required
-def rolle(request, name):
+def intern(request):
     '''Dokumentationsseiten nach Rollen
     Der Pfad rolle/1 rolle/2 zeigt die jeweilige Seite der Rolle (ROLLEN_CHOICES)
     Voraussetzung ist, dass der user Mitglied dieser Rolle ist
     übergeben wird der Rollenname, daraus wird das passende Objekt aus Rollendoku ausgelesen'''
-    try: # Hole den pk zum Argument 'name' aus auth_group
-        group_pk = (Group.objects.filter(name__exact = name).get()).pk
-    except Group.DoesNotExist:
-        logger.warn("*** def rolle: Group zum Namen: %s nicht existent", name )
-        return redirect("/")
-    logger.debug("*** def rolle: Group.pk zum Namen %s ist %s.", name, group_pk)
-    
-    try: # Hole das objekt Rollendoku.group_id mit group_pk aus auth_group
-         obj = Rollendoku.objects.filter(group_id__exact = group_pk).get()
-    except Rollendoku.DoesNotExist:
-         logger.warn("*** def rolle: Rollendoku zur Rolle: %s nicht existent", name )
-         return redirect("/")
-    logger.debug("*** def rolle: Rollendoku %s in obj geladen.", obj)
+    logger.info("########################   view.py def intern(request):    ###############")
+    groups = list(request.user.groups.all())
+    logger.debug("groups von %s: %s", request.user, groups)
+    inhaltsverz = [] # die noch leere, bald verkette Liste
 
-    return render(request, 'filme/inhaltsseite.html', {'inhalt': obj }) 
+    for group in groups:
+        # logger.debug("*** def intern: auth_group_id =  %s ***",  group.pk)
+        try: # Hole id und name der Rollendokus der auth_group
+            rollendokus =  list(Rollendoku.objects.filter(group_id = group.pk).values_list('id', 'name'))
+            # logger.debug("rollendokus %s ", rollendokus)
+            # dokus = list(chain( dokus, rollendoku_qs )) # werde das <query> los => from itertools import chain
+            inhaltsverz.append( [ group.name, [rollendokus] ]  ) 
+            # logger.debug("inhaltsverz %s ", inhaltsverz)
+        except Rollendoku.DoesNotExist:
+            logger.debug("keine rollendoku für Gruppe %s ", group.name )
+   
+    logger.debug("inhaltsverz %s ", inhaltsverz)
+    return render(request, 'filme/intern-dokus.html', {'inhaltsverz': inhaltsverz}) 
+
+@login_required
+def doku(request, pk):
+    '''Hier werden die einezlnen Dokuseiten aufgerufen
+    Es wird geprüft, ob der user Mitglied der entsprechenden Rolle ist'''
+    logger.info("########################   view.py def doku(request, pk):    ###############")
+    doku =  get_object_or_404(Rollendoku, pk=pk)
+    logger.debug("Objekt geladen: %s ", doku)
+    if not request.user.groups.all().filter(id__contains=doku.group_id):
+        logger.warning("zugriff auf Doku mit pk %s ohne Rechte", doku.pk)
+        return redirect('/')
+    return render(request, 'filme/intern-doku.html', {'inhalt': doku}) 
 
 
 

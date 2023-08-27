@@ -60,7 +60,7 @@ class InhaltsseiteAdmin(SummernoteModelAdmin):
 
 class RollendokuAdmin(SummernoteModelAdmin):
     summernote_fields = ('text',)
-    list_display = ( 'group_id', 'pk')
+    list_display = ( 'group_id', 'name', 'pk')
     ROLLEN_CHOICES = Rollendoku.get_Rollen() # gibt es Rollenänderung?
 
 

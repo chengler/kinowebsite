@@ -1,0 +1,25 @@
+{% extends 'filme/base.html' %}
+{% block extra_head %}
+    <meta name="description" content="Die {{inhalt.name}} Seite.">
+    <title>Kino 35 - {{inhalt.name}}</title>
+    <meta name="robots" content="NoFollow NoArchive"> 
+{% endblock %}
+{% block content %}
+    <div class="row ">
+        <div class="col-12 ">
+            <h2>{{ inhalt.name}}</h2>
+        </div>
+        {% if inhalt.bild %}
+            <div class="col-6 col-sm-11 col-lg-6">
+                <img class="plakat bild_inhaltsseite" src="{{inhalt.bild_gross.url }}" alt="bild"> 
+            </div>
+            <div class="col-6 col-sm-12 col-lg-6">
+                 {{inhalt.text|safe}} 
+            </div>
+        {% else %}
+            <div class="col-12">
+                 {{inhalt.text|safe}} 
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}  

@@ -1,0 +1,25 @@
+{% extends 'filme/base.html' %}
+{% block extra_head %}
+    <meta name="description" content="Doku Übersichtsseite">
+    <title>Kino 35 - Dokumentation </title>
+    <meta name="robots" content="NoFollow NoArchive"> 
+{% endblock %}
+{% block content %}
+    <h2>Dokumentation</h2>
+    <h3>für {{ user.username }}</h3>
+
+    {% for gruppen in inhaltsverz %}
+        <!-- gruppe.0 <= auth_groups.name -->
+        <hr>
+        <h3> {{ gruppen.0 }}</h3> 
+        {% for dokus in gruppen.1 %}
+            <!-- eintrag.0 <= Rollendoku.pk -->
+            <!-- eintrag.1 <= Rollendoku.name -->
+            {% for eintrag in dokus %}
+            <h6>
+                <a href="{% url 'doku' pk=eintrag.0  %}">{{ eintrag.1 }} </a>
+            </h6>
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+{% endblock %}  

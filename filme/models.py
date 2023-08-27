@@ -289,7 +289,8 @@ class Rollendoku(models.Model):
     anzeigen = models.BooleanField( default = True)
     anzeigen.help_text = 'Soll die Seite angezeigt werden?'
     ROLLEN_CHOICES = get_Rollen() 
-    group_id =  models.CharField(null=True, max_length=150,choices=ROLLEN_CHOICES, unique = True)
+    group_id =  models.CharField(null=True, max_length=150,choices=ROLLEN_CHOICES)
+    group_id.help_text = "hier wird die id der Group gespeichert. angezeigt wird üblicherweise der Text z.B. admin"
 
     bild = models.ImageField(upload_to='filme/plakate/', blank=True, null = True)
     bild_klein = ImageSpecField(source='bild',
