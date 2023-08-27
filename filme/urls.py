@@ -61,9 +61,11 @@ urlpatterns = [
     path('film/ueber_uns/', views.film_ueber_uns, name='film_ueber_uns'),
     path('film/anfahrt/', views.film_anfahrt, name='film_anfahrt'),
 
+    path('film/intern/dokus', views.intern, name='intern'),
+    path('film/intern/doku/<pk>', views.doku, name='doku'),
+
+
     path('summernote/', include('django_summernote.urls')),
-
-
     path('robots.txt', TemplateView.as_view(template_name="filme/robots.txt", content_type="text/plain"),  ),
     
 

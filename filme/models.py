@@ -1,3 +1,5 @@
+from django.contrib.auth.models import Group
+
 from urllib import request
 from django.conf import settings
 from django.db import models
@@ -262,7 +264,49 @@ class Event(models.Model):
         """
         day_shift = (weekday - given_date.isoweekday()) % 7
         return given_date + datetime.timedelta(days=day_shift)
+
+
+
+
+
+class Rollendoku(models.Model):
+    '''Dokumentationsseite für eine jeweilige Rolle wie z.B. admin
+    Die Auswahl erfolgt dynamisch'''
+    def get_Rollen():
+        # [ ('1', 'admin' ), ...]
+        gruppen =  {group for group in Group.objects.all()}
+        logger.debug("class Rollendoku Gruppen %s ", gruppen)
+        gruppenlist = []
+        for gr  in gruppen:
+            gruppenlist.append( tuple( [str(gr.pk), gr.name] ))
+        logger.debug("Rollen Group.objects %s ", gruppenlist)
+        return gruppenlist
     
+    name = models.CharField( max_length=32)
+    name.help_text = 'Überschrift der Seite'
+    text = models.TextField(blank=True, null=True) 
+    text.help_text = "Inhalt diser Seite"
+    anzeigen = models.BooleanField( default = True)
+    anzeigen.help_text = 'Soll die Seite angezeigt werden?'
+    ROLLEN_CHOICES = get_Rollen() 
+    group_id =  models.CharField(null=True, max_length=150,choices=ROLLEN_CHOICES)
+    group_id.help_text = "hier wird die id der Group gespeichert. angezeigt wird üblicherweise der Text z.B. admin"
+
+    bild = models.ImageField(upload_to='filme/plakate/', blank=True, null = True)
+    bild_klein = ImageSpecField(source='bild',
+                                           processors=[ResizeToFill(320, 240)],
+                                           format='JPEG',
+                                           options={'quality': 90},
+                                           )    
+    bild_gross = ImageSpecField(source='bild',
+                                           processors=[ResizeToFill(640, 480)],
+                                           format='JPEG',
+                                           options={'quality': 90},
+                                           )   
+    # def __str__(self):
+    #     '''Ausgabe des Objektes ist der Rollenname wie admin'''
+    #     return self.get_rolle_display()
+
 class Inhaltsseite(models.Model):
     name = models.CharField( max_length=32, null=True, unique=True)
     text = models.TextField(blank=True, null=True)
@@ -433,6 +477,8 @@ class NewsletterSent(models.Model):
             delete_testmail.delete()
         #zeit auf Website
         return timediff
+
+
 
 
 class Sondernewsletter(models.Model):

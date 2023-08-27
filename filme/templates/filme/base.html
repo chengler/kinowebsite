@@ -44,6 +44,11 @@
                     {% comment %} <li class=" nav-item">
                         <a class="{% if request.resolver_match.url_name == 'film_ueber_uns' %}active{% endif %} nav-link" href="{% url 'film_ueber_uns'%}"><i class="fa fa-users" aria-hidden="true"></i> Über uns</a>
                     </li> {% endcomment %}
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="{% if request.resolver_match.url_name == 'intern' %}active{% endif %} nav-link" href="{% url 'intern' %}"><i class="fa fa-users" aria-hidden="true"></i> Internes</a>
+                    </li>   
+                    {% endif %}   
                 </ul>
                 {% if user.is_authenticated %}
                     <ul class="nav nav-tabs sticky-top ">
@@ -67,7 +72,8 @@
                         </li>
                         <li class="nav-item">
                             <a class="{% if request.resolver_match.url_name == 'filmevent_archiv' %}active{% endif %} nav-link" href="{% url 'filmevent_archiv' %}"><i class="fa fa-database" aria-hidden="true"></i> Chronik</a>
-                        </li>                                                                                                                                
+                        </li>
+                                                                                                                               
                     </ul>
                 {% endif %}    
             </div>

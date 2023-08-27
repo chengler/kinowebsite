@@ -1,6 +1,7 @@
+from django.contrib.auth.models import Group
 from django.shortcuts import redirect, render, get_object_or_404
 from django.utils import timezone
-from .models import Film, Event, Comment, Flyer, Inhaltsseite, NewsletterAbonnent, NewsletterSent, ZeitStempel, Sondernewsletter
+from .models import Film, Event, Comment, Flyer, Inhaltsseite, NewsletterAbonnent, NewsletterSent, Rollendoku, ZeitStempel, Sondernewsletter
 from .forms import *
 # FilmForm, FilmNeuForm, FilmBewertungForm, EventForm, CommentForm, SpielplanForm, EventNeuForm, EventDiensteForm
 from django.contrib.auth.decorators import login_required
@@ -30,6 +31,9 @@ from django.contrib import messages
 import threading
 # from datetime import datetime
 from django.forms import modelformset_factory
+
+from django.contrib.auth.models import Group
+
 import logging
 # from logging import FileHandler
 from logging import handlers
@@ -697,9 +701,6 @@ def filmevent_dienste(request, pk):
         form = EventDetailForm(instance=event)
     return render(request, 'filme/filmevent_dienste.html', {'form': form, 'event': event})
 
-
-
-
 def film_impressum(request):
     inhalt = Inhaltsseite.objects.filter(typen = 2)
     inhalt = inhalt[0]  
@@ -720,6 +721,51 @@ def film_anfahrt(request):
     inhalt = Inhaltsseite.objects.filter(typen = 5)
     inhalt = inhalt[0]
     return render(request, 'filme/inhaltsseite.html', {'inhalt': inhalt }) 
+
+def get_context_data(self, **kwargs):
+    context = super(Rollendoku, self).get_context_data(**kwargs)
+    some_data = rollendoku.objects.all()
+    context.update({'some_data': some_data})
+    return context
+
+@login_required
+def intern(request):
+    '''Dokumentationsseiten nach Rollen
+    Der Pfad rolle/1 rolle/2 zeigt die jeweilige Seite der Rolle (ROLLEN_CHOICES)
+    Voraussetzung ist, dass der user Mitglied dieser Rolle ist
+    übergeben wird der Rollenname, daraus wird das passende Objekt aus Rollendoku ausgelesen'''
+    logger.info("########################   view.py def intern(request):    ###############")
+    groups = list(request.user.groups.all())
+    logger.debug("groups von %s: %s", request.user, groups)
+    inhaltsverz = [] # die noch leere, bald verkette Liste
+
+    for group in groups:
+        # logger.debug("*** def intern: auth_group_id =  %s ***",  group.pk)
+        try: # Hole id und name der Rollendokus der auth_group
+            rollendokus =  list(Rollendoku.objects.filter(group_id = group.pk).values_list('id', 'name'))
+            # logger.debug("rollendokus %s ", rollendokus)
+            # dokus = list(chain( dokus, rollendoku_qs )) # werde das <query> los => from itertools import chain
+            inhaltsverz.append( [ group.name, [rollendokus] ]  ) 
+            # logger.debug("inhaltsverz %s ", inhaltsverz)
+        except Rollendoku.DoesNotExist:
+            logger.debug("keine rollendoku für Gruppe %s ", group.name )
+   
+    logger.debug("inhaltsverz %s ", inhaltsverz)
+    return render(request, 'filme/intern-dokus.html', {'inhaltsverz': inhaltsverz}) 
+
+@login_required
+def doku(request, pk):
+    '''Hier werden die einezlnen Dokuseiten aufgerufen
+    Es wird geprüft, ob der user Mitglied der entsprechenden Rolle ist'''
+    logger.info("########################   view.py def doku(request, pk):    ###############")
+    doku =  get_object_or_404(Rollendoku, pk=pk)
+    logger.debug("Objekt geladen: %s ", doku)
+    if not request.user.groups.all().filter(id__contains=doku.group_id):
+        logger.warning("zugriff auf Doku mit pk %s ohne Rechte", doku.pk)
+        return redirect('/')
+    return render(request, 'filme/intern-doku.html', {'inhalt': doku}) 
+
+
 
 def import_drupal(request):
     url = 'http://35kino.de/service/flyer'

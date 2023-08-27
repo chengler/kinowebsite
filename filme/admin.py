@@ -4,7 +4,7 @@ from django.contrib import admin
 from mysite.privat_settings import DEFAULT_DOMAIN
 # Register your models here.
 from django_summernote.admin import SummernoteModelAdmin
-from .models import Film,  Inhaltsseite, Event, NewsletterAbonnent, NewsletterSent, Flyer
+from .models import Film,  Inhaltsseite, Event, NewsletterAbonnent, NewsletterSent, Flyer, Rollendoku
 
 import logging
 from logging import FileHandler
@@ -56,7 +56,15 @@ class FlyerAdmin(admin.ModelAdmin):
     actions = [delete_model]
 
 class InhaltsseiteAdmin(SummernoteModelAdmin):
-     summernote_fields = ('text',)
+    summernote_fields = ('text',)
+
+class RollendokuAdmin(SummernoteModelAdmin):
+    summernote_fields = ('text',)
+    list_display = ( 'group_id', 'name', 'pk')
+    ROLLEN_CHOICES = Rollendoku.get_Rollen() # gibt es Rollenänderung?
+
+
+     
 
 # # Apply summernote to all TextField in model.
 # class SomeModelAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
@@ -69,6 +77,7 @@ class InhaltsseiteAdmin(SummernoteModelAdmin):
 
 admin.site.register(Film, FilmAdmin)
 admin.site.register(Inhaltsseite, InhaltsseiteAdmin)
+admin.site.register(Rollendoku, RollendokuAdmin)
 admin.site.register(Event, EventAdmin)
 admin.site.register(NewsletterAbonnent, NewsletterAdmin)
 admin.site.register(NewsletterSent)
