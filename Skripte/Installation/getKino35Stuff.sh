@@ -6,15 +6,15 @@
 
 echo "erst Skript lesen, anpassen und dann exit 0 auskommentieren"
 echo "keine Garantie, sie sollten das Skript verstehen"
-# exit 0
 
 # wechsel in das Verzeichniss in dem dieses Skript steht -> hostsharing
 dir="$(cd -P -- "$(dirname -- "$0")" && pwd -P)"
 cd $dir
 
 # von welchem server wird kopiert
-ziel=$(cat ../mysite/produktiver_server.txt)
+ziel= produktiver_server@dmomain
 echo $ziel
+exit 0
 
 
 # mysite/privat_settings.py
