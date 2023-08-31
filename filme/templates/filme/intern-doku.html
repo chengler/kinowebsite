@@ -21,5 +21,14 @@
                  {{inhalt.text|safe}} 
             </div>
         {% endif %}
+        <div class=" col-12">
+            {% if 'filme.change_rollendoku' in request.user.get_user_permissions %}
+                <div class=""><a  href="{% url 'admin:filme_rollendoku_change' inhalt.id %}"><i class="fa fa-edit" aria-hidden="true"></i> bearbeiten</a></div>
+            {% endif %}
+            <div></div>
+            {% if 'filme.add_rollendoku' in request.user.get_user_permissions %}
+            <div class="float-end"><a href="{% url 'admin:filme_rollendoku_add' %}"><i class="fa fa-plus" aria-hidden="true"></i> neue Doku</a></div>
+            {% endif %}
+       </div>
     </div>
 {% endblock %}  
