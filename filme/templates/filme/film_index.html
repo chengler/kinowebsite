@@ -9,9 +9,15 @@
     {% if  hinweis.anzeigen %} 
         <div class="indexinfo ">
             <h3>Hinweis</h3>
+            {% if 'filme.change_inhaltsseite' in request.user.get_user_permissions %}
+                <div class="float-end float-top"><a  href="{% url 'admin:filme_inhaltsseite_change' hinweis.id %}"><i class="fa fa-edit" aria-hidden="true"></i> bearbeiten</a></div>
+            {% endif %}
             <hr>
             {{hinweis.text|safe}}
             <hr>
+
+            
+
         </div>
     {% endif %}
     {% if events.count == 0 %}
