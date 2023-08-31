@@ -1,10 +1,10 @@
 {% extends 'filme/base.html' %}
 {% block content %}
     {% load crispy_forms_tags %} 
-    <h2>Dienste</h2>
     <form method="POST" class="dienste-form" enctype="multipart/form-data" >
         {% csrf_token %}
         <button type="submit" class="float-end save btn btn-success">Save</button>
+       <h2>Dienste</h2>
         {{ form.theke1|as_crispy_field }}
         {{ form.theke2|as_crispy_field }}
         {{ form.kasse|as_crispy_field }}
