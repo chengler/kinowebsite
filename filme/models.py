@@ -281,6 +281,7 @@ class Rollendoku(models.Model):
             gruppenlist.append( tuple( [str(gr.pk), gr.name] ))
         logger.debug("Rollen Group.objects %s ", gruppenlist)
         return gruppenlist
+
     name = models.CharField( max_length=32)
     name.help_text = 'Überschrift der Seite'
     text = models.TextField(blank=True, null=True) 
