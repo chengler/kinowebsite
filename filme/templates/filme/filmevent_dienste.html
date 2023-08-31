@@ -4,12 +4,12 @@
     <h2>Dienste</h2>
     <form method="POST" class="dienste-form" enctype="multipart/form-data" >
         {% csrf_token %}
-
+        <button type="submit" class="float-end save btn btn-success">Save</button>
         {{ form.theke1|as_crispy_field }}
         {{ form.theke2|as_crispy_field }}
         {{ form.kasse|as_crispy_field }}
         {{ form.vorfuehrer|as_crispy_field }}
         {{ form.text_intern|as_crispy_field }}
-        <button type="submit" class="save btn btn-success">Save</button>
+        <button type="submit" class="float-end save btn btn-success">Save</button>
     </form>
 {% endblock %}  
