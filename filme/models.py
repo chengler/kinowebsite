@@ -282,7 +282,7 @@ class Rollendoku(models.Model):
         logger.debug("Rollen Group.objects %s ", gruppenlist)
         return gruppenlist
 
-    name = models.CharField( max_length=32)
+    name = models.CharField( max_length=64)
     name.help_text = 'Überschrift der Seite'
     text = models.TextField(blank=True, null=True) 
     text.help_text = "Inhalt diser Seite"
