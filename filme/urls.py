@@ -63,7 +63,7 @@ urlpatterns = [
 
     path('film/intern/dokus', views.intern, name='intern'),
     path('film/intern/doku/<pk>', views.doku, name='doku'),
-
+    path('vorverkauf', views.vorverkauf, name='vorverkauf'),
 
     path('summernote/', include('django_summernote.urls')),
     path('robots.txt', TemplateView.as_view(template_name="filme/robots.txt", content_type="text/plain"),  ),

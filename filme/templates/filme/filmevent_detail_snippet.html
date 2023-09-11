@@ -13,6 +13,10 @@
                 {% else %}
                         <img itemprop="image" class="plakat" src="{{film.plakat_klein.url}}" srcset="{{film.plakat_gross.url}} x2" alt="Filmplakat">
                 {% endif %}
+                {% if event.vorverkauf %}            
+                    <a href="{% url 'vorverkauf' %}"><h2>zum Vorverkauf</h2></a>
+                {% endif %}
+
             </div>
             <div class="col-7 border-4">   
                     {% if caler != 'filmevent_detail' %}

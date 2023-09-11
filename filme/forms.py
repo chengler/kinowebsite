@@ -89,10 +89,10 @@ class SpielplanForm(forms.ModelForm):
     
     class Meta:
         model = Event
-        fields = ( 'kategorie','film', 'ersatzfilm', 'termin', 'zeit' )
+        fields = ( 'kategorie','film', 'vorverkauf', 'termin', 'zeit' )
         labels = {
             'film': ( ),
-            'ersatzfilm': ( ),
+            'vorverkauf': ( ),
             'kategorie': ( ),
             'termin':(),
             'zeit':(),
@@ -106,7 +106,7 @@ class SpielplanForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['film'].queryset = self.fields['film'].queryset.distinct()
-        self.fields['ersatzfilm'].queryset = self.fields['ersatzfilm'].queryset.distinct()
+        # self.fields['ersatzfilm'].queryset = self.fields['ersatzfilm'].queryset.distinct()
 
        
 class EventDiensteForm(forms.ModelForm):

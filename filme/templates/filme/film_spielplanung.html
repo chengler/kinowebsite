@@ -14,7 +14,7 @@
                     <th scope="col-2">Datum</th>
                     <th scope="col-2">Zeit</th>
                     <th scope="col-3">Wunschfilm</th>
-                    <th scope="col-3">Ersatzfilm</th>
+                    <th scope="col-3">Vorverkauf</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,7 +29,7 @@
                             <td>{{form.termin|as_crispy_field}}</td>      
                             <td>{{form.zeit|as_crispy_field}}</td>
                             <td>{{form.film|as_crispy_field}}</td>
-                            <td>{{form.ersatzfilm|as_crispy_field}}</td>
+                            <td>{{form.vorverkauf|as_crispy_field}}</td>
                         </tr>   
                     {% endif%}
                 {% endfor %}

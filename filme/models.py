@@ -238,6 +238,7 @@ class Event(models.Model):
     kategorie =  models.CharField( max_length=16,choices=KATEGORIE_CHOICES,  null=True, blank=True)
 
     event_online = models.BooleanField( default = False, blank = True)#event confirmd und film komplett
+    vorverkauf = models.BooleanField( default=False, blank=True)
     theke1 = models.CharField( max_length=32, default="", blank=True)
     theke2 = models.CharField( max_length=32, default="", blank=True)
     kasse  = models.CharField( max_length=32, default="", blank=True)
