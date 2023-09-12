@@ -4,11 +4,11 @@
     <title>Kino 35 - Vorverkauf</title>
     <meta name="robots" content="NoFollow NoArchive"> 
     
-    <script src="https://embed.eventfrog.de/js/relaunch/embed/embed.js"></script> 
 {% endblock %}
 {% block content %}
-    <div class=" col-12">
+    <div class=" col-12"  height="100%">
         {% if frog_src %}
+            <script src="https://embed.eventfrog.de/js/relaunch/embed/embed.js"></script> 
             <iframe width="100%" height="100%" style="border: medium; overflow: hidden; height: 918px;" src="https://embed.eventfrog.de/de/events.html?key=2d77b4f1-ca2a-44fb-8504-78a7f8e0ef3b&amp;color=f8b302&amp;showSearch=true&amp;excludeOrgs=false&amp;orgId=2833918" id="iFrameResizer1" scrolling="no">
             </iframe>  
         {% else %}
@@ -17,6 +17,5 @@
         {% endif %}
 
     </div>
-
 {% endblock %}  
 

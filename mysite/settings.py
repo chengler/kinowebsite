@@ -15,6 +15,8 @@ import os
 # from django.contrib.messages import constants as message_constants
 # MESSAGE_LEVEL = 10  # DEBUG default 20= Info; 40 Error
 from .privat_settings import *
+from .newsletter_keys import SECRET_KEY
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -72,7 +74,7 @@ LOGGING = {
 ### the importetd stuff
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '***'
+# SECRET_KEY = '***' <= in newsletter.keys
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
