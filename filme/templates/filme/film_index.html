@@ -44,11 +44,11 @@
                             <h4><time itemprop="startDate" datetime="{{ event.termin|date:"Y-m-dTH:i"}}">{{ event.termin|date:"D. d. M. H:i"}}</time> &nbsp; 
                                <span class="kategorie>"> "{{ event.get_kategorie_display}}"</span></h4>
                         {% endif %}   
-                            {% if events.count == 1 %}                
-                                {% include 'filme/filmevent_detail_snippet.html' %}
-                            {% else%}          
-                                {% include 'filme/filmevent_list_snippet.html' %}
-                            {% endif %}
+                        {% if events.count == 1 %}                
+                            {% include 'filme/filmevent_detail_snippet.html' %}
+                        {% else%}          
+                            {% include 'filme/filmevent_list_snippet.html' %}
+                        {% endif %}
                     {% endwith %}                    
                 </div>                   
             </div>                    

@@ -16,8 +16,6 @@ class FilmAdmin(admin.ModelAdmin):
         (None,               {'fields': ['name']}),
         ('Löschschutz', {'fields': ['film_no_delete']}),
         ('Beschreibung', {'fields': ['description']}),
-
-
     ]
     list_display = ('name', 'status', 'film_no_delete')
 
@@ -62,19 +60,13 @@ class RollendokuAdmin(SummernoteModelAdmin):
     summernote_fields = ('text',)
     list_display = ( 'group_id', 'name', 'pk')
     ROLLEN_CHOICES = Rollendoku.get_Rollen() # gibt es Rollenänderung?
-
-
-     
-
+  
 # # Apply summernote to all TextField in model.
 # class SomeModelAdmin(SummernoteModelAdmin):  # instead of ModelAdmin
 #     summernote_fields = '__all__'
 # # Apply summernote only to specific TextField in model
 # https://github.com/summernote/django-summernote
  
-
-    
-
 admin.site.register(Film, FilmAdmin)
 admin.site.register(Inhaltsseite, InhaltsseiteAdmin)
 admin.site.register(Rollendoku, RollendokuAdmin)

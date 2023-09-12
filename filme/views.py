@@ -13,6 +13,8 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import User
 import os
 from mysite.newsletter_keys import *
+from mysite.privat_settings import FROG_SRC
+
 # import filter
 from django.conf import settings
 
@@ -722,11 +724,14 @@ def film_anfahrt(request):
     inhalt = inhalt[0]
     return render(request, 'filme/inhaltsseite.html', {'inhalt': inhalt }) 
 
-def get_context_data(self, **kwargs):
-    context = super(Rollendoku, self).get_context_data(**kwargs)
-    some_data = rollendoku.objects.all()
-    context.update({'some_data': some_data})
-    return context
+def vorverkauf(request):
+    return render(request, 'filme/vorverkauf.html', {'frog_src': FROG_SRC }) 
+
+# def get_context_data(self, **kwargs):
+#     context = super(Rollendoku, self).get_context_data(**kwargs)
+#     some_data = rollendoku.objects.all()
+#     context.update({'some_data': some_data})
+#     return context
 
 @login_required
 def intern(request):
