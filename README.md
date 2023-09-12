@@ -22,8 +22,8 @@ Der Flow basiert auf eine ehrenamtlich Struktur und kennt wenig Hirachie:
 
 Im folgenden findet sich die Anleitung zur Installation einer Entwicklungsumgebung auf einem Lokalen Windows und einer Produktiven Installation auf einem debian/linux server von hostsharing.net (passenger / wsgi).
 
-
-- [## Es gibt ein wiki](https://github.com/chengler/kinowebsite/wiki)
+## Wiki
+[Es gibt ein wiki](https://github.com/chengler/kinowebsite/wiki)
 
 
 
