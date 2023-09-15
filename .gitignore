@@ -36,6 +36,7 @@ cert.key
 # für update siehe https://github.com/chengler/kinowebsite/issues/19
 summernote/*
 static/summernote/*
+media/django-summernote/*
 
 #
 # Alles ab hier gehört unbedingt ins Backup
