@@ -201,7 +201,16 @@ def newsletter_send(request, typ, key):
     '''
     # Das Programm von heute
     if typ == 'heute':
+        # überprüfe das Password
         if key == HEUTE_KEY:
+            # lösche Karteileichen
+            logger.debug("newsletter_send: checke Karteileichen")
+            karteileichen = NewsletterAbonnent.objects.filter(beantragt__lte=datetime.datetime.now() - datetime.timedelta(days=2)).exclude(opt_in=True)
+            logger.debug("newsletter_send: entferne %s Karteileichen.", karteileichen.count() )
+            karteileichen.delete()
+            return render(request, 'filme/newsletter_send.html', {'key': karteileichen.count() })
+
+
             nextevents = get_programm_query()
             if nextevents: # wenn ein event existiert
                 datum = nextevents[0].termin.date() # hole den Tag des nächsten events
