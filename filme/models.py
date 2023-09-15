@@ -26,6 +26,8 @@ from django.core import mail
 import logging
 from logging import FileHandler
 from mysite.privat_settings import DEFAULT_DOMAIN
+from mysite.newsletter_keys import *
+
 
 logger = logging.getLogger(__name__) 
 # custom user für das nächste Projekt
@@ -356,6 +358,8 @@ class NewsletterAbonnent(models.Model):
 
     def sent_opt_in(self):
         '''versendet Email zum opt_in'''
+        logger.debug("def sent_opt_in:  EMAIL_HOST_USER %s DEFAULT_FROM_EMAIL %s", EMAIL_HOST_USER, DEFAULT_FROM_EMAIL)
+
         html_body = get_template('filme/newsletter_opt_in_email.html').render()
         change = settings.DEFAULT_DOMAIN + '/newsletter/opt_in/' + self.email + '/' + self.salz
         html_body = html_body.replace("#changeme#", change)
@@ -363,13 +367,13 @@ class NewsletterAbonnent(models.Model):
         text_maker.ignore_images = True
         text_body = text_maker.handle(html_body)
         subject = "Newsletterabo für's Kino35 bestätigen"
-        # from_email = settings.EMAIL_HOST_USER
-        from_email = settings.DEFAULT_FROM_EMAIL
+        # from_email = EMAIL_HOST_USER
+        from_email = DEFAULT_FROM_EMAIL
         to_email = self.email
         message = EmailMultiAlternatives(subject=subject, body=text_body, 
             from_email=from_email, to = [to_email] )
         message.attach_alternative(html_body, "text/html")
-        message.send()
+        # message.send()
 
     def empfange_opt_in(self, salz):
         '''verarbeite opt_in Rückmeldung'''
@@ -432,7 +436,7 @@ class NewsletterSent(models.Model):
         self.anzahl = int(abonenten.count())
         subject = subject 
         # from_email = settings.EMAIL_HOST_USER
-        from_email = settings.DEFAULT_FROM_EMAIL
+        from_email = DEFAULT_FROM_EMAIL
         text_maker = html2text.HTML2Text()
         text_maker.ignore_images = True
         text_maker.ignore_tables = True
