@@ -367,13 +367,13 @@ class NewsletterAbonnent(models.Model):
         text_maker.ignore_images = True
         text_body = text_maker.handle(html_body)
         subject = "Newsletterabo für's Kino35 bestätigen"
-        # from_email = EMAIL_HOST_USER
+        #  from_email = EMAIL_HOST_USER
         from_email = DEFAULT_FROM_EMAIL
         to_email = self.email
         message = EmailMultiAlternatives(subject=subject, body=text_body, 
             from_email=from_email, to = [to_email] )
         message.attach_alternative(html_body, "text/html")
-        # message.send()
+        message.send()
 
     def empfange_opt_in(self, salz):
         '''verarbeite opt_in Rückmeldung'''
