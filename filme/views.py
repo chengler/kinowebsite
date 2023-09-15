@@ -220,7 +220,7 @@ def newsletter_send(request, typ, key):
             if datetime.datetime.now().date() == datum: 
             # eine Woche im Voraus               
            # if datetime.datetime.now()+datetime.timedelta(days=7).date() == datum: 
-                print('### newsletter send; heute:')
+                logger.debug("newsletter_send: sende den HEUTE Newsletter")
 
                 newsletter = NewsletterSent.objects.create()              
                 # newsletter.sent_newsletter('newsletter_render_today', "[Kino35] Das Programm für heute.")
@@ -237,11 +237,11 @@ def newsletter_send(request, typ, key):
             else: #heute kein Event
                 return render(request, 'filme/newsletter_send.html', {'key': 'heute kein Film, nix gesendet' })
         else:
-            print('### key falsch, Programm heute nicht gesendet')
+            logger.warn("newsletter_send: key falsch, Filme von HEUTE nicht gesendet")
     
          # Sende den Hinweis der Startseite
     if typ == 'hinweis':
-        print('### newsletter send; hinweis:')
+        logger.debug("newsletter_send: sende HINWEIS")
         #überprüfe key 
         if key == HINWEIS_KEY:
             if (Inhaltsseite.objects.get(typen='1').anzeigen == True):
@@ -258,7 +258,8 @@ def newsletter_send(request, typ, key):
             else: # Es gibt aktuell keinen _Hinweis
                     return render(request, 'filme/newsletter_send.html', {'key': 'heute kein Hinweis, nix gesendet' })
         else:
-                print('### key falsch, hinweis nicht gesendet')           
+                logger.warn("newsletter_send: key falsch, HINWEIS nicht gesendet")
+        
     return render(request, 'filme/newsletter_send.html', {'key': False })
     
  
