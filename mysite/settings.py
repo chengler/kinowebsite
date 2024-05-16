@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+
 # in privat_settings ?
 # from django.contrib.messages import constants as message_constants
 # MESSAGE_LEVEL = 10  # DEBUG default 20= Info; 40 Error
@@ -21,7 +22,7 @@ from .newsletter_keys import SECRET_KEY
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# logging 
+# logging
 # https://docs.djangoproject.com/en/4.2/howto/logging/
 # Use logger namespacing könnte Sinn machen
 LOGGING = {
@@ -31,29 +32,29 @@ LOGGING = {
         "file": {
             "class": "logging.FileHandler",
             #             'class': 'logging.handlers.RotatingFileHandler',
-            #             'maxBytes': 15728640,  # 1024 * 1024 * 15B = 15MB  
-            #             'backupCount': 10,    
+            #             'maxBytes': 15728640,  # 1024 * 1024 * 15B = 15MB
+            #             'backupCount': 10,
             # "class": "logging.FileHandler",
-            'class': 'logging.handlers.TimedRotatingFileHandler',
-            'when': 'midnight',
-            'backupCount': 3,
-            "filename": os.path.join(BASE_DIR,"general.log"),
-            "level": DJANGO_LOG_LEVEL, # mindestens warning, Variable in privat_settings L
-            "formatter":DJANGO_FORMATTER,  # verbose oder simple; os.getenv("DJANGO_FORMATTER")
-        },     
+            "class": "logging.handlers.TimedRotatingFileHandler",
+            "when": "midnight",
+            "backupCount": 3,
+            "filename": os.path.join(BASE_DIR, "general.log"),
+            "level": DJANGO_LOG_LEVEL,  # mindestens warning, Variable in privat_settings L
+            "formatter": DJANGO_FORMATTER,  # verbose oder simple; os.getenv("DJANGO_FORMATTER")
+        },
         "console": {
             "class": "logging.StreamHandler",
-            "level": DJANGO_LOG_LEVEL, # mindestens warning, Variable in privat_settings L
-            "formatter":DJANGO_FORMATTER,  # verbose oder simple; os.getenv("DJANGO_FORMATTER")
+            "level": DJANGO_LOG_LEVEL,  # mindestens warning, Variable in privat_settings L
+            "formatter": DJANGO_FORMATTER,  # verbose oder simple; os.getenv("DJANGO_FORMATTER")
         },
     },
     "loggers": {
         "": {
             "level": "DEBUG",
-            "handlers": ["file", "console"], # der logger hat keine Einschränkungen
+            "handlers": ["file", "console"],  # der logger hat keine Einschränkungen
         },
     },
-    "formatters": {  #verbose oder simple
+    "formatters": {  # verbose oder simple
         "verbose": {
             "format": "{name} {levelname} {asctime} {module} {process:d} {thread:d} {message}",
             "style": "{",
@@ -64,8 +65,6 @@ LOGGING = {
         },
     },
 }
-
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -82,14 +81,14 @@ LOGGING = {
 # DEFAULT_DOMAIN = 'http://127.0.0.1:8000'
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#email-backend
-#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#EMAIL_HOST = ''
-#EMAIL_PORT = 587
-#EMAIL_SUBJECT_PREFIX = '[MySite]'
-#EMAIL_USE_LOCALTIME = False
-#EMAIL_USE_TLS = True
-#EMAIL_HOST_PASSWORD = ''
-#EMAIL_HOST_USER = '@'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = ''
+# EMAIL_PORT = 587
+# EMAIL_SUBJECT_PREFIX = '[MySite]'
+# EMAIL_USE_LOCALTIME = False
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_PASSWORD = ''
+# EMAIL_HOST_USER = '@'
 
 ###
 
@@ -97,70 +96,70 @@ LOGGING = {
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'imagekit',
-    'crispy_forms',
-    'django_bootstrap5',
-    'crispy_bootstrap5',
-    'filme.apps.FilmeConfig',
-    'polls.apps.PollsConfig',
-    'django_extensions', 
-    'django.forms',
-    'maintenance_mode',
-    'django_summernote',
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    "imagekit",
+    "crispy_forms",
+    "django_bootstrap5",
+    "crispy_bootstrap5",
+    "filme.apps.FilmeConfig",
+    "polls.apps.PollsConfig",
+    "django_extensions",
+    "django.forms",
+    "maintenance_mode",
+    "django_summernote",
 ]
-CRISPY_TEMPLATE_PACK = 'bootstrap5' # neu
-CRISPY_TEMPLATE_PACK = 'bootstrap5' # neu
+CRISPY_TEMPLATE_PACK = "bootstrap5"  # neu
+CRISPY_TEMPLATE_PACK = "bootstrap5"  # neu
 
-FORM_RENDERER = 'django.forms.renderers.TemplatesSetting' # ClearableFileInput
+FORM_RENDERER = "django.forms.renderers.TemplatesSetting"  # ClearableFileInput
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.csrf.CsrfViewMiddleware",
+    "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     # 'django.middleware.cache.UpdateCacheMiddleware',
     # 'django.middleware.common.CommonMiddleware',
     # 'django.middleware.cache.FetchFromCacheMiddleware',
-    'maintenance_mode.middleware.MaintenanceModeMiddleware',
+    "maintenance_mode.middleware.MaintenanceModeMiddleware",
 ]
 
-ROOT_URLCONF = 'mysite.urls'
+ROOT_URLCONF = "mysite.urls"
 
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        "BACKEND": "django.template.backends.django.DjangoTemplates",
+        "DIRS": [os.path.join(BASE_DIR, "templates")],
+        "APP_DIRS": True,
+        "OPTIONS": {
+            "context_processors": [
+                "django.template.context_processors.debug",
+                "django.template.context_processors.request",
+                "django.contrib.auth.context_processors.auth",
+                "django.contrib.messages.context_processors.messages",
             ],
         },
     },
 ]
 
-WSGI_APPLICATION = 'mysite.wsgi.application'
+WSGI_APPLICATION = "mysite.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 
@@ -182,16 +181,16 @@ AUTH_PASSWORD_VALIDATORS = [
     # },
 ]
 
-LOGIN_REDIRECT_URL = '/'
-LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'de-de'
+LANGUAGE_CODE = "de-de"
 
-TIME_ZONE = 'Europe/Berlin'
+TIME_ZONE = "Europe/Berlin"
 
 USE_I18N = True
 
@@ -203,27 +202,27 @@ USE_TZ = False
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 
 if DEBUG:
-    STATICFILES_DIRS = [    os.path.join(BASE_DIR, "static"),]
-    STATIC_ROOT = os.path.join(BASE_DIR, '')
+    STATICFILES_DIRS = [
+        os.path.join(BASE_DIR, "static"),
+    ]
+    STATIC_ROOT = os.path.join(BASE_DIR, "")
 else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 
 PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 
-SECURE_HSTS_SECONDS = '0' # acuh http ermöglichen
+SECURE_HSTS_SECONDS = "0"  # acuh http ermöglichen
 SECURE_CONTENT_TYPE_NOSNIFF = True
-X_FRAME_OPTIONS = 'DENY'
+X_FRAME_OPTIONS = "DENY"
 CSRF_COOKIE_SECURE = True
 SECURE_HSTS_PRELOAD = True
 
@@ -236,6 +235,40 @@ SECURE_HSTS_PRELOAD = True
 # CACHE_MIDDLEWARE_ALIAS = "cache"
 # CACHE_MIDDLEWARE_SECONDS = 600
 
-# änderung bei django update 
+# änderung bei django update
 # https://docs.djangoproject.com/en/3.2/releases/3.2/
-DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
+
+SUMMERNOTE_CONFIG = {
+    # Using SummernoteWidget - iframe mode, default
+    #'iframe': True,
+    # Or, you can set it to `False` to use SummernoteInplaceWidget by default - no iframe mode
+    # In this case, you have to load Bootstrap/jQuery sources and dependencies manually.
+    # Use this when you're already using Bootstrap/jQuery based themes.
+    "iframe": False,
+    # You can put custom Summernote settings
+    "summernote": {
+        # As an example, using Summernote Air-mode
+        "airMode": False,
+        # Change editor size
+        "width": "100%",
+        #'height': '480',
+        # Toolbar customization
+        # https://summernote.org/deep-dive/#custom-toolbar-popover
+        "toolbar": [
+            #  ['style', ['style']],
+            ["font", ["bold", "underline", "clear"]],
+            # ["fontname", ["fontname"]],
+            #  ['color', ['color']],
+            ["para", ["ul", "ol", "paragraph"]],
+            # ['table', ['table']],
+            ["insert", ["link", "picture", "video"]],
+            ["view", ["fullscreen", "codeview", "help"]],
+        ],
+        # Or, explicitly set language/locale for editor
+        "lang": "de-DE",
+
+"callbacks": "{ onPaste: function (e) { var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text'); e.preventDefault(); document.execCommand('insertText', false, bufferText); }}"
+       
+    },
+}
