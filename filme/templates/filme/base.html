@@ -40,7 +40,7 @@
                     </li>
                     {% if user.is_authenticated %}
                     <li class="nav-item">
-                        <a class="{% if request.resolver_match.url_name == 'film_mufi' %}active{% endif %} nav-link" href="{% url 'film_mufi'%}"><i class="fa fa-film" aria-hidden="true"></i> Mufi</a>
+                        <a class="{% if request.resolver_match.url_name == 'film_mufi' %}active{% endif %} nav-link" href="{% url 'film_mufi'%}"><i class="fa fa-headphones" aria-hidden="true"></i> Mufi</a>
                     </li>
                     {% endif %}
                     <li class="nav-item">
