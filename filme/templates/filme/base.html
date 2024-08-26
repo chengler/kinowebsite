@@ -38,6 +38,11 @@
                     <li class="nav-item">
                         <a class="{% if request.resolver_match.url_name == 'filmevent_programm_list' %}active{% endif %} nav-link" href="{% url 'filmevent_programm_list'%}"><i class="fa fa-film" aria-hidden="true"></i> Programm</a>
                     </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="{% if request.resolver_match.url_name == 'film_mufi' %}active{% endif %} nav-link" href="{% url 'film_mufi'%}"><i class="fa fa-film" aria-hidden="true"></i> Mufi</a>
+                    </li>
+                    {% endif %}
                     <li class="nav-item">
                         <a class="{% if request.resolver_match.url_name == 'film_anfahrt' %}active{% endif %} nav-link" href="{% url 'film_anfahrt'%}"><i class="fa fa-map-o" aria-hidden="true"></i> Anfahrt</a>
                     </li>
