@@ -223,6 +223,7 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 SECURE_HSTS_SECONDS = "0"  # acuh http ermöglichen
 SECURE_CONTENT_TYPE_NOSNIFF = True
 X_FRAME_OPTIONS = "DENY"
+# X_FRAME_OPTIONS = "SAMEORIGIN"
 CSRF_COOKIE_SECURE = True
 SECURE_HSTS_PRELOAD = True
 
@@ -245,13 +246,11 @@ SUMMERNOTE_CONFIG = {
     # Or, you can set it to `False` to use SummernoteInplaceWidget by default - no iframe mode
     # In this case, you have to load Bootstrap/jQuery sources and dependencies manually.
     # Use this when you're already using Bootstrap/jQuery based themes.
-    "iframe": False,
+    "iframe": True,
     # You can put custom Summernote settings
     "summernote": {
         # As an example, using Summernote Air-mode
         "airMode": False,
-        # Change editor size
-        "width": "100%",
         #'height': '480',
         # Toolbar customization
         # https://summernote.org/deep-dive/#custom-toolbar-popover
@@ -267,8 +266,7 @@ SUMMERNOTE_CONFIG = {
         ],
         # Or, explicitly set language/locale for editor
         "lang": "de-DE",
-
-"callbacks": "{ onPaste: function (e) { var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text'); e.preventDefault(); document.execCommand('insertText', false, bufferText); }}"
-       
+        # Using SummernoteWidget - iframe mode, default
+        "callbacks": "{ onPaste: function (e) { var bufferText = ((e.originalEvent || e).clipboardData || window.clipboardData).getData('Text'); e.preventDefault(); document.execCommand('insertText', false, bufferText); }}",
     },
 }
