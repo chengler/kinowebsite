@@ -28,14 +28,7 @@
             </td>
             <td bgcolor="aliceblue" style="font-size: 0;"> </td>
         </tr>
-        <tr>
-            <td bgcolor="aliceblue" style="font-size: 0;"> </td>
-            <td bgcolor="white" width="600px" style="border-radius: 4px;  font-family: sans-serif; padding: 0px 40px;">
-                <p>{{hinweis.text|safe}}</p>
-                <hr>
-            </td>
-            <td bgcolor="aliceblue" style="font-size: 0;"> </td>
-        </tr>        
+      
     </table>
     {% for event in events%}
     {% with film=event.film %}
@@ -94,11 +87,22 @@
                     {{ film.display_description}}
                     <hr>
                 </td>
-                <td bgcolor="aliceblue" style="font-size: 0;"> </td>  
+                <td bgcolor="aliceblue" style="font-size: 0;"> </td> 
+            </tr>
         </table>
     {% endwith %}                    
     {% endfor %}
     <table border="0" cellspacing="0" cellpadding="0" role="presentation" width="100%">      
+
+        <tr>
+            <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+            <td bgcolor="white" width="600px" style="border-radius: 4px;  font-family: sans-serif; padding: 0px 40px;">
+                <p>{{hinweis.text|safe}}</p>
+                <hr>
+            </td>
+            <td bgcolor="aliceblue" style="font-size: 0;"> </td>
+        </tr>   
+
         <tr>
             <td bgcolor="aliceblue" style="font-size: 0;"> </td>
             <td bgcolor="white" width="600px" style="border-radius: 4px; font-family: sans-serif; padding: 20px 40px;">   
