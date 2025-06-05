@@ -13,6 +13,12 @@ html{
     background-color: darkgrey;
 
   }
+          
+  .sr-only {
+          position: absolute;
+          left: -9999px;
+          top: -9999px;
+        }
 
 
 .wrapper {

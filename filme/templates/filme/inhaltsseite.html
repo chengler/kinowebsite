@@ -5,6 +5,7 @@
     <meta name="robots" content="NoFollow NoArchive"> 
 {% endblock %}
 {% block content %}
+<h1 class="sr-only">{{inhalt.name}}</h1>
     <div class=" col-12">
         {% if 'filme.change_inhaltsseite' in request.user.get_user_permissions %}
             <div class="float-end"><a  href="{% url 'admin:filme_inhaltsseite_change' inhalt.id %}"><i class="fa fa-edit" aria-hidden="true"></i> bearbeiten</a></div>
