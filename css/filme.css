@@ -22,7 +22,7 @@ html{
 
 
 .wrapper {
-    background: rgb(25, 25, 25);
+    background: #383838;
     background-image: url('/static/css/img/textur_dunkelgrau-min.png');
     
 }
@@ -115,9 +115,9 @@ a {
 
 .nav-tabs .nav-link.active {
     /* color: #ffffff; */
-    color: #F1891A;
+    color: #F39B3D;
     background-image: url('/static/css/img/textur_dunkelgrau-min.png');
-    border-color: #F1891A ;
+    border-color: #F39B3D ;
     border-bottom-width: 0;
 }
 
