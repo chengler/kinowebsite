@@ -10,7 +10,7 @@ html{
     height: 100vh;
     height: 100%;
     font-size: 4vw;
-    background-color: rgb(25, 25, 25);
+    background-color: #f7f7f7;
 
   }
           
@@ -22,7 +22,7 @@ html{
 
 
 .wrapper {
-    background: rgb(25, 25, 25);
+    background: #383838;
     background-image: url('/static/css/img/textur_dunkelgrau-min.png');
     
 }
@@ -34,8 +34,6 @@ html{
 
 
 .page-header a, .page-header {
-    /* background-color: #ef7c00; */
-    /* background-image: url('/static/css/img/textur_dunkelgrau.png'); */
 
     font-weight: 400;
     font-size: 7vw;
@@ -115,9 +113,9 @@ a {
 
 .nav-tabs .nav-link.active {
     /* color: #ffffff; */
-    color: #F1891A;
+    color: #F39B3D;
     background-image: url('/static/css/img/textur_dunkelgrau-min.png');
-    border-color: #F1891A ;
+    border-color: #F39B3D ;
     border-bottom-width: 0;
 }
 
