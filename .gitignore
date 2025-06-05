@@ -62,3 +62,69 @@ media/filme/flyer
 media/CACHE
 media/flyer*
 media/django-summernote/*
+*.pyc
+*~
+__pycache__
+.vscode             # Daten der Entwiclungsumgebung
+
+
+## bei Änderungen an dieser DAtei
+## remove all files from git cache
+# git rm -rf --cached .
+# git add .
+# git commit -m ".gitignore geändert"
+
+# die Kinospezifischen Sachen
+static/lokal/*
+!static/lokal/favicon-default.ico
+!static/lokal/logo-default.png
+
+# private Skripte beginnen mit my
+meineSkripte/*
+
+# das macht collectstatic
+static/django_extensions/*
+static/admin/*
+
+# maintaince oder nicht? datei wird beim installieren Eingerichtet
+mysite/maintenance_mode_state.txt
+general.log*
+# für django ssl server
+cert/crt.pem  # Zirtifikate für https des Django webservers
+cert/key.pem
+cert/*
+cert.crt
+cert.key
+
+# summernote wird über requirements installiert
+# für update siehe https://github.com/chengler/kinowebsite/issues/19
+summernote/*
+static/summernote/*
+media/django-summernote/*
+
+#
+# Alles ab hier gehört unbedingt ins Backup
+#
+
+#
+# Die Konfigurationsdaten
+#
+mysite/newsletter_keys.py
+mysite/privat_settings.py
+mysite/produktiver_server.txt
+filme/migrations
+
+meineSkripte/
+#
+# die eigentlichen Daten
+#
+db.sqlite3
+db.sqlite3.back
+media/filme/newsletter
+media/filme/plakate
+media/filme/flyer
+media/CACHE
+media/flyer*
+media/django-summernote/*
+media/kdm
+media/gewinnspiele/*
