@@ -10,7 +10,7 @@ html{
     height: 100vh;
     height: 100%;
     font-size: 4vw;
-    background-color: rgb(26, 25, 25);
+    background-color: rgb(25, 25, 25);
 
   }
           
@@ -22,7 +22,7 @@ html{
 
 
 .wrapper {
-    background: rgb(26, 25, 25);
+    background: rgb(25, 25, 25);
     background-image: url('/static/css/img/textur_dunkelgrau-min.png');
     
 }
