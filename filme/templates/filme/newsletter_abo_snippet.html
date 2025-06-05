@@ -4,7 +4,7 @@
         <div class=" newsletter ">
             <h3>Newsletter </h3>
         </div>
-        <span class="sr-only"  for="id_email" aria-label="E-Mail Feld für Newsletter">
+        <span class="sr-only"  for="id_email" label="E-Mail Feld für Newsletter">
             <form method='POST'>
                 {% csrf_token %}
                 {{ form.email|as_crispy_field }}
