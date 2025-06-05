@@ -115,9 +115,9 @@ a {
 
 .nav-tabs .nav-link.active {
     /* color: #ffffff; */
-    color: #ef7c00;
+    color: #F1891A;
     background-image: url('/static/css/img/textur_dunkelgrau-min.png');
-    border-color: #ef7c00 ;
+    border-color: #F1891A ;
     border-bottom-width: 0;
 }
 

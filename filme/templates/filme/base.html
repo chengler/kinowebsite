@@ -28,7 +28,7 @@
                     {% if user.is_authenticated %}
                         <span class="rechts second-headline ">{{ user.username }} <a href="{% url 'logout' %}"><i class="second-headline fa fa-sign-out"></i></a> </span>
                     {% else %} 
-                        <span class="rechts second-headline"><a href="{% url 'login' %}" ><i class="second-headline fa fa-sign-in"></i></a></span>
+                        <span class="rechts second-headline"><a href="{% url 'login' %}" alt="login"><i class="second-headline fa fa-sign-in"></i></a></span>
                     {% endif %}   
                 </div> 
                 <ul class="nav nav-tabs sticky-top ">
